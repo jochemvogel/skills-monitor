@@ -17,5 +17,6 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/test', function(){return view('test');});
 Route::post('/test', function(){return view('test');});
 Route::get('/another', function(){return view('another');});
+Route::get('/profile', function(){return view('profile.index');});
 
 Route::resource('users', 'usersController');
