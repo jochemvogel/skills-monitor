@@ -7,7 +7,9 @@
                 <h1>Profiel pagina</h1>
             </div>
         </div>
-        
+
+        <!-- Shows information about the user when logged in -->
+
         @if(Auth::check())
             <div class="row">
                 <div class="col-sm-5">
@@ -20,6 +22,8 @@
                 </div>
             </div>
          @endif
+
+        <!-- When not logged in user is redirected to login page -->
 
          @if(Auth::guest())
          <a href="/login" class="btn btn-info"> Je moet eerst inloggen om je profiel te kunnen zien! >></a>
