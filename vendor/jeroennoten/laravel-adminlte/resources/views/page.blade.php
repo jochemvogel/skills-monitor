@@ -58,7 +58,15 @@
 
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#"><?php use Illuminate\Support\Facades\Auth; echo(Auth::user()->firstname.' '.Auth::user()->lastname); ?></a>
+                            <a href="#">
+                                <?php
+                                    use Illuminate\Support\Facades\Auth; 
+                                        if (Auth::check()) {
+                                            echo(Auth::user()->firstname.' '.Auth::user()->lastname); 
+                                        }else{
+                                            
+                                        }?>
+                            </a>
                         </li>
                         
                         <li>
