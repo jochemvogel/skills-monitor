@@ -18,7 +18,7 @@
                         <div class="box-body">
                             <h3>Welcome <?php echo(Auth::user()->firstname.' '.Auth::user()->lastname); ?></h2>
                             <p>Your e-mail address is: <?php echo(Auth::user()->email); ?></p>
-                            <p>Do you want to change your email address? Click <a href="users.index">here</a>  </p>
+                            <p>Do you want to change your email address? Click <a href="{{ route('users.index') }}">here</a></p>
                         </div>
 
                     </div>
