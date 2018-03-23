@@ -110,13 +110,8 @@ return [
     'menu' => [
         'Menu',
         [
-            'text'        => 'Test',
-            'url'         => 'test',
-            'icon'        => 'file',
-        ],
-        [
-            'text'        => 'Another',
-            'url'         => 'another',
+            'text'        => 'Create Rubrics',
+            'url'         => 'create',
             'icon'        => 'file',
         ],
         [
@@ -128,11 +123,6 @@ return [
             'text' => 'Profile',
             'url'  => '/profile',
             'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => '#',
-            'icon' => 'lock',
         ]
     ],
 
