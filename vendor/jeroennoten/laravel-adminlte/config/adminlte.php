@@ -110,9 +110,9 @@ return [
     'menu' => [
         'Menu',
         [
-            'text'        => 'Create Rubrics',
-            'url'         => 'create',
-            'icon'        => 'file',
+            'text' => 'Create Rubrics',
+            'url'  => 'create',
+            'icon' => 'file',
         ],
         [
             'text' => 'Users',
