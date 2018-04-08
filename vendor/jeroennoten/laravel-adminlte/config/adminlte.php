@@ -123,6 +123,11 @@ return [
             'text' => 'Profile',
             'url'  => '/profile',
             'icon' => 'user',
+        ],
+        [
+            'text' => 'Progress',
+            'url'  => '/progress',
+            'icon' => 'user',
         ]
     ],
 
