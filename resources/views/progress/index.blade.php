@@ -23,11 +23,11 @@
 
             <tbody>
                 <!-- Foreach-loop, create table row with data for each course-->
-                <tr>
-                    <td>AAAAA</td>
-                    <td>##</td>
-                    <td>##</td>    
-                </tr>
+                    <tr>
+                        <td>AAAAA</td>
+                        <td>##</td>
+                        <td>##</td>    
+                    </tr>
 
             </tbody>
 
