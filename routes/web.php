@@ -18,5 +18,6 @@ Route::get('/create', function(){return view('test');});
 Route::post('/create', function(){return view('test');});
 Route::get('/another', function(){return view('another');});
 Route::get('/profile', 'profileController@show')->name('profile');
+Route::get('/progress', 'ProgressController@index')->name('progress');
 
 Route::resource('users', 'usersController');
