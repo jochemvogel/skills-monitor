@@ -14,8 +14,8 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/create', function(){return view('test');});
-Route::post('/create', function(){return view('test');});
+Route::get('/create', function(){return view('rubrics');});
+Route::post('/create', function(){return view('rubrics');});
 Route::get('/another', function(){return view('another');});
 Route::get('/profile', 'profileController@show')->name('profile');
 Route::get('/progress', 'ProgressController@index')->name('progress');
