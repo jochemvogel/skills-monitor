@@ -6,47 +6,54 @@
     @isset($_REQUEST['name'])
         {{-- check if the choosen name is already in use --}}
         @if(App\Http\Controllers\rubricsController::checkName($_REQUEST['name']) == NULL)
-            {{-- show the name of the rubrics --}}
-            <h1>{{ $_REQUEST['name'] }}</h1>
-
-            {{-- make a table with the selected number of columns and rows --}}
-            <table class='table table-striped table-bordered'>
-                <thead>
-                </thead>
-                <tbody>
-                    @for($i=0; $i<$_REQUEST['rows']; $i++)
-                        <tr>
-                        @for($j=0; $j<$_REQUEST['cols']; $j++)
-                            <td>test</td>
+            {{-- create a box around the rubrics and it's name --}}
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">
+                        {{-- show the name of the rubrics --}}
+                        {{ $_REQUEST['name'] }}
+                    </h3>
+                </div>
+                <div class="box-body">
+                    {{-- make a table with the selected number of columns and rows --}}
+                    <table class='table table-striped table-bordered'>
+                        <thead>
+                        </thead>
+                        <tbody>
+                        @for($i=0; $i<$_REQUEST['rows']; $i++)
+                            <tr>
+                                @for($j=0; $j<$_REQUEST['cols']; $j++)
+                                    <td>test</td>
+                                @endfor
+                            </tr>
                         @endfor
-                        </tr>
-                    @endfor
-                </tbody>
-            </table>
-
-            <br><br>
-
-            {{-- add row button --}}
-            <form method='POST'>
-                <input type='hidden' name='_token' value='{{ Session::token() }}'>
-                <input type='hidden' name='name' value='{{ $_REQUEST['name'] }}'>
-                <input type='hidden' name='rows' value='{{ $_REQUEST['rows'] + 1 }}'>
-                <input type='hidden' name='cols' value='{{ $_REQUEST['cols'] }}'>
-                <button class='btn-info btn-sm' type='submit' name='add_row'><i class='fa fa-plus-square-o'></i>&nbsp;&nbsp;Voeg rij toe</button>
-            </form>
-
-            <br>
-
-            {{-- remove row button --}}
-            @if($_REQUEST['rows'] > 1)
-            <form method='POST'>
-                <input type='hidden' name='_token' value='{{ Session::token() }}'>
-                <input type='hidden' name='name' value='{{ $_REQUEST['name'] }}'>
-                <input type='hidden' name='rows' value='{{ $_REQUEST['rows'] - 1 }}'>
-                <input type='hidden' name='cols' value='{{ $_REQUEST['cols'] }}'>
-                <button class='btn-danger btn-sm' type='submit' name='delete_row'><i class='fa fa-minus-square-o'></i>&nbsp;&nbsp;Verwijder rij</button>
-            </form>
-            @endif
+                        </tbody>
+                    </table>
+                    <br>
+                    <div class="pull-left">
+                    {{-- add row button --}}
+                        <form method='POST'>
+                            <input type='hidden' name='_token' value='{{ Session::token() }}'>
+                            <input type='hidden' name='name' value='{{ $_REQUEST['name'] }}'>
+                            <input type='hidden' name='rows' value='{{ $_REQUEST['rows'] + 1 }}'>
+                            <input type='hidden' name='cols' value='{{ $_REQUEST['cols'] }}'>
+                            <button class='btn-info btn-sm' type='submit' name='add_row'><i class='fa fa-plus-square-o'></i>&nbsp;&nbsp;Voeg rij toe</button>
+                        </form>
+                    </div>
+                    <div class="pull-right">
+                        {{-- remove row button --}}
+                        @if($_REQUEST['rows'] > 1)
+                            <form method='POST'>
+                                <input type='hidden' name='_token' value='{{ Session::token() }}'>
+                                <input type='hidden' name='name' value='{{ $_REQUEST['name'] }}'>
+                                <input type='hidden' name='rows' value='{{ $_REQUEST['rows'] - 1 }}'>
+                                <input type='hidden' name='cols' value='{{ $_REQUEST['cols'] }}'>
+                                <button class='btn-danger btn-sm' type='submit' name='delete_row'><i class='fa fa-minus-square-o'></i>&nbsp;&nbsp;Verwijder rij</button>
+                            </form>
+                        @endif
+                    </div>
+                </div>
+            </div>
 
         {{-- the name is already in use --}}
         @else
