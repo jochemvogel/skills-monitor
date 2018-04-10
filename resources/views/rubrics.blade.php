@@ -10,8 +10,10 @@
             <div class="box box-solid">
                 <div class="box-header with-border">
                     <h3 class="box-title">
-                        {{-- show the name of the rubrics --}}
-                        {{ $_REQUEST['name'] }}
+                        <strong>
+                            {{-- show the name of the rubrics --}}
+                            {{ $_REQUEST['name'] }}
+                        </strong>
                     </h3>
                 </div>
                 <div class="box-body">
