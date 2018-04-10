@@ -15,7 +15,8 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/profile', 'profileController@show')->name('profile');
-Route::get('/progress', 'ProgressController@index')->name('stats');
+
 
 Route::resource('users', 'usersController');
 Route::resource('rubrics', 'rubricsController');
+Route::resource('stats', 'StatsController');
