@@ -5,13 +5,12 @@
         <h1>Progress</h1>
     @endsection
 
-    <!-- Give an ID for each 'blok'-->
-    <button class="btn btn-primary btn-xs"> BLOK 1</button>
-    <button class="btn btn-primary btn-xs"> BLOK 2</button>
-    <button class="btn btn-primary btn-xs"> BLOK 3</button>
-    <button class="btn btn-primary btn-xs"> BLOK 4</button>
+    <button class="btn btn-primary btn-xs" id="1"> BLOK 1</button>
+    <button class="btn btn-primary btn-xs" id="2"> BLOK 2</button>
+    <button class="btn btn-primary btn-xs" id="3"> BLOK 3</button>
+    <button class="btn btn-primary btn-xs" id="4"> BLOK 4</button>
 
-    <div class="x_content">
+    <div class="x_content" id="table">
         <table id="datatable-buttons" class="table table-striped table-bordered">
             <thead>
                 <tr>
