@@ -108,26 +108,27 @@ return [
     */
 
     'menu' => [
-        'Menu',
+        'Main menu',
         [
-            'text' => 'Create Rubrics',
-            'url'  => 'create',
-            'icon' => 'file',
+            'text' => 'Rubrics',
+            'url'  => 'rubrics',
+            'icon' => 'th',
         ],
         [
             'text' => 'Users',
-            'url'  => '/users',
+            'url'  => 'users',
             'icon' => 'group',
         ],
+        'User menu',
         [
             'text' => 'Profile',
-            'url'  => '/profile',
+            'url'  => 'profile',
             'icon' => 'user',
         ],
         [
-            'text' => 'Progress',
-            'url'  => '/progress',
-            'icon' => 'user',
+            'text' => 'Stats',
+            'url'  => 'stats',
+            'icon' => 'bar-chart-o',
         ]
     ],
 
