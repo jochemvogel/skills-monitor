@@ -37,7 +37,7 @@ class rubricsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
