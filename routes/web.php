@@ -18,5 +18,3 @@ Route::get('/profile', 'profileController@show')->name('profile');
 
 Route::resource('users', 'usersController');
 Route::resource('rubrics', 'rubricsController');
-
-Route::post('/rubrics/create/part2', 'rubricsController@create2')->name('rubrics.create.part2');
