@@ -3,23 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Rubrics;
+use DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class rubricsController extends Controller
 {
-
-    /**
-     * check if the name is already in use
-     * @param $name
-     * @return null or id
-     */
-    public static function checkName($name){
-        if(DB::table('rubrics')->where('name', $name)->exists()){
-            return DB::table('rubrics')->where('name', $name)->first()->id;
-        }else{
-            return NULL;
-        }
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -37,8 +26,9 @@ class rubricsController extends Controller
      */
     public function create()
     {
-        //
+        return view('rubrics.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -48,7 +38,20 @@ class rubricsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:rubrics',
+            'cols' => 'required|Numeric',
+        ]);
+
+        $rubrics = Rubrics::create([
+            'name' => $request->input('name'),
+            'rows' => $request->input('rows'),
+            'cols' => $request->input('cols'),
+        ]);
+
+        $id = $rubrics->id;
+
+        return redirect()->route('rubrics.show',['id' => $id]);
     }
 
     /**
@@ -59,7 +62,15 @@ class rubricsController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $rubrics = Rubrics::findOrFail($id);
+            session(['id' => $rubrics->id, 'name' => $rubrics->name, 'rows' => $rubrics->rows, 'cols' => $rubrics->cols]);
+            return view('rubrics.show');
+        }catch (ModelNotFoundException $ex){
+            if ($ex instanceof ModelNotFoundException){
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -82,7 +93,20 @@ class rubricsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rubrics = Rubrics::findOrFail($id);
+
+        $this->validate($request, [
+            'cols' => 'required|Numeric',
+            'rows' => 'required|Numeric',
+        ]);
+
+        $rubrics->rows = $request->input('rows');
+        $rubrics->cols = $request->input('cols');
+
+        $rubrics->save();
+
+
+        return redirect()->route('rubrics.show',['id' => $id]);
     }
 
     /**
