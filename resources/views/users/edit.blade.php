@@ -49,6 +49,26 @@
                                 </div>
                             </div>
 
+                            <div class="form-group {{ $errors->has('role') ? ' has-error ' : '' }}">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <div class="input-group">
+                                    <select class="form-control" name="role" id="role">
+                                      @if ($roles->count())
+                                        @foreach($roles as $role)
+                                          <option value="{{ $role->id }}" {{ $currentRole->id == $role->id ? 'selected="selected"' : '' }}>{{ $role->name }}</option>
+                                        @endforeach
+                                      @endif
+                                    </select>
+                                    <label class="input-group-addon" for="role"><i class="fa fa-fw {{ trans('forms.create_user_icon_role') }}" aria-hidden="true"></i></label>
+                                  </div>
+                                  @if ($errors->has('role'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span>
+                                  @endif
+                                </div>
+                              </div>
+
                             <div class="ln_solid"></div>
 
                             <div class="form-group">

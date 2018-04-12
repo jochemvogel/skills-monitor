@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class usersController extends Controller
@@ -105,10 +107,16 @@ class usersController extends Controller
         try
         {
             $user = User::findOrFail($id);
+            $roles = Role::all();
+            foreach ($user->roles as $user_role) {
+                $currentRole = $user_role;
+            }
 
             $params = [
                 'title' => 'Edit User',
                 'user' => $user,
+                'roles'       => $roles,
+                'currentRole' => $currentRole,
             ];
 
             return view('users.edit')->with($params);
@@ -139,11 +147,20 @@ class usersController extends Controller
                 'firstname' => 'required',
                 'lastname' => 'required',
                 'email' => 'required|email|unique:users,email,'.$id,
+                
             ]);
 
             $user->firstname = $request->input('firstname');
             $user->lastname = $request->input('lastname');
             $user->email = $request->input('email');
+
+            $userRole = $request->input('role');
+
+            for ($i=1; $i < 6; $i++) { 
+                $user->roles()->detach($i);
+            }
+
+            $user->roles()->attach($userRole);
 
             $user->save();
 
