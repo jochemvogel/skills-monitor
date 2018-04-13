@@ -1,14 +1,11 @@
 @extends('adminlte::page')
 
-@section('content_header')
-    <h1> Index rubrics</h1>
-@endsection
 
 
 @section('content')
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">List of all the rubrics</h3>
+            <h3 class="box-title">List of all the rubrics  <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a></h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
