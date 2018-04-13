@@ -35,7 +35,7 @@
                     <input type='hidden' name='name' value='{{ $rubrics->name}}'>
                     <input type='hidden' name='rows' value='{{ $rows + 1 }}'>
                     <input type='hidden' name='cols' value='{{ $rubrics->cols }}'>
-                    <button class='btn-info btn-sm' type='submit' name='add_row'><i class='fa fa-plus-square-o'></i>&nbsp;&nbsp;Add row</button>
+                    <button class='btn-success btn-sm' type='submit' name='add_row'><i class='fa fa-plus-square-o'></i>&nbsp;&nbsp;Add row</button>
                 </form>
             </div>
             <div class="pull-right">
