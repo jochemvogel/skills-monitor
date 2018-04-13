@@ -13,7 +13,7 @@ class InboxController extends Controller
      */
     public function index()
     {
-        //
+        return view('inbox.inbox');
     }
 
     /**
@@ -45,7 +45,7 @@ class InboxController extends Controller
      */
     public function show($id)
     {
-            return view('inbox.index');
+            
     }
 
     /**

@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/profile', 'profileController@show')->name('profile');
+Route::get('/inbox', 'InboxController@index')->name('index');
 
 Route::resource('users', 'usersController');
 Route::resource('rubrics', 'rubricsController');
