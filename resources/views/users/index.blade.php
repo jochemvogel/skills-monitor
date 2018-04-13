@@ -27,31 +27,13 @@
                             <tbody>
                             @if(count($users))
                                 @foreach ($users as $row)
-
-                                    <!-- function to check the role of the user -->
-                                    <?php
-                                        if($row->hasRole('admin')) {
-                                            $role = 'Admin';
-                                        }
-                                        else if($row->hasRole('teacher')) {
-                                            $role = 'Teacher';
-                                        }
-                                        else if($row->hasRole('student')) {
-                                            $role = 'Student';
-                                        }
-                                        else if($row->hasRole('external')) {
-                                            $role = 'External codereviewer';
-                                        }
-                                        else if($row->hasRole('guest')) {
-                                            $role = 'Guest';
-                                        }
-                                    ?>
-
                                     <tr>
                                         <td>{{$row->firstname}}</td>
                                         <td>{{$row->lastname}}</td>
                                         <td>{{$row->email}}</td>
-                                        <td><?php echo $role ?></td>
+                                          @foreach($row->roles as $role)
+                                            <td>{{$role->name}}</td>
+                                          @endforeach
                                         <td>
                                             <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
                                             <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
