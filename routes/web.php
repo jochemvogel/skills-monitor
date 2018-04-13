@@ -14,9 +14,9 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/create', function(){return view('rubrics');});
-Route::post('/create', function(){return view('rubrics');});
-Route::get('/another', function(){return view('another');});
 Route::get('/profile', 'profileController@show')->name('profile');
 
 Route::resource('users', 'usersController');
+Route::resource('rubrics', 'rubricsController');
+
+Route::post('/rubrics/create/part2', 'rubricsController@create2')->name('rubrics.create.part2');

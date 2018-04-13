@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRubricsTable extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateRubricsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rubrics', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->String('name');
-            $table->integer('cols');
-            $table->integer('rows');
+            $table->string('name');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateRubricsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rubrics');
+        Schema::dropIfExists('roles');
     }
 }
