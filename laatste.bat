@@ -1,5 +1,5 @@
 cd vendor
-rmdir /s jeroennoten
+rmdir /s /q jeroennoten
 cd ..
 composer require jeroennoten/laravel-adminlte
 git stash
