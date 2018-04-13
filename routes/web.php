@@ -19,3 +19,5 @@ Route::get('/inbox', 'InboxController@index')->name('index');
 
 Route::resource('users', 'usersController');
 Route::resource('rubrics', 'rubricsController');
+
+Route::post('/rubrics/create/part2', 'rubricsController@create2')->name('rubrics.create.part2');
