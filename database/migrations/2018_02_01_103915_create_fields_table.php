@@ -15,9 +15,10 @@ class CreateFieldsTable extends Migration
     {
         Schema::create('fields', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('colinrubric');
-            $table->integer('rowinrubric');
+            $table->unsignedInteger('rows_id');
+            $table->integer('col');
             $table->text('content');
+            $table->timestamps();
         });
     }
 
