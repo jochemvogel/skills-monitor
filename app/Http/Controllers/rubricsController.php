@@ -48,7 +48,6 @@ class rubricsController extends Controller
 
         $rubrics = Rubrics::create([
             'name' => $request->input('name'),
-            'rows' => $request->input('rows'),
             'cols' => $request->input('cols'),
         ])->id;
 
@@ -111,10 +110,8 @@ class rubricsController extends Controller
 
         $this->validate($request, [
             'cols' => 'required|Numeric',
-            'rows' => 'required|Numeric',
         ]);
 
-        $rubrics->rows = $request->input('rows');
         $rubrics->cols = $request->input('cols');
 
         $rubrics->save();

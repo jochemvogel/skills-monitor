@@ -13,9 +13,8 @@ class RowsTableSeeder extends Seeder
      */
     public function run()
     {
-        for($id = 1; $id <=10; $id++){
-            $rubrics = Rubrics::findOrFail($id);
-            factory(Rows::class, $rubrics->rows)->create(['rubrics_id' => $id]);
+        for($i=0; $i<31; $i++){
+            factory(Rows::class)->create(['rubrics_id' => rand(1,10)]);
         }
     }
 }

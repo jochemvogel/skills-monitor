@@ -12,7 +12,7 @@ class Rubrics extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'rows', 'cols',
+        'name', 'cols',
     ];
 
 
