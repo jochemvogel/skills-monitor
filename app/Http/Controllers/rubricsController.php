@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Rubrics;
+
+
 
 class rubricsController extends Controller
 {
@@ -27,6 +30,17 @@ class rubricsController extends Controller
      */
     public function index()
     {
+        $id = 0;
+        try {
+            $rubrics = Rubrics::findOrFail($id);
+            return view('rubrics.index', [
+                'rubrics' => $rubrics
+            ]);
+        }catch (ModelNotFoundException $ex){
+            if ($ex instanceof ModelNotFoundException){
+                return response()->view('errors.'.'404');
+            }
+        }
         return view('rubrics.index');
     }
 
@@ -95,4 +109,6 @@ class rubricsController extends Controller
     {
         //
     }
+
+
 }
