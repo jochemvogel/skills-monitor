@@ -17,10 +17,9 @@
                             <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 297px;">Course name</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 361px;">Rubric name</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 323px;">Creator</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 257px;">Date created</th><th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 191px;">View</th></tr>
                             </thead>
                             <tbody>
-                            <?php $rubrics = "test"; ?>
                             <tr role="row" class="odd">
                                 <td class="sorting_1">SON1</td>
-                                <td>{{ $rubrics }}</td>
+                                <td>{{ $rubrics->name }}</td>
                                 <td>Docent X</td>
                                 <td>2018-04-19</td>
                                 <td>View</td>

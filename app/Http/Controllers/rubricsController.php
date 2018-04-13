@@ -18,7 +18,7 @@ class rubricsController extends Controller
      */
     public function index()
     {
-        $id = 0;
+        $id = 2;
         try {
             $rubrics = Rubrics::findOrFail($id);
             return view('rubrics.index', [
