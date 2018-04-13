@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Rubrics;
 use App\Rows;
 use App\Field;
-use App\FieldsRows;
-use App\RubricsRows;
+
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class rubricsController extends Controller
@@ -19,6 +18,17 @@ class rubricsController extends Controller
      */
     public function index()
     {
+        $id = 0;
+        try {
+            $rubrics = Rubrics::findOrFail($id);
+            return view('rubrics.index', [
+                'rubrics' => $rubrics
+            ]);
+        }catch (ModelNotFoundException $ex){
+            if ($ex instanceof ModelNotFoundException){
+                return response()->view('errors.'.'404');
+            }
+        }
         return view('rubrics.index');
     }
 
@@ -62,7 +72,6 @@ class rubricsController extends Controller
                  'content' => '',
              ]);
         }
-
         return redirect()->route('rubrics.show',['id' => $rubrics]);
     }
 
@@ -113,9 +122,7 @@ class rubricsController extends Controller
         ]);
 
         $rubrics->cols = $request->input('cols');
-
         $rubrics->save();
-
 
         return redirect()->route('rubrics.show',['id' => $id]);
     }
