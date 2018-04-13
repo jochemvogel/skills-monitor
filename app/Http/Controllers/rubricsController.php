@@ -85,8 +85,11 @@ class rubricsController extends Controller
     {
         try {
             $rubrics = Rubrics::findOrFail($id);
+            $rows = Rows::all()->where('rubrics_id','==',$id)->count();
+
             return view('rubrics.show', [
-                'rubrics' => $rubrics
+                'rubrics' => $rubrics,
+                'rows' => $rows,
             ]);
         }catch (ModelNotFoundException $ex){
             if ($ex instanceof ModelNotFoundException){
@@ -123,6 +126,27 @@ class rubricsController extends Controller
 
         $rubrics->cols = $request->input('cols');
         $rubrics->save();
+
+        $rows = Rows::all()->where('rubrics_id','==',$id)->count();
+
+       // dd($rows);
+       // dd($request->input('rows'));
+        if($rows < $request->input('rows')){
+            $row = Rows::create([
+                'rubrics_id' => $id,
+            ]);
+
+            for ($col=1;$col<=$rubrics->cols;$col++){
+                factory(Field::class)->create(['rows_id' => $row->id, 'col' => $col]);
+            }
+        }elseif ($rows > $request->input('rows')){
+            $row = Rows::all()->where('rubrics_id','=',$rubrics->id)->pop();
+            foreach(Field::all()->where('rows_id','=', $row->id) as $field){
+                $field->delete();
+            }
+            $row->delete();
+        }
+
 
         return redirect()->route('rubrics.show',['id' => $id]);
     }
