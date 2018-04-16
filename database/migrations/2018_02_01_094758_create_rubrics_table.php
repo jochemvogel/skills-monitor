@@ -17,7 +17,7 @@ class CreateRubricsTable extends Migration
             $table->increments('id');
             $table->String('name');
             $table->integer('cols');
-//            $table->integer('rows'); //TODO for now, not needed in the future
+//            $table->integer('rows'); //#TODO for now, not needed in the future
             $table->timestamps();
         });
     }

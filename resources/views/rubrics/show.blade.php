@@ -20,6 +20,7 @@
                     @foreach($rubrics->rowobjects as $row)
                         <tr>
                             <td>
+                                {{-- #TODO make the buttons do something --}}
                                 <a href="#" class="link-black"><i class="fa fa-toggle-up"></i></a>
                                 <a href="#" class="link-black"><i class="fa fa-trash"></i></a>
                                 <a href="#" class="link-black"><i class="fa fa-toggle-down"></i></a>
