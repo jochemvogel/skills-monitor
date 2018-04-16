@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Rubrics extends Model
+class Field extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,12 +12,6 @@ class Rubrics extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'cols',
+        'col','content','rows_id',
     ];
-
-
-    public function rowobjects()
-    {
-        return $this->hasMany('App\Rows');
-    }
 }
