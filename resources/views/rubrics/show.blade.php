@@ -21,12 +21,18 @@
                     <tr>
                         <td>
                             {{-- #TODO make the buttons do something --}}
-                            <a href="#" class="link-black"><i class="fa fa-toggle-up"></i></a>
+                            @if($rubrics->rowobjects->first()->id != $row->id)
+                                <a href="#" class="link-black"><i class="fa fa-toggle-up"></i></a>
+                                </br>
+                            @endif
                             <a href="#" class="link-black"><i class="fa fa-trash"></i></a>
-                            <a href="#" class="link-black"><i class="fa fa-toggle-down"></i></a>
+                            @if($rubrics->rowobjects->last()->id != $row->id)
+                                </br>
+                                <a href="#" class="link-black"><i class="fa fa-toggle-down"></i></a>
+                            @endif
                         </td>
                         @foreach($row->fields as $field)
-                            <td>{{  $field->content }}</td>
+                            <td contenteditable="true">{{  $field->content }}</td>
                         @endforeach
                     </tr>
                 @endforeach
