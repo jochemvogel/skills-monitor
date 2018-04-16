@@ -48,6 +48,7 @@
                     </div>
                 </div>
             </div>
+            <div class="links">{{$rubrics->links()}}</div>
         </div>
     </div>
 @endsection
