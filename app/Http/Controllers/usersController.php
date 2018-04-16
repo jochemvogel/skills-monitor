@@ -36,8 +36,11 @@ class usersController extends Controller
      */
     public function create()
     {
+        $roles = Role::all();
+
         $params = [
             'title' => 'Create User',
+            'roles' => $roles,
         ];
 
         return view('users.create')->with($params);
@@ -56,6 +59,7 @@ class usersController extends Controller
             'lastname' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required',
+            'role' => 'required',
         ]);
 
         $user = User::create([
@@ -64,6 +68,12 @@ class usersController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
         ]);
+
+        $userRole = $request->input('role');
+
+        $user
+        ->roles()
+        ->attach($userRole);;
 
         return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been created.");
     }
@@ -186,6 +196,10 @@ class usersController extends Controller
         try
         {
             $user = User::findOrFail($id);
+
+            for ($i=1; $i < 6; $i++) { 
+                $user->roles()->detach($i);
+            }
 
             $user->delete();
 

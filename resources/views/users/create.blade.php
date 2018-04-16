@@ -71,6 +71,25 @@
                                 </div>
                             </div>
 
+                            <div class="form-group {{ $errors->has('role') ? ' has-error ' : '' }}">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Role <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control col-md-7 col-xs-12" name="role" id="role">
+                                      @if ($roles->count())
+                                        @foreach($roles as $role)
+                                          <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                        @endforeach
+                                      @endif
+                                    </select>
+                                  </div>
+                                  @if ($errors->has('role'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span>
+                                  @endif
+                                </div> 
+
                             <div class="ln_solid"></div>
 
                             <div class="form-group">
