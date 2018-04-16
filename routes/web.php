@@ -15,9 +15,9 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/profile', 'profileController@show')->name('profile');
-Route::get('stats/blok2', 'StatsController@blok2')->name('stats.blok2');
-Route::get('stats/blok3', 'StatsController@blok3')->name('stats.blok3');
-Route::get('stats/blok4', 'StatsController@blok4')->name('stats.blok4');
+Route::get('stats/2', 'StatsController@blok2')->name('stats.blok2');
+Route::get('stats/3', 'StatsController@blok3')->name('stats.blok3');
+Route::get('stats/4', 'StatsController@blok4')->name('stats.blok4');
 
 Route::resource('users', 'usersController');
 Route::resource('rubrics', 'rubricsController');

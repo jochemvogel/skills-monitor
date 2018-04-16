@@ -12,7 +12,7 @@
         </div>
 
         <div class="box-body">
-            <a href="" class="btn btn-primary btn-xs">BLOK 1</a>
+            <a href="{{route('stats.index')}}" class="btn btn-primary btn-xs">BLOK 1</a>
             <a href="{{route('stats.blok2')}}" class="btn btn-primary btn-xs">BLOK 2</a>
             <a href="{{route('stats.blok3')}}" class="btn btn-primary btn-xs">BLOK 3</a>
             <a href="{{route('stats.blok4')}}" class="btn btn-primary btn-xs">BLOK 4</a>
