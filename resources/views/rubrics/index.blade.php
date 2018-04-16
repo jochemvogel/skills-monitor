@@ -41,8 +41,6 @@
                                         <td>{{ $rubric->id }}</td>
                                         <td>{{ $rubric->created_at }}</td>
                                         <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}">View</a></td>
-
-                                        {{--{{route('rubrics.show',['id' => session('id')])}} {{ $rubric->id }}--}}
                                     </tr>
                                 @endforeach
                             </tbody>
