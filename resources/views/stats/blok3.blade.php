@@ -43,14 +43,3 @@
     </div>
 
 @endsection
-
-@push('js')
-<script type='text/javascript'>
-    function addListeners() {
-        document.getElementById('1').onclick = function(){alert('Hello');}
-    }
-
-
-    window.onload = addListeners;
-</script>
-@endpush
