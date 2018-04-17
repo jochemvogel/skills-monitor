@@ -18,21 +18,21 @@
                 </thead>
                 <tbody>
                 @foreach($rubrics->rowobjects as $row)
-                    <tr>
+                    <tr id="row_{{$row->id}}">
                         <td>
                             {{-- #TODO make the buttons do something --}}
                             @if($rubrics->rowobjects->first()->id != $row->id)
-                                <a href="#" class="link-black"><i class="fa fa-toggle-up"></i></a>
+                                <i class="fa fa-toggle-up"></i>
                                 </br>
                             @endif
-                            <a href="#" class="link-black"><i class="fa fa-trash"></i></a>
+                            <i class="fa fa-trash"></i>
                             @if($rubrics->rowobjects->last()->id != $row->id)
                                 </br>
-                                <a href="#" class="link-black"><i class="fa fa-toggle-down"></i></a>
+                               <i class="fa fa-toggle-down"></i>
                             @endif
                         </td>
                         @foreach($row->fields as $field)
-                            <td contenteditable="true">{{  $field->content }}</td>
+                            <td id="{{ $field->id }}" contenteditable="true">{{  $field->content }}</td>
                         @endforeach
                     </tr>
                 @endforeach
@@ -66,3 +66,29 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        document.addEventListener('input', function(){
+            console.log(event.srcElement.innerHTML);
+        });
+
+        document.addEventListener('click', function(){
+            var elem = event.srcElement;
+            var row = elem.parentElement.parentElement;
+            if(row.id.substr(0,3) == "row"){
+                var rowid = row.id.substr(4);
+                switch(elem.classList[1]){
+                    case "fa-toggle-up":
+                        console.log("up");
+                        break;
+                    case "fa-trash":
+                        console.log("delete");
+                        break;
+                    case "fa-toggle-down":
+                        console.log("down");
+                        break;
+                }
+            }
+        });
+    </script>
+@endpush
