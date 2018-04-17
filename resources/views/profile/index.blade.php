@@ -12,11 +12,11 @@
 
                         <div class="box-header with-border">
                             <i class="fa fa-user"></i> 
-                            <h1 class="box-title">Profile</h3>
+                            <h1 class="box-title">Profile</h1>
                         </div>
 
                         <div class="box-body">
-                            <h3>Welcome <?php echo(Auth::user()->firstname.' '.Auth::user()->lastname); ?></h2>
+                            <h2>Welcome <?php echo(Auth::user()->firstname.' '.Auth::user()->lastname); ?></h2>
                             <p>Your e-mail address is: <?php echo(Auth::user()->email); ?></p>
                             <p>Do you want to change your email address? Click <a href="{{ route('users.index') }}">here</a></p>
                         </div>
