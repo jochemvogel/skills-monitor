@@ -20,4 +20,5 @@ class Rubrics extends Model
     {
         return $this->hasMany('App\Rows');
     }
+
 }

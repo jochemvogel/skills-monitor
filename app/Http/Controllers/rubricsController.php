@@ -18,9 +18,8 @@ class rubricsController extends Controller
      */
     public function index()
     {
-        $id = 0;
         try {
-            $rubrics = Rubrics::findOrFail($id);
+            $rubrics = Rubrics::orderBy('name', 'asc')->paginate(5);
             return view('rubrics.index', [
                 'rubrics' => $rubrics
             ]);
