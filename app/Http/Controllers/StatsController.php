@@ -13,19 +13,21 @@ public function index()
     return view('stats.index');
 }
 
-public function blok2()
-{
-    return view('stats.blok2');
-}
+public function show($id)
+{    
+    if( 2 == $id) {
+        return view('stats.blok2');
+    }
+    elseif( 3 == $id) {
+        return view('stats.blok3');
+    }
+    elseif( 4 == $id) {
+        return view('stats.blok4');
+    }
+    else{
+        return view('errors.404');
+    }
 
-public function blok3()
-{
-    return view('stats.blok3');
-}
-
-public function blok4()
-{
-    return view('stats.blok4');
 }
 
 }

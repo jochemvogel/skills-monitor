@@ -31,7 +31,7 @@
                         </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table> 
             <br>
             <div class="pull-left">
                 {{-- add row button --}}
