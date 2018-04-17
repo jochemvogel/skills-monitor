@@ -27,20 +27,18 @@
                         <table id="rubrics" class="table table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column descending" style="width: 361px;" aria-sort="ascending">Course name</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 323px;">Rubric name</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 257px;">ID</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 191px;">Date created</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="rubrics" rowspan="1" colspan="1" style="width: 361px;" aria-sort="ascending">Course name</th>
+                                <th class="sorting" tabindex="0" aria-controls="rubrics" rowspan="1" colspan="1" style="width: 323px;">Rubric name</th>
+                                <th class="sorting" tabindex="0" aria-controls="rubrics" rowspan="1" colspan="1"  style="width: 191px;">Creator</th>
                                 <th style="width: 261px;">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($rubrics as $rubric)
                                 <tr role="row">
-                                    <td>SON1</td>
+                                    <td>Software Ontwerpen 1 (SON1, CU19641)</td>
                                     <td>{{ $rubric->name }}</td>
-                                    <td>{{ $rubric->id }}</td>
-                                    <td>{{ $rubric->created_at }}</td>
+                                    <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
                                     <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}">View</a></td>
                                 </tr>
                             @endforeach
@@ -50,7 +48,6 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 
 @push ('js')
