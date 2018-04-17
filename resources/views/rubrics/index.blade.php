@@ -1,9 +1,13 @@
 @extends('adminlte::page')
 
 @section('content')
-    <div class="box">
+    <div class="box box-solid"">
         <div class="box-header">
-            <h3 class="box-title">List of all the rubrics  <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs">
+            <h3 class="box-title">
+                <strong>
+                    List of all the rubrics
+                </strong>
+                <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs">
                     <i class="fa fa-plus"></i> Create New </a></h3>
         </div>
 
@@ -27,7 +31,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 323px;">Rubric name</th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 257px;">ID</th>
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 191px;">Date created</th>
-                                <th style="width: 261px;"></th>
+                                <th style="width: 261px;">Action</th>
                             </tr>
                             </thead>
                             <tbody>
