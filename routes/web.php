@@ -13,8 +13,10 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/profile', 'profileController@show')->name('profile');
+Route::middleware(['auth'])->group( function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/profile', 'profileController@show')->name('profile');
+    Route::get('/inbox', 'InboxController@index')->name('index');
 
 
 
@@ -23,3 +25,9 @@ Route::resource('rubrics', 'rubricsController');
 Route::resource('stats', 'StatsController');
 
 Route::resource('courses', 'coursesController');
+});
+
+Route::fallback(function ()
+{
+    return Redirect::to('/');
+});
