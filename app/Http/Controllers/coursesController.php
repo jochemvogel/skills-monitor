@@ -48,7 +48,9 @@ class coursesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:courses',
+            'course_abbreviation' => 'unique:courses',
+            'course_code' => 'unique:courses',
         ]);
 
         $course = Course::create([
@@ -66,16 +68,28 @@ class coursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($course_abbreviation)
     {
         try
         {
-            $courses = Course::findOrFail($id);
-            $rubrics = Rubrics::All()->where('course_id', '=', $id);
+            $courses = Course::All();
+            $selectedcourse = null;
+            // ->where('course_abbreviation', '=', $course_abbreviation)->first();
+            foreach($courses as $course) {
+                if(strcasecmp($course->course_abbreviation, $course_abbreviation) === 0){
+                    $selectedcourse = $course;
+                }
+            }
+            if($selectedcourse == null){
+                return redirect(route('courses.index'));
+            }
+            // dd($selectedcourse->name);
+            $rubrics = Rubrics::All()->where('course_id', '=', $selectedcourse->id);
+            // dd($rubrics);
 
             $params = [
                 'title' => 'Delete Course',
-                'courses' => $courses,
+                'courses' => $selectedcourse,
                 'rubrics' => $rubrics,
             ];
 
