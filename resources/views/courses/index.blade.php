@@ -1,9 +1,6 @@
 @extends('adminlte::page')
 
 @section('content')
-@extends('adminlte::page')
-
-@section('content')
     <div class="box box-solid">
         <div class="box-header with-border">
             <h3 class="box-title">
@@ -52,5 +49,4 @@
             </table>
         </div>
     </div>
-@endsection
 @endsection
