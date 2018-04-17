@@ -9,7 +9,7 @@
 
         <!-- /.box-header -->
         <div class="box-body">
-            <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+            <div id="example1_wrapper" class="">
                     <div class="row">
                     <div class="col-sm-6">
                         <div class="dataTables_length" id="example1_length">
@@ -22,11 +22,11 @@
                     <div class="col-sm-12">
                         <table id="rubrics" class="table table-striped table-bordered">
                             <thead>
-                            <tr role="row">
-                                <th style="width: 161px;">Course name</th>
-                                <th style="width: 561px;">Rubric name</th>
-                                <th style="width: 161px;">ID</th>
-                                <th style="width: 361px;">Date created</th>
+                            <tr>
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column descending" style="width: 361px;" aria-sort="ascending">Course name</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 323px;">Rubric name</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 257px;">ID</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 191px;">Date created</th>
                                 <th style="width: 261px;"></th>
                             </tr>
                             </thead>
