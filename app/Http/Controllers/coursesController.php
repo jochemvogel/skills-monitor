@@ -71,7 +71,7 @@ class coursesController extends Controller
         try
         {
             $courses = Course::findOrFail($id);
-            $rubrics = Rubrics::All();
+            $rubrics = Rubrics::All()->where('course_id', '=', $id);
 
             $params = [
                 'title' => 'Delete Course',

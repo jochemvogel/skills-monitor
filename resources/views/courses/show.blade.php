@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                     @foreach($rubrics as $row)
-                        <tr>{{$rubrics->name}}</tr>
+                        <tr>{{$row->name}}</tr>
                     @endforeach
                 </tbody>
             </table>
