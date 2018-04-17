@@ -17,13 +17,19 @@
                 <thead>
                 </thead>
                 <tbody>
-                @foreach($rubrics->rowobjects as $row)
-                    <tr>
-                        @foreach($row->fields as $field)
-                            <td>{{  $field->content }}</td>
-                        @endforeach
-                    </tr>
-                @endforeach
+                    @foreach($rubrics->rowobjects as $row)
+                        <tr>
+                            <td>
+                                {{-- #TODO make the buttons do something --}}
+                                <a href="#" class="link-black"><i class="fa fa-toggle-up"></i></a>
+                                <a href="#" class="link-black"><i class="fa fa-trash"></i></a>
+                                <a href="#" class="link-black"><i class="fa fa-toggle-down"></i></a>
+                            </td>
+                            @foreach($row->fields as $field)
+                                <td contenteditable="true">{{  $field->content }}</td>
+                            @endforeach
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
             <br>
