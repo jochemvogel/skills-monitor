@@ -18,6 +18,7 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/profile', 'profileController@show')->name('profile');
     Route::get('/inbox', 'InboxController@index')->name('index');
     Route::get('/courses/create', 'coursesController@create');
+    Route::get('/courses/{id}/delete', 'coursesController@delete')->name('courses.delete');
     Route::get('/courses/{course_abbreviation}', 'coursesController@show');
 
     Route::resource('users', 'usersController');

@@ -166,6 +166,28 @@ class coursesController extends Controller
         }
     }
 
+    public function delete($id)
+    {
+        try
+        {
+            $course = Course::findOrFail($id);
+
+            $params = [
+                'title' => 'Delete Course',
+                'course' => $course,
+            ];
+
+            return view('courses.delete')->with($params);
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
