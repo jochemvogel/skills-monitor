@@ -117,7 +117,7 @@ return [
         [
             'text' => 'Courses',
             'url'  => 'courses',
-            'icon' => 'th',
+            'icon' => 'graduation-cap',
         ],
         [
             'text' => 'Users',
