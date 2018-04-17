@@ -14,8 +14,11 @@ public function index()
 }
 
 public function show($id)
-{    
-    if( 2 == $id) {
+{   
+    if( 1 == $id) {
+        return view('stats.index');
+    } 
+    elseif( 2 == $id) {
         return view('stats.blok2');
     }
     elseif( 3 == $id) {
