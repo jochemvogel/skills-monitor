@@ -15,4 +15,9 @@ class Course extends Model
         'name', 'course_abbreviation', 'course_code',
     ];
 
+    public function rubrics()
+    {
+      return $this->belongsToMany(Rubric::class);
+    }
+
 }

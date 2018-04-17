@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use Cmgmyr\Messenger\Models\Models;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-class CreateRubricsTable extends Migration
+class CreateThreadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +14,9 @@ class CreateRubricsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rubrics', function (Blueprint $table) {
+        Schema::create(Models::table('threads'), function (Blueprint $table) {
             $table->increments('id');
-            $table->String('name');
-            $table->integer('cols');
-            $table->integer('course_id');
+            $table->string('subject');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateRubricsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rubrics');
+        Schema::dropIfExists(Models::table('threads'));
     }
 }

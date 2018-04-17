@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Rubrics;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
@@ -69,14 +70,16 @@ class coursesController extends Controller
     {
         try
         {
-            $course = Course::findOrFail($id);
+            $courses = Course::findOrFail($id);
+            $rubrics = Rubrics::All()->where('course_id', '=', $id);
 
             $params = [
                 'title' => 'Delete Course',
-                'course' => $course,
+                'courses' => $courses,
+                'rubrics' => $rubrics,
             ];
 
-            return view('courses.delete')->with($params);
+            return view('courses.show')->with($params);
         }
         catch (ModelNotFoundException $ex) 
         {
