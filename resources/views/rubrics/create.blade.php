@@ -27,6 +27,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="form-group {{ $errors->has('course') ? ' has-error ' : '' }}">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Course <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <select class="form-control col-md-7 col-xs-12" name="course" id="course">
+                          @if ($courses->count())
+                            @foreach($courses as $course)
+                              <option value="{{ $course->id }}">{{ $course->name }}</option>
+                            @endforeach
+                          @endif
+                        </select>
+                      </div>
+                      @if ($errors->has('course'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('course') }}</strong>
+                        </span>
+                      @endif
+                    </div> 
+
                 <div class="box-footer">
                     <div class="pull-right">
                         <input type='submit' class='btn btn-success btn-sm' value='Save'>
