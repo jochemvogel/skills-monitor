@@ -115,6 +115,11 @@ return [
             'icon' => 'th',
         ],
         [
+            'text' => 'Courses',
+            'url'  => 'courses',
+            'icon' => 'th',
+        ],
+        [
             'text' => 'Users',
             'url'  => 'users',
             'icon' => 'group',
