@@ -23,16 +23,18 @@
                             {{-- #TODO make the buttons do something --}}
                             @if($rubrics->rowobjects->first()->id != $row->id)
                                 <i class="fa fa-toggle-up"></i>
-                                </br>
+                                <br />
                             @endif
                             <i class="fa fa-trash"></i>
                             @if($rubrics->rowobjects->last()->id != $row->id)
-                                </br>
+                                <br />
                                <i class="fa fa-toggle-down"></i>
                             @endif
                         </td>
                         @foreach($row->fields as $field)
-                            <td id="{{ $field->id }}" contenteditable="true">{{  $field->content }}</td>
+                            <td id="field_{{ $field->id }}">
+                                {{  $field->content }}
+                            </td>
                         @endforeach
                     </tr>
                 @endforeach
@@ -68,27 +70,49 @@
 @endsection
 @push('js')
     <script>
-        document.addEventListener('input', function(){
-            console.log(event.srcElement.innerHTML);
-        });
-
         document.addEventListener('click', function(){
             var elem = event.srcElement;
             var row = elem.parentElement.parentElement;
+            console.log(row.id + "," + elem.id);
             if(row.id.substr(0,3) == "row"){
                 var rowid = row.id.substr(4);
                 switch(elem.classList[1]){
                     case "fa-toggle-up":
                         console.log("up");
+                        //#TODO add ajax call to move row one up
                         break;
                     case "fa-trash":
                         console.log("delete");
+                        //#TODO add ajax call to delete row
                         break;
                     case "fa-toggle-down":
                         console.log("down");
+                        //#TODO add ajax call to move row one down
                         break;
                 }
+            }else if(elem.id.substr(0,5) == "field"){
+                var field = document.getElementById(elem.id);
+                var content = field.innerHTML;
+                    field.innerHTML = "<div id='newText' contenteditable='true'>" +
+                        content +
+                        "</div><div id='oldText' class='hidden'>" +
+                        content +
+                        "</div><button class='btn btn-success' id='safe'>Save</button>";
+                    document.getElementById("newText").focus();
             }
+        });
+
+        document.addEventListener('focusout', function (){
+            var field = event.srcElement.parentElement;
+            var oldContent = document.getElementById("oldText").innerHTML;
+            var newContent = document.getElementById("newText").innerHTML;
+            if (event.relatedTarget) {
+                field.innerHTML = newContent;
+            }else{
+                field.innerHTML = oldContent;
+            }
+
+            //#TODO safe content to database w/ ajax call
         });
     </script>
 @endpush
