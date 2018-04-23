@@ -74,7 +74,7 @@ class coursesController extends Controller
         {
             $courses = Course::All();
             $selectedcourse = null;
-            // ->where('course_abbreviation', '=', $course_abbreviation)->first();
+
             foreach($courses as $course) {
                 if(strcasecmp($course->course_abbreviation, $course_abbreviation) === 0){
                     $selectedcourse = $course;
