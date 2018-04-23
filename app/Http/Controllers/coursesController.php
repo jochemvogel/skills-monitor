@@ -83,9 +83,8 @@ class coursesController extends Controller
             if($selectedcourse == null){
                 return redirect(route('courses.index'));
             }
-            // dd($selectedcourse->name);
+
             $rubrics = Rubrics::All()->where('course_id', '=', $selectedcourse->id);
-            // dd($rubrics);
 
             $params = [
                 'course' => $selectedcourse,
