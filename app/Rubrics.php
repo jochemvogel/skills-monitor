@@ -26,6 +26,11 @@ class Rubrics extends Model
       return $this->belongsToMany(Course::class);
     }
 
+    public function courses2()
+    {
+        return $this->belongsTo('App\Course', 'course_id');
+    }
+
     public function creator()
     {
         return $this->belongsTo('App\User', 'user_id');

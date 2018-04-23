@@ -36,7 +36,7 @@
                             <tbody>
                             @foreach($rubrics as $rubric)
                                 <tr role="row">
-                                    <td>Software Ontwerpen 1 (SON1, CU19641)</td>
+                                    <td>{{ $rubric->courses2->name }} ({{ $rubric->courses2->course_abbreviation}}, {{ $rubric->courses2->course_code }})</td>
                                     <td>{{ $rubric->name }}</td>
                                     <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
                                     <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}">View</a></td>
