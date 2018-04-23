@@ -19,6 +19,7 @@ class CreateRubricsTable extends Migration
             $table->integer('cols');
             $table->integer('course_id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('course_id');
             $table->timestamps();
         });
     }

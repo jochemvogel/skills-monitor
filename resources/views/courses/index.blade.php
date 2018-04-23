@@ -16,6 +16,7 @@
                         <th>Abbreviation</th>
                         <th>Code</th>
                         <th>Name</th>
+                        <th>View</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -37,10 +38,12 @@
                                 @endif
 
                                 <td>{{$row->name}}</td>
+
+                                <td><a href="{{route('courses.show',['course_abbreviation' => $row->course_abbreviation])}}">View</a></td>
                                 
                                 <td>
                                     <a href="{{ route('courses.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
-                                    <a href="{{ route('courses.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
+                                    <a href="{{ route('courses.delete', ['id' => $row->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -50,7 +53,6 @@
         </div>
     </div>
 @endsection
-
 
 @push ('js')
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -67,3 +69,4 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 @endpush
+

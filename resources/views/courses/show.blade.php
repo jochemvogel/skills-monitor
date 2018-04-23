@@ -1,28 +1,36 @@
 @extends('adminlte::page')
 
 @section('content')
-    {{-- create a box around the rubrics and it's name --}}
     <div class="box box-solid">
         <div class="box-header with-border">
             <h3 class="box-title">
                 <strong>
-                    {{-- show the name of the rubrics --}}
-                    {{ $courses->name }}
+                    @if($course->course_abbreviation != null)
+                    {{$course->course_abbreviation}} -
+                    @endif
+                    {{$course->name}}
                 </strong>
             </h3>
         </div>
         <div class="box-body">
-            {{-- make a table with the selected number of columns and rows --}}
-            <table class='table table-striped table-bordered'>
+            <table id="datatable-buttons" class="table table-striped table-bordered">
                 <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>View</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    @foreach($rubrics as $row)
-                        <tr>{{$row->name}}</tr>
-                    @endforeach
+                    @if(count($rubrics))
+                        @foreach($rubrics as $row)
+                            <tr>
+                                <td>{{$row->name}}</td>
+                                <td><a href="{{route('rubrics.show',['id' => $row->id])}}">View</a></td>
+                            </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
-            <br>
-
+        </div>
     </div>
 @endsection
