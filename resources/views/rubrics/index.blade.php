@@ -37,33 +37,56 @@
                             @foreach($rubrics as $rubric)
                                 <tr role="row">
                                     <td>{{ $rubric->courses2->name }}
-                                        @if($rubric->courses2->course_abbreviation != null)
+
+                                        @if($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation != null)
+
                                             ({{$rubric->courses2->course_abbreviation}},
-                                    @else
-                                        -
-                                    @endif
 
-                                    @if($rubric->courses2->course_code  != null)
-                                        {{$rubric->courses2->course_code }})
-                                    @else
-                                        -
-                                    @endif
+                                        @elseif($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation == null )
+
+
+                                        @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation != null )
+
+                                             ({{$rubric->courses2->course_abbreviation}})
+
+
+                                        @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation == null)
+
+                                        @else
+                                            -
+
+                                        @endif
+
+
+
+                                        @if($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code != null)
+
+                                            {{$rubric->courses2->course_code}})
+
+
+                                        @elseif($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code == null)
+
+
+
+                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code != null)
+
+                                            ({{$rubric->courses2->course_code}})
+
+
+                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code == null)
+
+
+                                        @else
+                                            -
+
+                                        @endif
+
                                     </td>
-
                                     <td>{{ $rubric->name }}</td>
-
                                     <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
-
                                     <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}">View</a></td>
-
                                 </tr>
                             @endforeach
-
-
-
-
-
-
                             </tbody>
                         </table>
                     </div>
