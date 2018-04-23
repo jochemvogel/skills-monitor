@@ -92,7 +92,11 @@
                 }
             }else if(elem.id.substr(0,5) == "field"){
                 var field = document.getElementById(elem.id);
-                var content = field.innerHTML;
+                var content = field.innerText;
+                // remove Save from content
+                if(content.substr(content.length-4) == "Save"){
+                    content = content.substr(0,content.length-5);
+                }
                 field.innerHTML = "<div id='newText' contenteditable='true'>" +
                     content +
                     "</div><div id='oldText' class='hidden'>" +
@@ -108,11 +112,33 @@
             var newContent = document.getElementById("newText").innerHTML;
             if (event.relatedTarget) {
                 field.innerHTML = newContent;
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "PUT",
+                    url: '/updatefield',
+                    data: {
+                        'id': field.id.substr(6),
+                        'content': newContent,
+                    },
+                    success: function() { console.info('success')}
+                });
             }else{
                 field.innerHTML = oldContent;
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "PUT",
+                    url: '/backupfield',
+                    data: {
+                        'id': field.id.substr(6),
+                        'content': newContent,
+                    },
+                    success: function() { console.info('success')}
+                });
             }
-
-            //#TODO safe content to database w/ ajax call
         });
     </script>
 @endpush

@@ -21,6 +21,9 @@ Route::middleware(['auth'])->group( function () {
     Route::resource('users', 'usersController');
     Route::resource('rubrics', 'rubricsController');
     Route::resource('courses', 'coursesController');
+
+    Route::put('updatefield', 'JSONcontroller@updateField');
+    Route::put('backupfield', 'JSONcontroller@backupField');
 });
 
 Route::fallback(function ()
