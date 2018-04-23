@@ -12,13 +12,18 @@ class Rubrics extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'cols',
+        'name', 'cols', 'course_id',
     ];
 
 
     public function rowobjects()
     {
         return $this->hasMany('App\Rows');
+    }
+
+    public function courses()
+    {
+      return $this->belongsToMany(Course::class);
     }
 
 }

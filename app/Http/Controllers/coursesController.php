@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Course;
+use App\Rubrics;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
@@ -47,7 +48,9 @@ class coursesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:courses',
+            'course_abbreviation' => 'unique:courses',
+            'course_code' => 'unique:courses',
         ]);
 
         $course = Course::create([
@@ -65,18 +68,30 @@ class coursesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($course_abbreviation)
     {
         try
         {
-            $course = Course::findOrFail($id);
+            $courses = Course::All();
+            $selectedcourse = null;
+
+            foreach($courses as $course) {
+                if(strcasecmp($course->course_abbreviation, $course_abbreviation) === 0){
+                    $selectedcourse = $course;
+                }
+            }
+            if($selectedcourse == null){
+                return redirect(route('courses.index'));
+            }
+
+            $rubrics = Rubrics::All()->where('course_id', '=', $selectedcourse->id);
 
             $params = [
-                'title' => 'Delete Course',
-                'course' => $course,
+                'course' => $selectedcourse,
+                'rubrics' => $rubrics,
             ];
 
-            return view('courses.delete')->with($params);
+            return view('courses.show')->with($params);
         }
         catch (ModelNotFoundException $ex) 
         {
@@ -139,6 +154,28 @@ class coursesController extends Controller
             $course->save();
 
             return redirect()->route('courses.index')->with('success', "The course <strong>$course->name</strong> has successfully been updated.");
+        }
+        catch (ModelNotFoundException $ex) 
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
+    }
+
+    public function delete($id)
+    {
+        try
+        {
+            $course = Course::findOrFail($id);
+
+            $params = [
+                'title' => 'Delete Course',
+                'course' => $course,
+            ];
+
+            return view('courses.delete')->with($params);
         }
         catch (ModelNotFoundException $ex) 
         {
