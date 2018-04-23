@@ -22,8 +22,10 @@ Route::middleware(['auth'])->group( function () {
     Route::resource('rubrics', 'rubricsController');
     Route::resource('courses', 'coursesController');
 
+    // JSONcontroller routes
     Route::put('updatefield', 'JSONcontroller@updateField');
     Route::put('backupfield', 'JSONcontroller@backupField');
+    Route::get('getpending', 'JSONcontroller@getPending');
 });
 
 Route::fallback(function ()

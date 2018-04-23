@@ -97,4 +97,10 @@ class JSONcontroller extends Controller
             "field_id" => $request->input('id'),
         ]);
     }
+
+    public function getPending(Request $request){
+        $hasPending = DB::table('pending_changes')->where('field_id', '=', $request->input('id'))->first()->content;
+        DB::table('pending_changes')->where('field_id', '=', $request->input('id'))->delete();
+        return $hasPending;
+    }
 }

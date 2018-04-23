@@ -97,12 +97,28 @@
                 if(content.substr(content.length-4) == "Save"){
                     content = content.substr(0,content.length-5);
                 }
-                field.innerHTML = "<div id='newText' contenteditable='true'>" +
-                    content +
-                    "</div><div id='oldText' class='hidden'>" +
-                    content +
-                    "</div><button class='btn btn-success' id='safe'>Save</button>";
-                document.getElementById("newText").focus();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "GET",
+                    url: '/getpending',
+                    data: {
+                        'id': field.id.substr(6),
+                    },
+                    success: function(data) {
+                        field.innerHTML = "<div id='newText' contenteditable='true'>" + data +"</div>";
+                        field.innerHTML += "<div id='oldText' class='hidden'>" + content + "</div>"
+                        field.innerHTML += "<button class='btn btn-success' id='safe'>Save</button>";
+                        document.getElementById("newText").focus();
+                    },
+                    error: function(){
+                        field.innerHTML = "<div id='newText' contenteditable='true'>" + content +"</div>";
+                        field.innerHTML += "<div id='oldText' class='hidden'>" + content + "</div>"
+                        field.innerHTML += "<button class='btn btn-success' id='safe'>Save</button>";
+                        document.getElementById("newText").focus();
+                    }
+                });
             }
         });
 
@@ -111,19 +127,23 @@
             var oldContent = document.getElementById("oldText").innerHTML;
             var newContent = document.getElementById("newText").innerHTML;
             if (event.relatedTarget) {
-                field.innerHTML = newContent;
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: "PUT",
-                    url: '/updatefield',
-                    data: {
-                        'id': field.id.substr(6),
-                        'content': newContent,
-                    },
-                    success: function() { console.info('success')}
-                });
+                if(event.relatedTarget.id == "safe"){
+                    field.innerHTML = newContent;
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "PUT",
+                        url: '/updatefield',
+                        data: {
+                            'id': field.id.substr(6),
+                            'content': newContent,
+                        },
+                        success: function() { console.info('success')}
+                    });
+                }else{
+
+                }
             }else{
                 field.innerHTML = oldContent;
                 $.ajax({
