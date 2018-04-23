@@ -36,12 +36,34 @@
                             <tbody>
                             @foreach($rubrics as $rubric)
                                 <tr role="row">
-                                    <td>{{ $rubric->courses2->name }} ({{ $rubric->courses2->course_abbreviation}}, {{ $rubric->courses2->course_code }})</td>
+                                    <td>{{ $rubric->courses2->name }}
+                                        @if($rubric->courses2->course_abbreviation != null)
+                                            ({{$rubric->courses2->course_abbreviation}},
+                                    @else
+                                        -
+                                    @endif
+
+                                    @if($rubric->courses2->course_code  != null)
+                                        {{$rubric->courses2->course_code }})
+                                    @else
+                                        -
+                                    @endif
+                                    </td>
+
                                     <td>{{ $rubric->name }}</td>
+
                                     <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
+
                                     <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}">View</a></td>
+
                                 </tr>
                             @endforeach
+
+
+
+
+
+
                             </tbody>
                         </table>
                     </div>
