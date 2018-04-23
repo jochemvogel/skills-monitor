@@ -569,7 +569,6 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
             "version": "v5.6.17",
             "source": {
                 "type": "git",
@@ -580,7 +579,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/0f787c763ae8fb9fae0c8c809830ba4fa81e2d9d",
                 "reference": "0f787c763ae8fb9fae0c8c809830ba4fa81e2d9d",
-=======
             "version": "v5.6.16",
             "source": {
                 "type": "git",
@@ -591,7 +589,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/fcdbc791bc3e113ada38ab0a1147141fb9ec2b16",
                 "reference": "fcdbc791bc3e113ada38ab0a1147141fb9ec2b16",
->>>>>>> b4ce17389e4f224e5d3845601b9710772e23b460
                 "shasum": ""
             },
             "require": {
@@ -717,11 +714,8 @@
                 "framework",
                 "laravel"
             ],
-<<<<<<< HEAD
             "time": "2018-04-17T12:51:04+00:00"
-=======
             "time": "2018-04-09T16:07:04+00:00"
->>>>>>> b4ce17389e4f224e5d3845601b9710772e23b460
         },
         {
             "name": "laravel/tinker",
@@ -3304,7 +3298,6 @@
         },
         {
             "name": "phpunit/phpunit",
-<<<<<<< HEAD
             "version": "7.1.4",
             "source": {
                 "type": "git",
@@ -3315,7 +3308,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6d51299e307dc510149e0b7cd1931dd11770e1cb",
                 "reference": "6d51299e307dc510149e0b7cd1931dd11770e1cb",
-=======
             "version": "7.1.3",
             "source": {
                 "type": "git",
@@ -3326,7 +3318,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a7834993ddbf4b0ed2c3b2dc1f3b1d093ef910a9",
                 "reference": "a7834993ddbf4b0ed2c3b2dc1f3b1d093ef910a9",
->>>>>>> b4ce17389e4f224e5d3845601b9710772e23b460
                 "shasum": ""
             },
             "require": {
@@ -3345,11 +3336,8 @@
                 "phpunit/php-text-template": "^1.2.1",
                 "phpunit/php-timer": "^2.0",
                 "phpunit/phpunit-mock-objects": "^6.1.1",
-<<<<<<< HEAD
                 "sebastian/comparator": "^2.1 || ^3.0",
-=======
                 "sebastian/comparator": "^2.1",
->>>>>>> b4ce17389e4f224e5d3845601b9710772e23b460
                 "sebastian/diff": "^3.0",
                 "sebastian/environment": "^3.1",
                 "sebastian/exporter": "^3.1",
@@ -3397,11 +3385,8 @@
                 "testing",
                 "xunit"
             ],
-<<<<<<< HEAD
             "time": "2018-04-18T13:41:53+00:00"
-=======
             "time": "2018-04-13T02:28:50+00:00"
->>>>>>> b4ce17389e4f224e5d3845601b9710772e23b460
         },
         {
             "name": "phpunit/phpunit-mock-objects",
