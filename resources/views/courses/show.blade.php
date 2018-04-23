@@ -5,10 +5,10 @@
         <div class="box-header with-border">
             <h3 class="box-title">
                 <strong>
-                    @if($courses->course_abbreviation != null)
-                    {{$courses->course_abbreviation}} -
+                    @if($course->course_abbreviation != null)
+                    {{$course->course_abbreviation}} -
                     @endif
-                    {{$courses->name}}
+                    {{$course->name}}
                 </strong>
             </h3>
         </div>

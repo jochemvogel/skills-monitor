@@ -88,8 +88,7 @@ class coursesController extends Controller
             // dd($rubrics);
 
             $params = [
-                'title' => 'Delete Course',
-                'courses' => $selectedcourse,
+                'course' => $selectedcourse,
                 'rubrics' => $rubrics,
             ];
 
