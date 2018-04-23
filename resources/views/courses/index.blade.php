@@ -16,6 +16,7 @@
                         <th>Abbreviation</th>
                         <th>Code</th>
                         <th>Name</th>
+                        <th>View</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -37,6 +38,8 @@
                                 @endif
 
                                 <td>{{$row->name}}</td>
+
+                                <td><a href="{{route('courses.show',['course_abbreviation' => $row->course_abbreviation])}}">View</a></td>
                                 
                                 <td>
                                     <a href="{{ route('courses.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
