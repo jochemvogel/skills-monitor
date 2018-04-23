@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <div class="box box-solid">
         <div class="box-header with-border">
@@ -27,8 +28,14 @@
 
                 </table>
             </div>
+
+            <div class="x_content">
+                <canvas id="line-chart" width="400" height="225"></canvas>
+            </div>
+
         </div>
     </div>
 
 @endsection
+
 
