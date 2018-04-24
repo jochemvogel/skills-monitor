@@ -40,31 +40,31 @@
                 @endforeach
                 </tbody>
             </table>
-            <br>
-            <div class="pull-left">
-                {{-- add row button --}}
-                <form method='POST' action="{{route('rubrics.update',['id' => $rubrics->id])}}">
-                    @method('PUT')
-                    @csrf
-                    <input type='hidden' name='name' value='{{ $rubrics->name}}'>
-                    <input type='hidden' name='rows' value='{{ $rows + 1 }}'>
-                    <input type='hidden' name='cols' value='{{ $rubrics->cols }}'>
-                    <button class='btn-success btn-sm' type='submit' name='add_row'><i class='fa fa-plus-square-o'></i>&nbsp;&nbsp;Add row</button>
-                </form>
-            </div>
-            <div class="pull-right">
-                {{-- remove row button --}}
-                @if($rows > 1)
-                    <form method='POST' action="{{route('rubrics.update',['id' => $rubrics->id])}}">
-                        @method('PUT')
-                        @csrf
-                        <input type='hidden' name='name' value='{{ $rubrics->name }}'>
-                        <input type='hidden' name='rows' value='{{ $rows - 1 }}'>
-                        <input type='hidden' name='cols' value='{{ $rubrics->cols }}'>
-                        <button class='btn-danger btn-sm' type='submit' name='delete_row'><i class='fa fa-minus-square-o'></i>&nbsp;&nbsp;Remove row</button>
-                    </form>
-                @endif
-            </div>
+            {{--<br>--}}
+            {{--<div class="pull-left">--}}
+                 {{--add row button --}}
+                {{--<form method='POST' action="{{route('rubrics.update',['id' => $rubrics->id])}}">--}}
+                    {{--@method('PUT')--}}
+                    {{--@csrf--}}
+                    {{--<input type='hidden' name='name' value='{{ $rubrics->name}}'>--}}
+                    {{--<input type='hidden' name='rows' value='{{ $rows + 1 }}'>--}}
+                    {{--<input type='hidden' name='cols' value='{{ $rubrics->cols }}'>--}}
+                    {{--<button class='btn-success btn-sm' type='submit' name='add_row'><i class='fa fa-plus-square-o'></i>&nbsp;&nbsp;Add row</button>--}}
+                {{--</form>--}}
+            {{--</div>--}}
+            {{--<div class="pull-right">--}}
+                 {{--remove row button --}}
+                {{--@if($rows > 1)--}}
+                    {{--<form method='POST' action="{{route('rubrics.update',['id' => $rubrics->id])}}">--}}
+                        {{--@method('PUT')--}}
+                        {{--@csrf--}}
+                        {{--<input type='hidden' name='name' value='{{ $rubrics->name }}'>--}}
+                        {{--<input type='hidden' name='rows' value='{{ $rows - 1 }}'>--}}
+                        {{--<input type='hidden' name='cols' value='{{ $rubrics->cols }}'>--}}
+                        {{--<button class='btn-danger btn-sm' type='submit' name='delete_row'><i class='fa fa-minus-square-o'></i>&nbsp;&nbsp;Remove row</button>--}}
+                    {{--</form>--}}
+                {{--@endif--}}
+            {{--</div>--}}
         </div>
     </div>
 @endsection
