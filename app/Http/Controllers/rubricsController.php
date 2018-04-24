@@ -20,7 +20,7 @@ class rubricsController extends Controller
     public function index()
     {
         try {
-            $rubrics = Rubrics::orderBy('name', 'asc')->paginate(5);
+            $rubrics = Rubrics::all();
             return view('rubrics.index', [
                 'rubrics' => $rubrics
             ]);
