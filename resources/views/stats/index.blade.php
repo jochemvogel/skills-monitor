@@ -17,23 +17,32 @@
 @push('js')
 <script>
     new Chart(document.getElementById("line-chart"), {
-        type: 'line',
+        type: 'line', 
         data: {
-            labels: ['GRE1','SAN1','SBE1'],
+            labels: ['GRE1','SON1','SBE1'],
             datasets: [{ 
-            data: [7,6,9],
-            label: 'BLOK 1',
+            data: [7,8,7.5],
+            label: 'Blok 1',
             borderColor: "#3e95cd",
             fill: false
+        }]},
+
+        options: {
+            title: {
+            display: true,
+            text: 'Progress'
+            },
+
+            scales: {
+					yAxes: [{
+						ticks: {
+							suggestedMin: 0,
+							suggestedMax: 10
+						}
+                    }]
+            }   
         }
-        ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'Progress'
-    }
-  }
-});
+                
+    });
 </script>
 @endpush

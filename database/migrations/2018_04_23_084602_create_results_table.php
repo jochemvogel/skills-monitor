@@ -17,8 +17,8 @@ class CreateResultsTable extends Migration
             $table->increments('id');
             $table->string('course');
             $table->integer('blok');
-            $table->integer('grade');
-            $table->integer('ec');
+            $table->decimal('grade');
+            $table->decimal('ec');
             $table->timestamps();
         });
     }

@@ -9,22 +9,22 @@
             <td>{{$row->grade}}</td>
             <td>{{$row->ec}}</td>    
         </tr>
-    @endforeach
+    @endforeach 
 </tbody>
 
 @endsection
 
+
 @push('js')
 <script>
-    let test = '<?php echo "hello"; ?>';
-
+    
     new Chart(document.getElementById("line-chart"), {
         type: 'line',
         data: {
-            labels: ['GRE2','SAN2','SBE2'],
+            labels: ['GRE2','SON2','SBE2'],
             datasets: [{ 
             data: [6,5,7],
-            label: test,
+            label: 'Blok 2',
             borderColor: "#3e95cd",
             fill: false
         }
@@ -34,8 +34,19 @@
     title: {
       display: true,
       text: 'Progress'
-    }
+    },
+
+    scales: {
+            yAxes: [{
+                ticks: {
+                    suggestedMin: 0,
+                    suggestedMax: 10
+                }
+            }]
+    }   
   }
 });
 </script>
-@endpush    
+@endpush
+
+   
