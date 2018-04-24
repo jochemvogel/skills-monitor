@@ -8,7 +8,9 @@
                     List of all the rubrics
                 </strong>
                 <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs">
-                    <i class="fa fa-plus"></i> Create New </a></h3>
+                    <i class="fa fa-plus"></i> Create New
+                </a>
+            </h3>
         </div>
 
         <!-- /.box-header -->
@@ -27,10 +29,11 @@
                         <table id="rubrics" class="table table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th class="sorting_asc" tabindex="0" aria-controls="rubrics" rowspan="1" colspan="1" style="width: 361px;" aria-sort="ascending">Course name</th>
-                                <th class="sorting" tabindex="0" aria-controls="rubrics" rowspan="1" colspan="1" style="width: 323px;">Rubric name</th>
-                                <th class="sorting" tabindex="0" aria-controls="rubrics" rowspan="1" colspan="1"  style="width: 191px;">Creator</th>
-                                <th style="width: 261px;">Action</th>
+                                <th>Course name</th>
+                                <th>Rubric name</th>
+                                <th>Creator</th>
+                                <th>View</th>
+                                <th class="rubrics_action">Action</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -85,6 +88,7 @@
                                     <td>{{ $rubric->name }}</td>
                                     <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
                                     <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}">View</a></td>
+                                    <td>Edit Remove</td>
                                 </tr>
                             @endforeach
                             </tbody>
