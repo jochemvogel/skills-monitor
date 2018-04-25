@@ -49,9 +49,10 @@ class coursesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:courses',
-            'course_abbreviation' => 'unique:courses',
-            'course_code' => 'unique:courses',
+            'course_abbreviation' => 'nullable|unique:courses',
+            'course_code' => 'nullable|unique:courses',
         ]);
+
 
         $course = Course::create([
             'name' => $request->input('name'),
