@@ -118,7 +118,26 @@ class rubricsController extends Controller
      */
     public function edit($id)
     {
-        //
+        try
+        {
+            $rubric = Rubrics::findOrFail($id);
+            $courses = Course::all();
+
+            $params = [
+                'title' => 'Edit Rubric',
+                'rubric' => $rubric,
+                'courses' => $courses,
+            ];
+
+            return view('rubrics.edit')->with($params);
+        }
+        catch (ModelNotFoundException $ex)
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 
     /**
@@ -163,6 +182,28 @@ class rubricsController extends Controller
         return redirect()->route('rubrics.show',['id' => $id]);
     }
 
+    public function delete($id)
+    {
+        try
+        {
+            $rubric = Rubrics::findOrFail($id);
+
+            $params = [
+                'title' => 'Delete Rubric',
+                'rubric' => $rubric,
+            ];
+
+            return view('rubrics.delete')->with($params);
+        }
+        catch (ModelNotFoundException $ex)
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -171,6 +212,20 @@ class rubricsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            $rubric = Rubrics::findOrFail($id);
+
+            $rubric ->delete();
+
+            return redirect()->route('rubrics.index')->with('success', "The rubric <strong>$rubric->name</strong> has successfully been archived.");
+        }
+        catch (ModelNotFoundException $ex)
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 }

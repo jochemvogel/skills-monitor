@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/courses/create', 'coursesController@create');
     Route::get('/courses/{id}/delete', 'coursesController@delete')->name('courses.delete');
     Route::get('/courses/{course_abbreviation}', 'coursesController@show');
+    Route::get('/rubrics/{id}/delete', 'rubricsController@delete')->name('rubrics.delete');
 
     Route::resource('users', 'usersController');
     Route::resource('rubrics', 'rubricsController');

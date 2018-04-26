@@ -89,8 +89,8 @@
                                     <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
                                     <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}">View</a></td>
                                     <td>
-                                        <a href="{{ route('courses.edit', ['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
-                                        <a href="{{ route('courses.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
+                                        <a href="{{ route('rubrics.edit', ['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
+                                        <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
                                     </td>
                                 </tr>
                             @endforeach
