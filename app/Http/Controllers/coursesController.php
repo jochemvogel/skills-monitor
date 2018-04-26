@@ -170,9 +170,20 @@ class coursesController extends Controller
                 'name' => 'required',
             ]);
 
+            if($request->input('course_abbreviation') != null)
+            {
+                $course_abbreviation = $request->input('course_abbreviation');
+                $course_abbreviation_boolean = true;
+            }
+            else
+            {
+                $course_abbreviation_boolean = false;
+            }
+    
             $course->name = $request->input('name');
             $course->course_abbreviation = $request->input('course_abbreviation');
             $course->course_code = $request->input('course_code');
+            $course->real_abbreviation = $course_abbreviation_boolean;
 
             $course->save();
 
