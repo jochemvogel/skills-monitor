@@ -54,7 +54,7 @@ class coursesController extends Controller
         ]);
 
         function generateRandomAbbrevation($length = 3) {
-            $characters = 'abcdefghijklmnopqrstuvwxyz';
+            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456';
             $charactersLength = strlen($characters);
             $randomString = '';
             for ($i = 0; $i < $length; $i++) {
