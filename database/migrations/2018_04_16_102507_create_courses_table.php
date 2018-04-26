@@ -17,6 +17,7 @@ class CreateCoursesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('course_abbreviation')->nullable()->unique();
+            $table->boolean('real_abbreviation');
             $table->string('course_code')->nullable()->unique();
             $table->timestamps();
         });

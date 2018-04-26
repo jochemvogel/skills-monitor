@@ -53,11 +53,33 @@ class coursesController extends Controller
             'course_code' => 'nullable|unique:courses',
         ]);
 
+        function generateRandomAbbrevation($length = 3) {
+            $characters = 'abcdefghijklmnopqrstuvwxyz';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
+        }
+
+        if($request->input('course_abbreviation') != null)
+        {
+            $course_abbreviation = $request->input('course_abbreviation');
+            $course_abbreviation_boolean = true;
+        }
+        else
+        {
+            $course_abbreviation = generateRandomAbbrevation();
+            $course_abbreviation_boolean = false;
+        }
+
 
         $course = Course::create([
             'name' => $request->input('name'),
-            'course_abbreviation' => $request->input('course_abbreviation'),
+            'course_abbreviation' => $course_abbreviation,
             'course_code' => $request->input('course_code'),
+            'real_abbreviation' => $course_abbreviation_boolean,
         ]);
 
         return redirect()->route('courses.index')->with('success', "The course <strong>$course->name</strong> has successfully been created.");
