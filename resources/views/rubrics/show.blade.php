@@ -20,7 +20,6 @@
                 @foreach($rubrics->rowobjects as $row)
                     <tr id="row_{{$row->id}}">
                         <td>
-                            {{-- #TODO make the buttons do something --}}
                             @if($rubrics->rowobjects->first()->id != $row->id)
                                 <i class="fa fa-toggle-up"></i>
                                 <br />
@@ -79,7 +78,18 @@
                 switch(elem.classList[1]){
                     case "fa-toggle-up":
                         console.log("up");
-                        //#TODO add ajax call to move row one up
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            type: "GET",
+                            url: '/moverow',
+                            data: {
+                                'id': rowid,
+                                'move': 'up',
+                            },
+                            success: function(data) { window.location.replace("/rubrics/"+data); }
+                        });
                         break;
                     case "fa-trash":
                         console.log("delete");
@@ -87,7 +97,18 @@
                         break;
                     case "fa-toggle-down":
                         console.log("down");
-                        //#TODO add ajax call to move row one down
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            type: "GET",
+                            url: '/moverow',
+                            data: {
+                                'id': rowid,
+                                'move': 'down',
+                            },
+                            success: function(data) { window.location.replace("/rubrics/"+data); }
+                        });
                         break;
                 }
             }else if(elem.id.substr(0,5) == "field"){

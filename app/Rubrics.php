@@ -18,7 +18,7 @@ class Rubrics extends Model
 
     public function rowobjects()
     {
-        return $this->hasMany('App\Rows');
+        return $this->hasMany('App\Rows')->orderBy('order','asc');
     }
 
 }

@@ -5,86 +5,11 @@ namespace App\Http\Controllers;
 use App\Role;
 use App\Rubrics;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\DB;
 
 class JSONcontroller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function updateField(Request $request){
         DB::table('fields')->where('id', '=', $request->input('id'))->update([
             'content' => $request->input('content'),
@@ -102,5 +27,19 @@ class JSONcontroller extends Controller
         $hasPending = DB::table('pending_changes')->where('field_id', '=', $request->input('id'))->first()->content;
         DB::table('pending_changes')->where('field_id', '=', $request->input('id'))->delete();
         return $hasPending;
+    }
+
+    public function moveRow(Request $request){
+        $rubrics_id = DB::table('rows')->where('id', "=", $request->input('id'))->pluck('rubrics_id')->first();
+        $currentRowOrder = DB::table('rows')->where('id', "=", $request->input('id'))->pluck('order')->first();
+
+        if($request->input('move') == "up"){
+            DB::table('rows')->where('order', '=', $currentRowOrder-1)->where('rubrics_id', '=', $rubrics_id)->update(["order" => $currentRowOrder]);
+            DB::table('rows')->where('id', '=', $request->input('id'))->update(["order" => $currentRowOrder-1]);
+        }elseif($request->input('move') == "down"){
+            DB::table('rows')->where('order', '=', $currentRowOrder + 1)->where('rubrics_id', '=', $rubrics_id)->update(["order" => $currentRowOrder]);
+            DB::table('rows')->where('id', '=', $request->input('id'))->update(["order" => $currentRowOrder + 1]);
+        }
+        return $rubrics_id;
     }
 }

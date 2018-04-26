@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group( function () {
     // JSONcontroller routes
     Route::put('updatefield', 'JSONcontroller@updateField');
     Route::put('backupfield', 'JSONcontroller@backupField');
+    Route::get('moverow', 'JSONcontroller@moveRow');
     Route::get('getpending', 'JSONcontroller@getPending');
 });
 
