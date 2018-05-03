@@ -9,7 +9,7 @@
                 <strong>
                     Rubrics: Overview
                 </strong>
-                <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs">
+                <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs" title="Create new rubric">
                     <i class="fa fa-plus"></i> Create New
                 </a>
             </h1>
@@ -41,7 +41,7 @@
                             <tbody>
                             @foreach($rubrics as $rubric)
                                 <tr role="row">
-                                    <td>{{ $rubric->courses2->name }}
+                                    <td><a href="{{route('courses.show',['course_abbreviation' => $rubric->courses2->course_abbreviation])}}" title="View course: {{ $rubric->courses2->name }}">{{ $rubric->courses2->name }}</a>
 
                                         @if($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation != null)
 
@@ -65,8 +65,8 @@
 
 
                                         @if($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code != null)
-
                                             {{$rubric->courses2->course_code}})
+
 
 
                                         @elseif($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code == null)
@@ -89,10 +89,10 @@
                                     </td>
                                     <td>{{ $rubric->name }}</td>
                                     <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
-                                    <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}">View</a></td>
+                                    <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}" title="View rubric: {{ $rubric->name }}" target="_blank">View rubric</a></td>
                                     <td>
-                                        <a href="{{ route('rubrics.edit', ['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
-                                        <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
+                                        <a href="{{ route('rubrics.edit', ['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit rubric: {{ $rubric->name }}"></i> </a>
+                                        <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric: {{ $rubric->name }}"></i> </a>
                                     </td>
                                 </tr>
                             @endforeach
