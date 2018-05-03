@@ -30,9 +30,9 @@
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="course">Course<span class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select class="form-control select2 select2-hidden-accessible" data-placeholder="Select a course" style="width: 100%;" tabindex="-1" aria-hidden="true" name="course">
-                                    <option value="volvo">SON1</option>
-                                    <option value="saab">IRE1</option>
-                                    <option value="mercedes">SAN1</option>
+                                    <option value="son1">SON1</option>
+                                    <option value="son1">IRE1</option>
+                                    <option value="son1">SAN1</option>
                                 </select>
                             </div>
                         </div>

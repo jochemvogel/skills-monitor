@@ -1,16 +1,18 @@
 @extends('adminlte::page')
 
+@section('title', 'Rubrics: Overview')
+
 @section('content')
-    <div class="box box-solid"">
+    <div class="box box-solid">
         <div class="box-header">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
-                    List of all the rubrics
+                    Rubrics: Overview
                 </strong>
                 <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs">
                     <i class="fa fa-plus"></i> Create New
                 </a>
-            </h3>
+            </h1>
         </div>
 
         <!-- /.box-header -->
