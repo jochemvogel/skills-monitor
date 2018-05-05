@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Rubrics: Delete')
+
 @section('content')
 <div class="">
     <div class="clearfix"></div>

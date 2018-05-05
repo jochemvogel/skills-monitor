@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Rubrics: Edit')
+
 @section('content')
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -10,9 +12,12 @@
                     <div class="clearfix"></div>
                 </div>
 
+
+                {{-- START NAME--}}
+
                 <div class="x_content">
                     <br />
-                    <form method="post" action="{{ route('rubrics.update', ['id' => $rubric->id]) }}" data-parsley-validate class="form-horizontal form-label-left">
+                    <form method="post" action="{{ route('rubrics.update', ['name' => $rubric->name]) }}" data-parsley-validate class="form-horizontal form-label-left">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name<span class="required">*</span></label>
@@ -25,6 +30,11 @@
                             </div>
                         </div>
 
+                        {{-- END NAME --}}
+
+
+
+                        {{--START DROPDOWN--}}
 
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="course">Course<span class="required">*</span></label>
@@ -36,6 +46,12 @@
                                 </select>
                             </div>
                         </div>
+
+                        {{--END DROP DOWN--}}
+
+
+                        {{-- DROPDOWN EXAMPLE (NEED TO SAVE) --}}
+
 
                         {{--<div class="form-group {{ $errors->has('course') ? ' has-error ' : '' }}">--}}
                             {{--<label class="col-sm-2 control-label" for="course">Course <span class="required">*</span></label>--}}
@@ -53,8 +69,11 @@
                             {{--@endif--}}
                         {{--</div>--}}
 
+                        {{-- END DROPDOWN EXAMPLE  --}}
 
 
+
+                        {{-- SUBMIT BUTTON --}}
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                 <input type="hidden" name="_token" value="{{ Session::token() }}">
@@ -62,6 +81,9 @@
                                 <button type="submit" class="btn btn-success">Save Rubric Changes</button>
                             </div>
                         </div>
+
+                        {{-- END SUBMIT BUTTON --}}
+
                     </form>
                 </div>
             </div>

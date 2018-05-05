@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+
+
 @section('content')
     {{-- create a box around the rubrics and it's name --}}
     <div class="box box-solid">
