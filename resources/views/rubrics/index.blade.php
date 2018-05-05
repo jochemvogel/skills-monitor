@@ -26,6 +26,8 @@
                 </div>
 
 
+                {{-- TABLE HEADER --}}
+
                 <div class="row">
                     <div class="col-sm-12">
                         <table id="rubrics" class="table table-striped table-bordered">
@@ -38,51 +40,56 @@
                                 <th class="rubrics_action">Action</th>
                             </tr>
                             </thead>
+
+                {{-- END TABLE HEADER --}}
+
+
+                {{-- TABLE BODY --}}
                             <tbody>
                             @foreach($rubrics as $rubric)
                                 <tr role="row">
-                                    <td><a href="{{route('courses.show',['course_abbreviation' => $rubric->courses2->course_abbreviation])}}" title="View course: {{ $rubric->courses2->name }}">{{ $rubric->courses2->name }}</a>
+                                    <td><a href="{{route('courses.show',['course_abbreviation' => $rubric->course_id->course_abbreviation])}}" title="View course: {{ $rubric->course_id->name }}">{{ $rubric->course_id->name }}</a>
 
-                                        @if($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation != null)
+                                        {{-- COURSE ABBREVIATION --}}
 
-                                            ({{$rubric->courses2->course_abbreviation}},
+                                        {{--  +Code +abb --}}
+                                        @if($rubric->course_id->course_code != null && $rubric->courses2->course_abbreviation != null)
 
-                                        @elseif($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation == null )
+                                            ({{$rubric->course_id->course_abbreviation}},
 
+                                        {{--  +Code -abb--}}
+                                        @elseif($rubric->course_id->course_code != null && $rubric->courses2->course_abbreviation == null )
 
-                                        @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation != null )
+                                        {{--  -Code +abb --}}
+                                        @elseif($rubric->course_id->course_code == null && $rubric->courses2->course_abbreviation != null )
 
-                                             ({{$rubric->courses2->course_abbreviation}})
+                                             ({{$rubric->course_id->course_abbreviation}})
 
-
-                                        @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation == null)
-
-                                        @else
-                                            -
+                                        {{--  -Code -abb --}}
+                                        @elseif($rubric->course_id->course_code == null && $rubric->courses2->course_abbreviation == null)
 
                                         @endif
 
+                                        {{-- COURSE CODE--}}
 
 
-                                        @if($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code != null)
-                                            {{$rubric->courses2->course_code}})
+                                        {{--  +Code +abb --}}
+                                        @if($rubric->course_id->course_abbreviation != null && $rubric->courses2->course_code != null)
+                                            {{$rubric->course_id->course_code}})
 
 
-
-                                        @elseif($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code == null)
-
-
-
-                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code != null)
-
-                                            ({{$rubric->courses2->course_code}})
+                                        {{--  +Code -abb --}}course_id
+                                        @elseif($rubric->course_id->course_abbreviation != null && $rubric->courses2->course_code == null)
 
 
-                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code == null)
+                                        {{--  -Code +abb --}}
+                                        @elseif($rubric->course_id->course_abbreviation == null && $rubric->courses2->course_code != null)
 
+                                            ({{$rubric->course_id->course_code}})
 
-                                        @else
-                                            -
+                                        {{--  -Code -abb --}}
+                                        @elseif($rubric->course_id->course_abbreviation == null && $rubric->courses2->course_code == null)
+
 
                                         @endif
 
@@ -97,6 +104,9 @@
                                 </tr>
                             @endforeach
                             </tbody>
+
+                            {{-- END TABLE BODY --}}
+
                         </table>
                     </div>
                 </div>

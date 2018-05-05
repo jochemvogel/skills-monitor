@@ -149,19 +149,21 @@ class rubricsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $rubrics = Rubrics::findOrFail($id);
+
         try {
-            $rubric = Rubrics::findOrFail($id);
+
 
             $this->validate($request, [
                 'cols' => 'required|Numeric',
             ]);
 
-            $rubric->course_id = $request->input('course_id');
-            $rubric->cols = $request->input('cols');
-            $rubric->name = $request->input('name');
-            $rubric->save();
+            $rubrics->course_id = $request->input('course_id');
+            $rubrics->cols = $request->input('cols');
+            $rubrics->name = $request->input('name');
+            $rubrics->save();
 
-            return redirect()->route('rubrics.index')->with('success', "The rubric <strong>$rubric->name</strong> has successfully been updated.");
+            return redirect()->route('rubrics.index')->with('success', "The rubric <strong>$rubrics->name</strong> has successfully been updated.");
         }
         catch (ModelNotFoundException $ex)
         {

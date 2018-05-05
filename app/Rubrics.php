@@ -26,7 +26,7 @@ class Rubrics extends Model
       return $this->belongsToMany(Course::class);
     }
 
-    public function courses2()
+    public function courses_id()
     {
         return $this->belongsTo('App\Course', 'course_id');
     }
