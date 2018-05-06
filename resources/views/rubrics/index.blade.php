@@ -18,7 +18,7 @@
         <!-- /.box-header -->
         <div class="box-body">
             <div id="example1_wrapper" class="">
-                    <div class="row">
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="dataTables_length" id="example1_length">
                         </div>

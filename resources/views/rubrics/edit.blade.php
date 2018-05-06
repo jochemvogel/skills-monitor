@@ -3,30 +3,40 @@
 @section('title', 'Rubrics: Edit')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="box box-solid">
+        <div class="box-header">
+            <h1 class="box-title">
+                <strong>
+                    Rubrics: Edit
+                </strong>
+                <a href="{{route('rubrics.index')}}" class="btn btn-info btn-xs" title="Back">
+                    <i class="fa fa-chevron-left"></i> Back
+                </a>
+            </h1>
+        </div>
 
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Edit Rubric <a href="{{route('rubrics.index')}}" class="btn btn-info btn-xs"><i class="fa fa-chevron-left"></i> Back </a></h2>
-                    <div class="clearfix"></div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <div id="example1_wrapper" class="">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="dataTables_length" id="example1_length">
+                        </div>
+                    </div>
                 </div>
 
+                {{-- FORM --}}
+                <form class="form-horizontal" action="{{ route('rubrics.store') }}" method="POST">
+                    @csrf
 
-                {{-- START NAME--}}
+                    {{-- NAME--}}
 
-                <div class="x_content">
-                    <br />
-                    <form method="post" action="{{ route('rubrics.update', ['name' => $rubric->name]) }}" data-parsley-validate class="form-horizontal form-label-left">
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name<span class="required">*</span></label>
-
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="{{$rubric->name}}" id="name" name="name" class="form-control col-md-7 col-xs-12">
-                                @if ($errors->has('name'))
-                                    <span class="help-block">{{ $errors->first('name') }}</span>
-                                @endif
+                    <input type='hidden' name='rubric' value='1'>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Name <span class="required">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="name" value="{{$rubric->name}}"  required>
                             </div>
                         </div>
 
@@ -34,59 +44,51 @@
 
 
 
-                        {{--START DROPDOWN--}}
+                        {{--DROPDOWN--}}
 
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="course">Course<span class="required">*</span></label>
+                        <div class="form-group {{ $errors->has('course') ? ' has-error ' : '' }}">
+                            <label class="col-sm-2 control-label" for="course">Course <span class="required">*</span></label>
                             <div class="col-sm-10">
                                 <select class="form-control select2 select2-hidden-accessible" data-placeholder="Select a course" style="width: 100%;" tabindex="-1" aria-hidden="true" name="course">
-                                    <option value="son1">SON1</option>
-                                    <option value="son1">IRE1</option>
-                                    <option value="son1">SAN1</option>
+                                    @if ($courses->count())
+                                        @foreach($courses as $course)
+                                            <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
+                            @if ($errors->has('course'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('course') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
-                        {{--END DROP DOWN--}}
-
-
-                        {{-- DROPDOWN EXAMPLE (NEED TO SAVE) --}}
-
-
-                        {{--<div class="form-group {{ $errors->has('course') ? ' has-error ' : '' }}">--}}
-                            {{--<label class="col-sm-2 control-label" for="course">Course <span class="required">*</span></label>--}}
-                            {{--<div class="col-sm-10">--}}
-                                {{--<select class="form-control select2 select2-hidden-accessible" data-placeholder="Select a course" style="width: 100%;" tabindex="-1" aria-hidden="true" name="course">--}}
-                                    {{--<option>test1</option>--}}
-                                    {{--<option>test2</option>--}}
-                                    {{--<option>test3</option>--}}
-                                {{--</select>--}}
-                            {{--</div>--}}
-                            {{--@if ($errors->has('course'))--}}
-                                {{--<span class="help-block">--}}
-                                    {{--<strong>{{ $errors->first('course') }}</strong>--}}
-                                {{--</span>--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
-
-                        {{-- END DROPDOWN EXAMPLE  --}}
-
+                        {{--END DROP DOWN-- }}
 
 
                         {{-- SUBMIT BUTTON --}}
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                <input type="hidden" name="_token" value="{{ Session::token() }}">
-                                <input name="_method" type="hidden" value="PUT">
-                                <button type="submit" class="btn btn-success">Save Rubric Changes</button>
+                                <input type='submit' class='btn btn-success btn-sm' value='Save'>
                             </div>
                         </div>
+                    </div>
 
-                        {{-- END SUBMIT BUTTON --}}
+                    {{-- END SUBMIT BUTTON --}}
 
-                    </form>
-                </div>
+                </form>
+
+                {{-- END FORM --}}
             </div>
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
+@endpush
