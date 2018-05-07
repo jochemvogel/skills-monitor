@@ -42,10 +42,13 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
+        // check if the user wants to edit himself
+        if($model->id === $user->id){
+            return true;
         // check if current user is an admin
-        if($user->role_id === DB::table('roles')->where('name', '=', 'admin')->pluck('id')->first()){
-            // make sure the current user can't change an other admin
-            if($model->role_id === DB::table('roles')->where('name', '=', 'admin')->pluck('id')->first()){
+        }elseif($user->role_id === DB::table('roles')->where('name', '=', 'admin')->pluck('id')->first()){
+            // make sure the current user can't change another admin
+            if($model->role_id === DB::table('roles')->where('name', '=', 'admin')->pluck('id')->first()) {
                 return false;
             }else{
                 return true;
@@ -75,6 +78,24 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        //
+        // check if current user is an admin
+        if($user->role_id === DB::table('roles')->where('name', '=', 'admin')->pluck('id')->first()){
+            // make sure the current user can't delete an other admin
+            if($model->role_id === DB::table('roles')->where('name', '=', 'admin')->pluck('id')->first()){
+                return false;
+            }else{
+                return true;
+            }
+        // check if the current user is a teacher
+        }elseif($user->role_id === DB::table('roles')->where('name', '=', 'teacher')->pluck('id')->first()) {
+            // check if the user has an higher role
+            if($user->role_id < $model->role_id){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 }

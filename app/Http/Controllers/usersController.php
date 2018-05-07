@@ -183,7 +183,8 @@ class usersController extends Controller
         {
             $user = User::findOrFail($id);
 
-            $user->delete();
+            $user->deleted = true;
+            $user->save();
 
             return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been archived.");
         }

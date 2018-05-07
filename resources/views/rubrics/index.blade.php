@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content')
-    <div class="box box-solid"">
+    <div class="box box-solid">
         <div class="box-header">
             <h3 class="box-title">
                 <strong>
