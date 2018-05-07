@@ -15,7 +15,6 @@
             </h1>
         </div>
 
-        <!-- /.box-header -->
         <div class="box-body">
             <div id="example1_wrapper" class="">
                 <div class="row">
@@ -26,7 +25,7 @@
                 </div>
 
                 {{-- FORM --}}
-                <form class="form-horizontal" action="{{ route('rubrics.store') }}" method="POST">
+                <form class="form-horizontal" action="{{ route('rubrics.update', ['id' => $rubric->id]) }}" method="post">
                     @csrf
 
                     {{-- NAME--}}
@@ -36,7 +35,7 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">Name <span class="required">*</span></label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="name" value="{{$rubric->name}}"  required>
+                                <input type="text" class="form-control" name="name" value="{{$rubric->name}}" id="name"  required>
                             </div>
                         </div>
 
@@ -53,6 +52,7 @@
                                     @if ($courses->count())
                                         @foreach($courses as $course)
                                             <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                            {{--<option value="{{ $course->id }}" {{ $currentCourse->id == $course->id ? 'selected="selected"' : '' }}>{{ $course->name }}</option>--}}
                                         @endforeach
                                     @endif
                                 </select>
@@ -63,6 +63,7 @@
                                 </span>
                             @endif
                         </div>
+
 
                         {{--END DROP DOWN-- }}
 

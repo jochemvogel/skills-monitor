@@ -9,9 +9,11 @@
                 <strong>
                     Rubrics: Overview
                 </strong>
+                {{--ADMIN/DOCENT--}}
                 <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs" title="Create new rubric">
                     <i class="fa fa-plus"></i> Create New
                 </a>
+                {{--ADMIN/DOCENT--}}
             </h1>
         </div>
 
@@ -37,7 +39,9 @@
                                 <th>Rubric name</th>
                                 <th>Creator</th>
                                 <th>View</th>
+                                {{--ADMIN/DOCENT--}}
                                 <th class="rubrics_action">Action</th>
+                                {{--ADMIN/DOCENT--}}
                             </tr>
                             </thead>
 
@@ -96,11 +100,13 @@
                                     </td>
                                     <td>{{ $rubric->name }}</td>
                                     <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
-                                    <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}" title="View rubric: {{ $rubric->name }}">View rubric</a></td>
+                                    <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}" title="View rubric">View rubric</a></td>
+                                    {{--ADMIN/DOCENT--}}
                                     <td>
-                                        <a href="{{ route('rubrics.edit', ['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit rubric: {{ $rubric->name }}"></i> </a>
-                                        <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric: {{ $rubric->name }}"></i> </a>
+                                        <a href="{{ route('rubrics.edit', ['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit rubric"></i> </a>
+                                        <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric"></i> </a>
                                     </td>
+                                    {{--ADMIN/DOCENT--}}
                                 </tr>
                             @endforeach
                             </tbody>

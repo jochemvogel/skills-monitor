@@ -122,11 +122,16 @@ class rubricsController extends Controller
         {
             $rubric = Rubrics::findOrFail($id);
             $courses = Course::all();
+//            foreach ($rubric->courses as $rubric_course) {
+//                $currentCourse = $rubric_course;
+//            }
+
 
             $params = [
                 'title' => 'Edit Rubric',
                 'rubric' => $rubric,
                 'courses' => $courses,
+//                'currentCourse' => $currentCourse,
             ];
 
             return view('rubrics.edit')->with($params);
@@ -139,6 +144,9 @@ class rubricsController extends Controller
             }
         }
     }
+
+
+
 
     /**
      * Update the specified resource in storage.
