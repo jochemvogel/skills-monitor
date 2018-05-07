@@ -27,9 +27,7 @@
                                 <td>{{$row->firstname}}</td>
                                 <td>{{$row->lastname}}</td>
                                 <td>{{$row->email}}</td>
-                                  @foreach($row->roles as $role)
-                                    <td>{{$role->name}}</td>
-                                  @endforeach
+                                <td>{{$row->role->name}}</td>
                                 <td>
                                     <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
                                     <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>

@@ -22,7 +22,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" value="{{ Request::old('firstname') ?: '' }}" id="firstname" name="firstname" class="form-control col-md-7 col-xs-12">
                                     @if ($errors->has('firstname'))
-                                    <span class="help-block">{{ $errors->first('firstname') }}</span>
+                                        <span class="help-block">{{ $errors->first('firstname') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" value="{{ Request::old('lastname') ?: '' }}" id="lastname" name="lastname" class="form-control col-md-7 col-xs-12">
                                     @if ($errors->has('lastname'))
-                                    <span class="help-block">{{ $errors->first('lastname') }}</span>
+                                        <span class="help-block">{{ $errors->first('lastname') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -44,7 +44,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" value="{{ Request::old('email') ?: '' }}" id="email" name="email" class="form-control col-md-7 col-xs-12">
                                     @if ($errors->has('email'))
-                                    <span class="help-block">{{ $errors->first('email') }}</span>
+                                        <span class="help-block">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="password" value="{{ Request::old('password') ?: '' }}" id="password" name="password" class="form-control col-md-7 col-xs-12">
                                     @if ($errors->has('password'))
-                                    <span class="help-block">{{ $errors->first('password') }}</span>
+                                        <span class="help-block">{{ $errors->first('password') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="password" value="{{ Request::old('confirm_password') ?: '' }}" id="confirm_password" name="confirm_password" class="form-control col-md-7 col-xs-12">
                                     @if ($errors->has('confirm_password'))
-                                    <span class="help-block">{{ $errors->first('confirm_password') }}</span>
+                                        <span class="help-block">{{ $errors->first('confirm_password') }}</span>
                                     @endif
                                 </div>
                             </div>
