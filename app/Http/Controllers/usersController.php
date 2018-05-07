@@ -66,14 +66,9 @@ class usersController extends Controller
             'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),
             'email' => $request->input('email'),
+            'role_id' => $request->input('role'),
             'password' => bcrypt($request->input('password')),
         ]);
-
-        $userRole = $request->input('role');
-
-        $user
-        ->roles()
-        ->attach($userRole);;
 
         return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been created.");
     }
@@ -118,9 +113,7 @@ class usersController extends Controller
         {
             $user = User::findOrFail($id);
             $roles = Role::all();
-            foreach ($user->roles as $user_role) {
-                $currentRole = $user_role;
-            }
+            $currentRole = $user->role;
 
             $params = [
                 'title' => 'Edit User',
@@ -163,14 +156,7 @@ class usersController extends Controller
             $user->firstname = $request->input('firstname');
             $user->lastname = $request->input('lastname');
             $user->email = $request->input('email');
-
-            $userRole = $request->input('role');
-
-            for ($i=1; $i < 6; $i++) { 
-                $user->roles()->detach($i);
-            }
-
-            $user->roles()->attach($userRole);
+            $user->role_id = $request->input('role');
 
             $user->save();
 

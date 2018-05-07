@@ -22,7 +22,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" value="{{$user->firstname}}" id="firstname" name="firstname" class="form-control col-md-7 col-xs-12">
                                     @if ($errors->has('firstname'))
-                                    <span class="help-block">{{ $errors->first('firstname') }}</span>
+                                        <span class="help-block">{{ $errors->first('firstname') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" value="{{$user->lastname}}" id="lastname" name="lastname" class="form-control col-md-7 col-xs-12">
                                     @if ($errors->has('lastname'))
-                                    <span class="help-block">{{ $errors->first('lastname') }}</span>
+                                        <span class="help-block">{{ $errors->first('lastname') }}</span>
                                     @endif
                                 </div>
                             </div>
@@ -44,29 +44,36 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" value="{{$user->email}}" id="email" name="email" class="form-control col-md-7 col-xs-12">
                                     @if ($errors->has('email'))
-                                    <span class="help-block">{{ $errors->first('email') }}</span>
+                                        <span class="help-block">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group {{ $errors->has('role') ? ' has-error ' : '' }}">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Role <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select class="form-control col-md-7 col-xs-12" name="role" id="role">
-                                      @if ($roles->count())
-                                        @foreach($roles as $role)
-                                          <option value="{{ $role->id }}" {{ $currentRole->id == $role->id ? 'selected="selected"' : '' }}>{{ $role->name }}</option>
-                                        @endforeach
-                                      @endif
-                                    </select>
-                                  </div>
-                                  @if ($errors->has('role'))
+                            @can('update', $user)
+                                <div class="form-group {{ $errors->has('role') ? ' has-error ' : '' }}">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Role <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select class="form-control col-md-7 col-xs-12" name="role" id="role">
+                                            @if($roles->count() != 0)
+                                                @foreach($roles as $role)
+                                                    @can('update', $role)
+                                                        <option value="{{ $role->id }}" {{ $currentRole->id == $role->id ? 'selected="selected"' : '' }}>{{ $role->name }}</option>
+                                                    @endcan
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                @if ($errors->has('role'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('role') }}</strong>
                                     </span>
-                                  @endif
-                                </div>
+                                @endif
+                            @endcan
+                            @cannot('update', $user)
+                                <input type="hidden" name="role" value="{{ $currentRole->id }}">
+                            @endcannot
                               
 
                             <div class="ln_solid"></div>
