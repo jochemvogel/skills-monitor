@@ -25,7 +25,7 @@
                         @foreach($courses as $row)
                             <tr>
                                 
-                                @if($row->course_abbreviation != null)
+                                @if($row->course_abbreviation != null && $row->real_abbreviation == true)
                                   <td>{{$row->course_abbreviation}}</td>
                                 @else
                                   <td>-</td>  

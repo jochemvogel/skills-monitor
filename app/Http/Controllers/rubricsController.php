@@ -7,6 +7,7 @@ use App\Rubrics;
 use App\Course;
 use App\Rows;
 use App\Field;
+use Auth;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -68,7 +69,7 @@ class rubricsController extends Controller
             'name' => $request->input('name'),
             'cols' => $request->input('cols'),
             'course_id' => $request->input('course'),
-            'user_id' => $request->user()->id,
+            'user_id' => Auth::user()->id,
         ])->id;
 
         $row = Rows::create([
