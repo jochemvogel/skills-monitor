@@ -17,9 +17,7 @@
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Role</th>
-                        @if(Auth::user()->hasrole('admin'))
                         <th>Action</th>
-                        @endif
                     </tr>
                 </thead>
                 <tbody>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Rubrics;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
@@ -59,6 +60,12 @@ class coursesController extends Controller
             $randomString = '';
             for ($i = 0; $i < $length; $i++) {
                 $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            while(DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists() ){
+                $randomString = '';
+                for ($i = 0; $i < $length; $i++) {
+                    $randomString .= $characters[rand(0, $charactersLength - 1)];
+                }
             }
             return $randomString;
         }
