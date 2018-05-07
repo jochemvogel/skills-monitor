@@ -17,10 +17,19 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/profile', 'profileController@show')->name('profile');
     Route::get('/inbox', 'InboxController@index')->name('index');
+    Route::get('/courses/create', 'coursesController@create');
+    Route::get('/courses/{id}/delete', 'coursesController@delete')->name('courses.delete');
+    Route::get('/courses/{course_abbreviation}', 'coursesController@show');
 
     Route::resource('users', 'usersController');
     Route::resource('rubrics', 'rubricsController');
     Route::resource('courses', 'coursesController');
+
+    // JSONcontroller routes
+    Route::put('updatefield', 'JSONcontroller@updateField');
+    Route::put('backupfield', 'JSONcontroller@backupField');
+    Route::get('moverow', 'JSONcontroller@moveRow');
+    Route::get('getpending', 'JSONcontroller@getPending');
 });
 
 Route::fallback(function ()

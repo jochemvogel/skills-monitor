@@ -1,32 +1,24 @@
 @extends('adminlte::page')
 
 @section('content')
-    <div class="box">
+    <div class="box box-solid"">
         <div class="box-header">
-            <h3 class="box-title">List of all the rubrics  <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a></h3>
+            <h3 class="box-title">
+                <strong>
+                    List of all the rubrics
+                </strong>
+                <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs">
+                    <i class="fa fa-plus"></i> Create New
+                </a>
+            </h3>
         </div>
 
         <!-- /.box-header -->
         <div class="box-body">
-            <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                <div class="row">
+            <div id="example1_wrapper" class="">
+                    <div class="row">
                     <div class="col-sm-6">
                         <div class="dataTables_length" id="example1_length">
-                            <label>
-                                Show
-                                <select name="example1_length" aria-controls="example1" class="form-control input-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                                entries
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div id="example1_filter" class="dataTables_filter">
-                            <label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="example1"></label>
                         </div>
                     </div>
                 </div>
@@ -34,24 +26,69 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                        <table id="rubrics" class="table table-striped table-bordered">
                             <thead>
-                            <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 297px;">Course name</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 361px;">Rubric name</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 323px;">ID</th>
-                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 257px;">Date created</th>
-                                <th class="" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 191px;">View</th>
+                            <tr>
+                                <th>Course name</th>
+                                <th>Rubric name</th>
+                                <th>Creator</th>
+                                <th>View</th>
+                                <th class="rubrics_action">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($rubrics as $rubric)
-                                <tr role="row" class="odd">
-                                    <td class="sorting_1">SON1</td>
+                                <tr role="row">
+                                    <td>{{ $rubric->courses2->name }}
+
+                                        @if($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation != null)
+
+                                            ({{$rubric->courses2->course_abbreviation}},
+
+                                        @elseif($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation == null )
+
+
+                                        @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation != null )
+
+                                             ({{$rubric->courses2->course_abbreviation}})
+
+
+                                        @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation == null)
+
+                                        @else
+                                            -
+
+                                        @endif
+
+
+
+                                        @if($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code != null)
+
+                                            {{$rubric->courses2->course_code}})
+
+
+                                        @elseif($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code == null)
+
+
+
+                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code != null)
+
+                                            ({{$rubric->courses2->course_code}})
+
+
+                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code == null)
+
+
+                                        @else
+                                            -
+
+                                        @endif
+
+                                    </td>
                                     <td>{{ $rubric->name }}</td>
-                                    <td>{{ $rubric->id }}</td>
-                                    <td>{{ $rubric->created_at }}</td>
+                                    <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
                                     <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}">View</a></td>
+                                    <td>Edit Remove</td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -59,9 +96,21 @@
                     </div>
                 </div>
             </div>
-            <div class="links">
-                {{$rubrics->links()}}
-            </div>
         </div>
-    </div>
 @endsection
+
+@push ('js')
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#rubrics').DataTable();
+    });
+</script>
+@endpush
+
+@push ('css')
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+@endpush

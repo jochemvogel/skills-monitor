@@ -20,7 +20,6 @@
                 @foreach($rubrics->rowobjects as $row)
                     <tr id="row_{{$row->id}}">
                         <td>
-                            {{-- #TODO make the buttons do something --}}
                             @if($rubrics->rowobjects->first()->id != $row->id)
                                 <i class="fa fa-toggle-up"></i>
                                 <br />
@@ -28,7 +27,7 @@
                             <i class="fa fa-trash"></i>
                             @if($rubrics->rowobjects->last()->id != $row->id)
                                 <br />
-                               <i class="fa fa-toggle-down"></i>
+                                <i class="fa fa-toggle-down"></i>
                             @endif
                         </td>
                         @foreach($row->fields as $field)
@@ -40,31 +39,31 @@
                 @endforeach
                 </tbody>
             </table>
-            <br>
-            <div class="pull-left">
-                {{-- add row button --}}
-                <form method='POST' action="{{route('rubrics.update',['id' => $rubrics->id])}}">
-                    @method('PUT')
-                    @csrf
-                    <input type='hidden' name='name' value='{{ $rubrics->name}}'>
-                    <input type='hidden' name='rows' value='{{ $rows + 1 }}'>
-                    <input type='hidden' name='cols' value='{{ $rubrics->cols }}'>
-                    <button class='btn-success btn-sm' type='submit' name='add_row'><i class='fa fa-plus-square-o'></i>&nbsp;&nbsp;Add row</button>
-                </form>
-            </div>
-            <div class="pull-right">
-                {{-- remove row button --}}
-                @if($rows > 1)
-                    <form method='POST' action="{{route('rubrics.update',['id' => $rubrics->id])}}">
-                        @method('PUT')
-                        @csrf
-                        <input type='hidden' name='name' value='{{ $rubrics->name }}'>
-                        <input type='hidden' name='rows' value='{{ $rows - 1 }}'>
-                        <input type='hidden' name='cols' value='{{ $rubrics->cols }}'>
-                        <button class='btn-danger btn-sm' type='submit' name='delete_row'><i class='fa fa-minus-square-o'></i>&nbsp;&nbsp;Remove row</button>
-                    </form>
-                @endif
-            </div>
+            {{--<br>--}}
+            {{--<div class="pull-left">--}}
+                 {{--add row button --}}
+                {{--<form method='POST' action="{{route('rubrics.update',['id' => $rubrics->id])}}">--}}
+                    {{--@method('PUT')--}}
+                    {{--@csrf--}}
+                    {{--<input type='hidden' name='name' value='{{ $rubrics->name}}'>--}}
+                    {{--<input type='hidden' name='rows' value='{{ $rows + 1 }}'>--}}
+                    {{--<input type='hidden' name='cols' value='{{ $rubrics->cols }}'>--}}
+                    {{--<button class='btn-success btn-sm' type='submit' name='add_row'><i class='fa fa-plus-square-o'></i>&nbsp;&nbsp;Add row</button>--}}
+                {{--</form>--}}
+            {{--</div>--}}
+            {{--<div class="pull-right">--}}
+                 {{--remove row button --}}
+                {{--@if($rows > 1)--}}
+                    {{--<form method='POST' action="{{route('rubrics.update',['id' => $rubrics->id])}}">--}}
+                        {{--@method('PUT')--}}
+                        {{--@csrf--}}
+                        {{--<input type='hidden' name='name' value='{{ $rubrics->name }}'>--}}
+                        {{--<input type='hidden' name='rows' value='{{ $rows - 1 }}'>--}}
+                        {{--<input type='hidden' name='cols' value='{{ $rubrics->cols }}'>--}}
+                        {{--<button class='btn-danger btn-sm' type='submit' name='delete_row'><i class='fa fa-minus-square-o'></i>&nbsp;&nbsp;Remove row</button>--}}
+                    {{--</form>--}}
+                {{--@endif--}}
+            {{--</div>--}}
         </div>
     </div>
 @endsection
@@ -79,7 +78,18 @@
                 switch(elem.classList[1]){
                     case "fa-toggle-up":
                         console.log("up");
-                        //#TODO add ajax call to move row one up
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            type: "GET",
+                            url: '/moverow',
+                            data: {
+                                'id': rowid,
+                                'move': 'up',
+                            },
+                            success: function(data) { window.location.replace("/rubrics/"+data); }
+                        });
                         break;
                     case "fa-trash":
                         console.log("delete");
@@ -87,18 +97,49 @@
                         break;
                     case "fa-toggle-down":
                         console.log("down");
-                        //#TODO add ajax call to move row one down
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            type: "GET",
+                            url: '/moverow',
+                            data: {
+                                'id': rowid,
+                                'move': 'down',
+                            },
+                            success: function(data) { window.location.replace("/rubrics/"+data); }
+                        });
                         break;
                 }
             }else if(elem.id.substr(0,5) == "field"){
                 var field = document.getElementById(elem.id);
-                var content = field.innerHTML;
-                    field.innerHTML = "<div id='newText' contenteditable='true'>" +
-                        content +
-                        "</div><div id='oldText' class='hidden'>" +
-                        content +
-                        "</div><button class='btn btn-success' id='safe'>Save</button>";
-                    document.getElementById("newText").focus();
+                var content = field.innerText;
+                // remove Save from content
+                if(content.substr(content.length-4) == "Save"){
+                    content = content.substr(0,content.length-5);
+                }
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "GET",
+                    url: '/getpending',
+                    data: {
+                        'id': field.id.substr(6),
+                    },
+                    success: function(data) {
+                        field.innerHTML = "<div id='newText' contenteditable='true'>" + data +"</div>";
+                        field.innerHTML += "<div id='oldText' class='hidden'>" + content + "</div>"
+                        field.innerHTML += "<button class='btn btn-success' id='safe'>Save</button>";
+                        document.getElementById("newText").focus();
+                    },
+                    error: function(){
+                        field.innerHTML = "<div id='newText' contenteditable='true'>" + content +"</div>";
+                        field.innerHTML += "<div id='oldText' class='hidden'>" + content + "</div>"
+                        field.innerHTML += "<button class='btn btn-success' id='safe'>Save</button>";
+                        document.getElementById("newText").focus();
+                    }
+                });
             }
         });
 
@@ -107,11 +148,38 @@
             var oldContent = document.getElementById("oldText").innerHTML;
             var newContent = document.getElementById("newText").innerHTML;
             if (event.relatedTarget) {
-                field.innerHTML = newContent;
+                if(event.relatedTarget.id == "safe"){
+                    field.innerHTML = newContent;
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "PUT",
+                        url: '/updatefield',
+                        data: {
+                            'id': field.id.substr(6),
+                            'content': newContent,
+                        },
+                        success: function() { console.info('success')}
+                    });
+                }else{
+
+                }
             }else{
                 field.innerHTML = oldContent;
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "PUT",
+                    url: '/backupfield',
+                    data: {
+                        'id': field.id.substr(6),
+                        'content': newContent,
+                    },
+                    success: function() { console.info('success')}
+                });
             }
-
             //#TODO safe content to database w/ ajax call
         });
     </script>

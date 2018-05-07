@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rubrics;
+use App\Course;
 use App\Rows;
 use App\Field;
 
@@ -19,7 +20,7 @@ class rubricsController extends Controller
     public function index()
     {
         try {
-            $rubrics = Rubrics::orderBy('name', 'asc')->paginate(5);
+            $rubrics = Rubrics::all();
             return view('rubrics.index', [
                 'rubrics' => $rubrics
             ]);
@@ -38,7 +39,14 @@ class rubricsController extends Controller
      */
     public function create()
     {
-        return view('rubrics.create');
+        $courses = Course::all();
+
+        $params = [
+            'title' => 'Create Course',
+            'courses' => $courses,
+        ];
+
+        return view('rubrics.create')->with($params);
     }
 
 
@@ -53,11 +61,13 @@ class rubricsController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:rubrics',
             'cols' => 'required|Numeric',
+            'course' => 'required|Numeric',
         ]);
 
         $rubrics = Rubrics::create([
             'name' => $request->input('name'),
             'cols' => $request->input('cols'),
+            'course_id' => $request->input('course'),
         ])->id;
 
         $row = Rows::create([

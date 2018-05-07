@@ -12,6 +12,6 @@ class RubricsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Rubrics::class, 10)->create();
+        factory(Rubrics::class, 15)->create();
     }
 }
