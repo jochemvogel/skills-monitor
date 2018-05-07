@@ -180,6 +180,7 @@
                     success: function() { console.info('success')}
                 });
             }
+            //#TODO safe content to database w/ ajax call
         });
     </script>
 @endpush
