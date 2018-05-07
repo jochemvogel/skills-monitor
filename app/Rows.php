@@ -12,7 +12,7 @@ class Rows extends Model
      * @var array
      */
     protected $fillable = [
-        'rubrics_id',
+        'rubrics_id', 'order',
     ];
 
     public function fields()
