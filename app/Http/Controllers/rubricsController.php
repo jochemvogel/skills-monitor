@@ -68,10 +68,12 @@ class rubricsController extends Controller
             'name' => $request->input('name'),
             'cols' => $request->input('cols'),
             'course_id' => $request->input('course'),
+            'user_id' => $request->user()->id,
         ])->id;
 
         $row = Rows::create([
             'rubrics_id' => $rubrics,
+            'order' => 0,
         ])->id;
 
         for($i=1;$i<=$request->input('cols'); $i++ ){
