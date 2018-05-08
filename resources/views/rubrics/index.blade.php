@@ -38,10 +38,7 @@
                                 <th>Course name</th>
                                 <th>Rubric name</th>
                                 <th>Creator</th>
-                                <th>View</th>
-                                {{--ADMIN/DOCENT--}}
-                                <th class="rubrics_action">Action</th>
-                                {{--ADMIN/DOCENT--}}
+                                <th>Action</th>
                             </tr>
                             </thead>
 
@@ -106,12 +103,12 @@
                                     </td>
                                     <td>{{ $rubric->name }}</td>
                                     <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
-                                    <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}" title="View rubric">View rubric</a></td>
-                                    {{--ADMIN/DOCENT--}}
                                     <td>
+                                        <a href="{{route('rubrics.update',['id' => $rubric->id])}}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View rubric"></i></a>
+                                    {{--@can ('delete', $rubric)--}}
                                         <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric"></i> </a>
+                                    {{--@endcan--}}
                                     </td>
-                                    {{--ADMIN/DOCENT--}}
                                 </tr>
                             @endforeach
                             </tbody>
