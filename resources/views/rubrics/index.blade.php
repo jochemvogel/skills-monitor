@@ -113,6 +113,7 @@
                             @endforeach
                             </tbody>
 
+
                             {{-- END TABLE BODY --}}
 
                         </table>
