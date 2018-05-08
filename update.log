@@ -1,1 +1,18 @@
-v 1.0.0 - initial version
+v 3.0.0 - initial version
+
+
+opmaak:
+v <version number> - #PR<pull request nummer> - <initialen>:
+    A:
+      -  <filepath>
+      -  <filepath>
+    D:
+      -  <filepath>
+      -  <filepath>
+    M:
+      -  <filepath>
+      -  <filepath>
+
+A: added files
+D: deleted files
+M: modified files
