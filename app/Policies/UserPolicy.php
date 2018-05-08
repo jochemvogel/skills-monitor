@@ -22,7 +22,7 @@ class UserPolicy
         if($user->role_id === $model->role_id){
             return true;
         }elseif($user->role_id < 4){
-            return false;
+            return true;
         }else{
             return false;
         }
