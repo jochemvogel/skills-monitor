@@ -5,7 +5,10 @@
         <div class="box-header with-border">
             <h3 class="box-title">
                 <strong>
-                    Users <a href="{{route('users.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a>
+                    Users
+                    @can('create', Auth::user())
+                        <a href="{{route('users.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a>
+                    @endcan
                 </strong>
             </h3>
         </div>

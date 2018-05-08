@@ -36,7 +36,11 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        if($user->role_id === 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
