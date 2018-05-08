@@ -74,6 +74,7 @@ class rubricsController extends Controller
 
         $row = Rows::create([
             'rubrics_id' => $rubrics,
+            'order' => 0,
         ])->id;
 
         for($i=1;$i<=$request->input('cols'); $i++ ){
