@@ -57,7 +57,6 @@
 
                                         {{-- COURSE ABBREVIATION --}}
 
-
                                         {{--  +Code +abb --}}
                                         @if($rubric->courses_id->course_code != null && $rubric->courses_id->course_abbreviation != null)
 
@@ -110,7 +109,6 @@
                                     <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}" title="View rubric">View rubric</a></td>
                                     {{--ADMIN/DOCENT--}}
                                     <td>
-                                        <a href="{{ route('rubrics.edit', ['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit rubric"></i> </a>
                                         <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric"></i> </a>
                                     </td>
                                     {{--ADMIN/DOCENT--}}
