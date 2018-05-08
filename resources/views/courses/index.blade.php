@@ -5,7 +5,10 @@
         <div class="box-header with-border">
             <h3 class="box-title">
                 <strong>
-                    Courses <a href="{{route('courses.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a>
+                    Courses
+                    @can('create', \App\Course::class)
+                        <a href="{{route('courses.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a>
+                    @endcan
                 </strong>
             </h3>
         </div>
@@ -42,8 +45,12 @@
                                 <td><a href="{{route('courses.show',['course_abbreviation' => $row->course_abbreviation])}}">View</a></td>
                                 
                                 <td>
-                                    <a href="{{ route('courses.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
-                                    <a href="{{ route('courses.delete', ['id' => $row->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
+                                    @can('update', $row)
+                                        <a href="{{ route('courses.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
+                                    @endcan
+                                    @can('delete', $row)
+                                        <a href="{{ route('courses.delete', ['id' => $row->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
