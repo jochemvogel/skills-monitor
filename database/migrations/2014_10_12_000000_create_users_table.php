@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->unsignedInteger('role_id');
+            $table->unsignedInteger('role_id')->default(5); // default is guest
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
