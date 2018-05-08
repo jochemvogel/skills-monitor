@@ -5,7 +5,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">
                 <strong>
-                    @if($course->course_abbreviation != null)
+                    @if($course->course_abbreviation != null && $course->real_abbreviation == true)
                     {{$course->course_abbreviation}} -
                     @endif
                     {{$course->name}}

@@ -31,7 +31,11 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="course_abbreviation">Abbreviation <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
+                                    @if($course->real_abbreviation)
                                     <input type="text" value="{{$course->course_abbreviation}}" id="course_abbreviation" name="course_abbreviation" class="form-control col-md-7 col-xs-12">
+                                    @else
+                                    <input type="text" value="" id="course_abbreviation" name="course_abbreviation" class="form-control col-md-7 col-xs-12">
+                                    @endif
                                     @if ($errors->has('course_abbreviation'))
                                     <span class="help-block">{{ $errors->first('course_abbreviation') }}</span>
                                     @endif

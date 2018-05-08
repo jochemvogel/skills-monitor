@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Rubrics;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
@@ -49,14 +50,43 @@ class coursesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:courses',
-            'course_abbreviation' => 'unique:courses',
-            'course_code' => 'unique:courses',
+            'course_abbreviation' => 'nullable|unique:courses',
+            'course_code' => 'nullable|unique:courses',
         ]);
+
+        function generateRandomAbbrevation($length = 3) {
+            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            while(DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists() ){
+                $randomString = '';
+                for ($i = 0; $i < $length; $i++) {
+                    $randomString .= $characters[rand(0, $charactersLength - 1)];
+                }
+            }
+            return $randomString;
+        }
+
+        if($request->input('course_abbreviation') != null)
+        {
+            $course_abbreviation = $request->input('course_abbreviation');
+            $course_abbreviation_boolean = true;
+        }
+        else
+        {
+            $course_abbreviation = generateRandomAbbrevation();
+            $course_abbreviation_boolean = false;
+        }
+
 
         $course = Course::create([
             'name' => $request->input('name'),
-            'course_abbreviation' => $request->input('course_abbreviation'),
+            'course_abbreviation' => $course_abbreviation,
             'course_code' => $request->input('course_code'),
+            'real_abbreviation' => $course_abbreviation_boolean,
         ]);
 
         return redirect()->route('courses.index')->with('success', "The course <strong>$course->name</strong> has successfully been created.");
@@ -147,9 +177,20 @@ class coursesController extends Controller
                 'name' => 'required',
             ]);
 
+            if($request->input('course_abbreviation') != null)
+            {
+                $course_abbreviation = $request->input('course_abbreviation');
+                $course_abbreviation_boolean = true;
+            }
+            else
+            {
+                $course_abbreviation_boolean = false;
+            }
+    
             $course->name = $request->input('name');
             $course->course_abbreviation = $request->input('course_abbreviation');
             $course->course_code = $request->input('course_code');
+            $course->real_abbreviation = $course_abbreviation_boolean;
 
             $course->save();
 

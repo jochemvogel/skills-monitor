@@ -54,20 +54,26 @@
                                 <tr role="row">
                                     <td><a href="{{route('courses.show',['course_abbreviation' => $rubric->courses_id->course_abbreviation])}}" title="View course: {{ $rubric->courses_id->name }}">{{ $rubric->courses_id->name }}</a>
 
+
                                         {{-- COURSE ABBREVIATION --}}
+
 
                                         {{--  +Code +abb --}}
                                         @if($rubric->courses_id->course_code != null && $rubric->courses_id->course_abbreviation != null)
 
+
                                             ({{$rubric->courses_id->course_abbreviation}},
+
 
                                         {{--  +Code -abb--}}
                                         @elseif($rubric->courses_id->course_code != null && $rubric->courses_id->course_abbreviation == null )
+
 
                                         {{--  -Code +abb --}}
                                         @elseif($rubric->courses_id->courses_id == null && $rubric->courses_id->course_abbreviation != null )
 
                                              ({{$rubric->courses_id->course_abbreviation}})
+
 
                                         {{--  -Code -abb --}}
                                         @elseif($rubric->courses_id->course_code == null && $rubric->courses_id->course_abbreviation == null)
@@ -86,14 +92,15 @@
                                         @elseif($rubric->courses_id->course_abbreviation != null && $rubric->courses_id->course_code == null)
 
 
+
                                         {{--  -Code +abb --}}
                                         @elseif($rubric->courses_id->course_abbreviation == null && $rubric->courses_id->course_code != null)
 
                                             ({{$rubric->courses_id->course_code}})
 
+
                                         {{--  -Code -abb --}}
                                         @elseif($rubric->courses_id->course_abbreviation == null && $rubric->courses_id->course_code == null)
-
 
                                         @endif
 
