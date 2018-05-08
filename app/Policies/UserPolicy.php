@@ -19,7 +19,13 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        if($user->role_id === $model->role_id){
+            return true;
+        }elseif($user->role_id < 4){
+            return false;
+        }else{
+            return false;
+        }
     }
 
     /**
