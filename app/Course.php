@@ -12,7 +12,7 @@ class Course extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'course_abbreviation', 'course_code',
+        'name', 'course_abbreviation', 'real_abbreviation', 'course_code',
     ];
 
     public function rubrics()

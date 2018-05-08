@@ -28,6 +28,15 @@ Route::resource('rubrics', 'rubricsController');
 Route::resource('stats', 'StatsController');
 
 Route::resource('courses', 'coursesController');
+    Route::resource('users', 'usersController');
+    Route::resource('rubrics', 'rubricsController');
+    Route::resource('courses', 'coursesController');
+
+    // JSONcontroller routes
+    Route::put('updatefield', 'JSONcontroller@updateField');
+    Route::put('backupfield', 'JSONcontroller@backupField');
+    Route::get('moverow', 'JSONcontroller@moveRow');
+    Route::get('getpending', 'JSONcontroller@getPending');
 });
 
 Route::fallback(function ()
