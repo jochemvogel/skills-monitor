@@ -177,6 +177,22 @@ class coursesController extends Controller
                 'name' => 'required',
             ]);
 
+            function generateRandomAbbrevation($length = 3) {
+                $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456';
+                $charactersLength = strlen($characters);
+                $randomString = '';
+                for ($i = 0; $i < $length; $i++) {
+                    $randomString .= $characters[rand(0, $charactersLength - 1)];
+                }
+                while(DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists() ){
+                    $randomString = '';
+                    for ($i = 0; $i < $length; $i++) {
+                        $randomString .= $characters[rand(0, $charactersLength - 1)];
+                    }
+                }
+                return $randomString;
+            }
+
             if($request->input('course_abbreviation') != null)
             {
                 $course_abbreviation = $request->input('course_abbreviation');
@@ -184,11 +200,12 @@ class coursesController extends Controller
             }
             else
             {
+                $course_abbreviation = generateRandomAbbrevation();
                 $course_abbreviation_boolean = false;
             }
     
             $course->name = $request->input('name');
-            $course->course_abbreviation = $request->input('course_abbreviation');
+            $course->course_abbreviation = $course_abbreviation;
             $course->course_code = $request->input('course_code');
             $course->real_abbreviation = $course_abbreviation_boolean;
 

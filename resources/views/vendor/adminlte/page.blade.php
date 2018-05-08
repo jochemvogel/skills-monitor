@@ -1,3 +1,4 @@
+
 @extends('adminlte::master')
 
 @section('adminlte_css')
@@ -113,9 +114,8 @@
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
                                     <img src="{{ URL::to('/') }}/img/coffee.png" class="img-circle" alt="User Image">
-
                                     <p>
-                                        Admin
+                                        {{ Auth::User()->role->name }}
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
