@@ -19,17 +19,19 @@
                 <tbody>
                 @foreach($rubrics->rowobjects as $row)
                     <tr id="row_{{$row->id}}">
-                        <td>
-                            @if($rubrics->rowobjects->first()->id != $row->id)
-                                <i class="fa fa-toggle-up"></i>
-                                <br />
-                            @endif
-                            <i class="fa fa-trash"></i>
-                            @if($rubrics->rowobjects->last()->id != $row->id)
-                                <br />
-                                <i class="fa fa-toggle-down"></i>
-                            @endif
-                        </td>
+                        @can('update', $rubrics)
+                            <td>
+                                @if($rubrics->rowobjects->first()->id != $row->id)
+                                    <i class="fa fa-toggle-up"></i>
+                                    <br />
+                                @endif
+                                <i class="fa fa-trash"></i>
+                                @if($rubrics->rowobjects->last()->id != $row->id)
+                                    <br />
+                                    <i class="fa fa-toggle-down"></i>
+                                @endif
+                            </td>
+                        @endcan
                         @foreach($row->fields as $field)
                             <td id="field_{{ $field->id }}">
                                 {{  $field->content }}
@@ -68,119 +70,120 @@
     </div>
 @endsection
 @push('js')
-    <script>
-        document.addEventListener('click', function(){
-            var elem = event.srcElement;
-            var row = elem.parentElement.parentElement;
-            console.log(row.id + "," + elem.id);
-            if(row.id.substr(0,3) == "row"){
-                var rowid = row.id.substr(4);
-                switch(elem.classList[1]){
-                    case "fa-toggle-up":
-                        console.log("up");
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            type: "GET",
-                            url: '/moverow',
-                            data: {
-                                'id': rowid,
-                                'move': 'up',
-                            },
-                            success: function(data) { window.location.replace("/rubrics/"+data); }
-                        });
-                        break;
-                    case "fa-trash":
-                        console.log("delete");
-                        //#TODO add ajax call to delete row
-                        break;
-                    case "fa-toggle-down":
-                        console.log("down");
-                        $.ajax({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            type: "GET",
-                            url: '/moverow',
-                            data: {
-                                'id': rowid,
-                                'move': 'down',
-                            },
-                            success: function(data) { window.location.replace("/rubrics/"+data); }
-                        });
-                        break;
-                }
-            }else if(elem.id.substr(0,5) == "field"){
-                var field = document.getElementById(elem.id);
-                var content = field.innerText;
-                // remove Save from content
-                if(content.substr(content.length-4) == "Save"){
-                    content = content.substr(0,content.length-5);
-                }
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: "GET",
-                    url: '/getpending',
-                    data: {
-                        'id': field.id.substr(6),
-                    },
-                    success: function(data) {
-                        field.innerHTML = "<div id='newText' contenteditable='true'>" + data +"</div>";
-                        field.innerHTML += "<div id='oldText' class='hidden'>" + content + "</div>"
-                        field.innerHTML += "<button class='btn btn-success' id='safe'>Save</button>";
-                        document.getElementById("newText").focus();
-                    },
-                    error: function(){
-                        field.innerHTML = "<div id='newText' contenteditable='true'>" + content +"</div>";
-                        field.innerHTML += "<div id='oldText' class='hidden'>" + content + "</div>"
-                        field.innerHTML += "<button class='btn btn-success' id='safe'>Save</button>";
-                        document.getElementById("newText").focus();
+    @can('update', $rubrics)
+        <script>
+            document.addEventListener('click', function(){
+                var elem = event.srcElement;
+                var row = elem.parentElement.parentElement;
+                console.log(row.id + "," + elem.id);
+                if(row.id.substr(0,3) == "row"){
+                    var rowid = row.id.substr(4);
+                    switch(elem.classList[1]){
+                        case "fa-toggle-up":
+                            console.log("up");
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                type: "GET",
+                                url: '/moverow',
+                                data: {
+                                    'id': rowid,
+                                    'move': 'up',
+                                },
+                                success: function(data) { window.location.replace("/rubrics/"+data); }
+                            });
+                            break;
+                        case "fa-trash":
+                            console.log("delete");
+                            //#TODO add ajax call to delete row
+                            break;
+                        case "fa-toggle-down":
+                            console.log("down");
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                type: "GET",
+                                url: '/moverow',
+                                data: {
+                                    'id': rowid,
+                                    'move': 'down',
+                                },
+                                success: function(data) { window.location.replace("/rubrics/"+data); }
+                            });
+                            break;
                     }
-                });
-            }
-        });
+                }else if(elem.id.substr(0,5) == "field"){
+                    var field = document.getElementById(elem.id);
+                    var content = field.innerText;
+                    // remove Save from content
+                    if (content.substr(content.length - 4) == "Save") {
+                        content = content.substr(0, content.length - 5);
+                    }
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        type: "GET",
+                        url: '/getpending',
+                        data: {
+                            'id': field.id.substr(6),
+                        },
+                        success: function (data) {
+                            field.innerHTML = "<div id='newText' contenteditable='true'>" + data + "</div>";
+                            field.innerHTML += "<div id='oldText' class='hidden'>" + content + "</div>"
+                            field.innerHTML += "<button class='btn btn-success' id='safe'>Save</button>";
+                            document.getElementById("newText").focus();
+                        },
+                        error: function () {
+                            field.innerHTML = "<div id='newText' contenteditable='true'>" + content + "</div>";
+                            field.innerHTML += "<div id='oldText' class='hidden'>" + content + "</div>"
+                            field.innerHTML += "<button class='btn btn-success' id='safe'>Save</button>";
+                            document.getElementById("newText").focus();
+                        }
+                    });
+                }
+            });
 
-        document.addEventListener('focusout', function (){
-            var field = event.srcElement.parentElement;
-            var oldContent = document.getElementById("oldText").innerHTML;
-            var newContent = document.getElementById("newText").innerHTML;
-            if (event.relatedTarget) {
-                if(event.relatedTarget.id == "safe"){
-                    field.innerHTML = newContent;
+            document.addEventListener('focusout', function (){
+                var field = event.srcElement.parentElement;
+                var oldContent = document.getElementById("oldText").innerHTML;
+                var newContent = document.getElementById("newText").innerHTML;
+                if (event.relatedTarget) {
+                    if(event.relatedTarget.id == "safe"){
+                        field.innerHTML = newContent;
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            type: "PUT",
+                            url: '/updatefield',
+                            data: {
+                                'id': field.id.substr(6),
+                                'content': newContent,
+                            },
+                            success: function() { console.info('success')}
+                        });
+                    }else{
+
+                    }
+                }else{
+                    field.innerHTML = oldContent;
                     $.ajax({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         type: "PUT",
-                        url: '/updatefield',
+                        url: '/backupfield',
                         data: {
                             'id': field.id.substr(6),
                             'content': newContent,
                         },
                         success: function() { console.info('success')}
                     });
-                }else{
-
                 }
-            }else{
-                field.innerHTML = oldContent;
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    type: "PUT",
-                    url: '/backupfield',
-                    data: {
-                        'id': field.id.substr(6),
-                        'content': newContent,
-                    },
-                    success: function() { console.info('success')}
-                });
-            }
-            //#TODO safe content to database w/ ajax call
-        });
-    </script>
+            });
+        </script>
+    @endcan
 @endpush

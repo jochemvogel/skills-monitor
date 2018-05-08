@@ -6,10 +6,10 @@
             <h3 class="box-title">
                 <strong>
                     List of all the rubrics
+                    @can('create', \App\Course::class)
+                        <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New</a>
+                    @endcan
                 </strong>
-                <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs">
-                    <i class="fa fa-plus"></i> Create New
-                </a>
             </h3>
         </div>
 
