@@ -22,7 +22,7 @@ class UserPolicy
         if($user->role_id === $model->role_id){
             return true;
         }elseif($user->role_id < 4){
-            return false;
+            return true;
         }else{
             return false;
         }
@@ -36,7 +36,11 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        if($user->role_id === 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**

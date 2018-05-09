@@ -8,12 +8,12 @@
             <h1 class="box-title">
                 <strong>
                     Rubrics: Overview
+                    @can('create', \App\Course::class)
+                        <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs" title="Create new rubric">
+                            <i class="fa fa-plus"></i> Create New
+                        </a>
+                    @endcan
                 </strong>
-                {{--ADMIN/DOCENT--}}
-                <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs" title="Create new rubric">
-                    <i class="fa fa-plus"></i> Create New
-                </a>
-                {{--ADMIN/DOCENT--}}
             </h1>
         </div>
 
