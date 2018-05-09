@@ -45,21 +45,19 @@
 
                                             ({{$rubric->courses2->course_abbreviation}},
 
-                                        @elseif($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation == null  )
+                                        @elseif($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation == null )
 
 
                                         @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation != null)
 
                                              ({{$rubric->courses2->course_abbreviation}})
 
-                                        @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation == null)
+                                        @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation == null )
 
                                         @else
                                             -
 
                                         @endif
-
-
 
                                         @if($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code != null)
 
@@ -68,12 +66,9 @@
 
                                         @elseif($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code == null )
 
-
-
-                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code != null )
+                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code != null)
 
                                             ({{$rubric->courses2->course_code}})
-
 
                                         @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code == null )
 
