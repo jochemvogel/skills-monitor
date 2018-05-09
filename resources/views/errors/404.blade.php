@@ -6,11 +6,11 @@
     {{-- create a box for all the text--}}
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
                     Sorry, we couldn't find the page you were looking for
                 </strong>
-            </h3>
+            </h1>
         </div>
         <div class="box-body">
             <p1>Congratulations, you are one of the few people who see this page.</p1>

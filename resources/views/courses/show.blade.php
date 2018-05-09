@@ -5,14 +5,14 @@
 @section('content')
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
                     @if($course->course_abbreviation != null && $course->real_abbreviation == true)
                     {{$course->course_abbreviation}} -
                     @endif
                     {{$course->name}}
                 </strong>
-            </h3>
+            </h1>
         </div>
         <div class="box-body">
             <table id="datatable-buttons" class="table table-striped table-bordered">

@@ -4,7 +4,9 @@
 
 @section('content-header')
           <h1>
-            HZ Mailbox
+            <strong>
+              Inbox: Overview
+            </strong>
             <small>13 New Messages</small>
           </h1>
           <ol class="breadcrumb">

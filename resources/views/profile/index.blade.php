@@ -15,7 +15,7 @@
 
                         <div class="box-header with-border">
                             <i class="fa fa-user"></i> 
-                            <h1 class="box-title">Profile</h1>
+                            <h1 class="box-title">Profile: Overview</h1>
                         </div>
 
                         <div class="box-body">
