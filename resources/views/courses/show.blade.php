@@ -27,11 +27,8 @@
                         @foreach($rubrics as $row)
                             <tr>
                                 <td>{{$row->name}}</td>
-                                {{--<td><a href="{{route('rubrics.show',['id' => $row->id])}}">View</a></td>--}}
                                 <td>
-                                {{--@can('view', $rubric)--}}
                                     <a href="{{ route('rubrics.show',['id' => $row->id])}}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View rubric"></i></a>
-                                {{--@endcan--}}
                                 </td>
                             </tr>
                         @endforeach
