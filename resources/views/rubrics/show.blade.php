@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 
+@section('title', 'Rubrics: ' . $rubrics->name)
 
 @section('content')
     {{-- create a box around the rubrics and it's name --}}
