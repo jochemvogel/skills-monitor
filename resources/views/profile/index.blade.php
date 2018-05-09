@@ -1,4 +1,7 @@
 @extends('adminlte::page')
+
+@section('title', 'Profile: Overview')
+
 <?php use Illuminate\Support\Facades\Auth; ?>
     @section('content')
     <div class="container">
@@ -12,7 +15,7 @@
 
                         <div class="box-header with-border">
                             <i class="fa fa-user"></i> 
-                            <h1 class="box-title">Profile</h1>
+                            <h1 class="box-title">Profile: Overview</h1>
                         </div>
 
                         <div class="box-body">
@@ -33,3 +36,8 @@
          @endif
     </div>
     @endsection
+
+@push ('css')
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+@endpush
