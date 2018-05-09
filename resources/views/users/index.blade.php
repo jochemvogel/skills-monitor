@@ -5,14 +5,14 @@
 @section('content')
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
-                    Users
+                    Users: Overview
                     @can('create', Auth::user())
                         <a href="{{route('users.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a>
                     @endcan
                 </strong>
-            </h3>
+            </h1>
         </div>
         <div class="box-body">
             <table id="users" class="table table-striped table-bordered">

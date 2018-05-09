@@ -5,11 +5,11 @@
 @section('content')
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
-                    Create new rubrics
+                 Rubrics: Create
                 </strong>
-            </h3>
+            </h1>
         </div>
         <div class="box-body">
             <form class="form-horizontal" action="{{ route('rubrics.store') }}" method="POST">

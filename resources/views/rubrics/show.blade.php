@@ -7,7 +7,7 @@
     {{-- create a box around the rubrics and it's name --}}
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
                     {{-- show the name of the rubrics --}}
                     {{ $rubrics->name }}
