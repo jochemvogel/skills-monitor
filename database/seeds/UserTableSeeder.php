@@ -2,20 +2,21 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\Role;
+
 class UserTableSeeder extends Seeder
 {
   public function run()
   {
-    $role_admin = Role::where('name', 'admin')->first();
-    
-    $admin = new User();
-    $admin->firstname = 'Admin';
-    $admin->lastname = 'Admin';
-    $admin->email = 'Admin@Admin.com';
-    $admin->role_id = 1;
-    $admin->password = bcrypt('123456');
-    $admin->save();
+  $name = ['admin', 'teacher', 'student', 'external', 'guest'];
+
+    for($i=0; $i<5; $i++)
+    User::create([
+            "firstname" => $name[$i],
+            "lastname" => $name[$i],
+            "email" => $name[$i]."@".$name[$i].".com",
+            "role_id" => $i+1,
+            "password" => bcrypt("123456"),
+        ]);
   }
 }
 

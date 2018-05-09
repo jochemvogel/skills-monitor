@@ -5,7 +5,10 @@
         <div class="box-header with-border">
             <h3 class="box-title">
                 <strong>
-                    Users <a href="{{route('users.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a>
+                    Users
+                    @can('create', Auth::user())
+                        <a href="{{route('users.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a>
+                    @endcan
                 </strong>
             </h3>
         </div>
@@ -23,16 +26,24 @@
                 <tbody>
                     @if(count($users))
                         @foreach($users as $row)
-                            <tr>
-                                <td>{{$row->firstname}}</td>
-                                <td>{{$row->lastname}}</td>
-                                <td>{{$row->email}}</td>
-                                <td>{{$row->role->name}}</td>
-                                <td>
-                                    <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
-                                    <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
-                                </td>
-                            </tr>
+                            @can('view', $row)
+                                @if($row->deleted != true)
+                                    <tr>
+                                        <td>{{$row->firstname}}</td>
+                                        <td>{{$row->lastname}}</td>
+                                        <td>{{$row->email}}</td>
+                                        <td>{{$row->role->name}}</td>
+                                        <td>
+                                            @can('update', $row)
+                                                <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
+                                            @endcan
+                                            @can('delete', $row)
+                                                <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endcan
                         @endforeach
                     @endif
                 </tbody>

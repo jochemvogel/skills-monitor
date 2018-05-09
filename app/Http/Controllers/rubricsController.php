@@ -9,6 +9,7 @@ use App\Rows;
 use App\Field;
 use Auth;
 
+
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class rubricsController extends Controller
@@ -118,8 +119,31 @@ class rubricsController extends Controller
      */
     public function edit($id)
     {
-        //
+        try
+        {
+            $rubric = Rubrics::findOrFail($id);
+            $courses = Course::all();
+
+
+            $params = [
+                'title' => 'Edit Rubric',
+                'rubric' => $rubric,
+                'courses' => $courses,
+            ];
+
+            return view('rubrics.edit')->with($params);
+        }
+        catch (ModelNotFoundException $ex)
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
+
+
+
 
     /**
      * Update the specified resource in storage.
@@ -132,17 +156,32 @@ class rubricsController extends Controller
     {
         $rubrics = Rubrics::findOrFail($id);
 
-        $this->validate($request, [
-            'cols' => 'required|Numeric',
-        ]);
+        try {
 
-        $rubrics->cols = $request->input('cols');
-        $rubrics->save();
+
+            $this->validate($request, [
+                'cols' => 'required|Numeric',
+            ]);
+
+            $rubrics->course_id = $request->input('course_id');
+            $rubrics->cols = $request->input('cols');
+            $rubrics->name = $request->input('name');
+            $rubrics->save();
+
+            return redirect()->route('rubrics.index')->with('success', "The rubric <strong>$rubrics->name</strong> has successfully been updated.");
+        }
+        catch (ModelNotFoundException $ex)
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
+
 
         $rows = Rows::all()->where('rubrics_id','==',$id)->count();
 
-       // dd($rows);
-       // dd($request->input('rows'));
+
         if($rows < $request->input('rows')){
             $row = Rows::create([
                 'rubrics_id' => $id,
@@ -163,6 +202,28 @@ class rubricsController extends Controller
         return redirect()->route('rubrics.show',['id' => $id]);
     }
 
+    public function delete($id)
+    {
+        try
+        {
+            $rubric = Rubrics::findOrFail($id);
+
+            $params = [
+                'title' => 'Delete Rubric',
+                'rubric' => $rubric,
+            ];
+
+            return view('rubrics.delete')->with($params);
+        }
+        catch (ModelNotFoundException $ex)
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -171,6 +232,20 @@ class rubricsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try
+        {
+            $rubric = Rubrics::findOrFail($id);
+
+            $rubric ->delete();
+
+            return redirect()->route('rubrics.index')->with('success', "The rubric <strong>$rubric->name</strong> has successfully been archived.");
+        }
+        catch (ModelNotFoundException $ex)
+        {
+            if ($ex instanceof ModelNotFoundException)
+            {
+                return response()->view('errors.'.'404');
+            }
+        }
     }
 }
