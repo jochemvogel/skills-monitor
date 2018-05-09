@@ -37,7 +37,7 @@
                                         <td>{{$row->role->name}}</td>
                                         <td>
                                             @can('update', $row)
-                                                <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
+                                                <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
                                             @endcan
                                             @can('delete', $row)
                                                 <a href="{{ route('users.show', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete"></i> </a>
