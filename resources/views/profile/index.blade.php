@@ -22,7 +22,7 @@
     <div class="box box-primary">
             <!-- /.box-header -->
             <div class="box-body">
-                <strong><i class="fa fa-book margin-r-5"></i> Opleiding</strong>
+                <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
 
                 <p class="text-muted">
                     HBO-ICT, HZ University of Applied Sciences at Vlissingen
@@ -30,7 +30,7 @@
 
                 <hr>
 
-                <strong><i class="fa fa-envelope margin-r-5"></i> E-mail</strong>
+                <strong><i class="fa fa-envelope margin-r-5"></i> Mail</strong>
 
                 <p class="text-muted">
                     admin@admin.com - Click <a href="{{ route('users.index') }}">here</a> to change
@@ -38,7 +38,7 @@
 
                 <hr>
 
-                <strong><i class="fa fa-map-marker margin-r-5"></i> Woonplaats</strong>
+                <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
                 <p class="text-muted">Middelburg, the Netherlands</p>
 
@@ -49,10 +49,6 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
             </div>
             <!-- /.box-body -->
-        @endif
-
-        @if(Auth::guest())
-            <a href="/login" class="btn btn-danger"> You have to login first before you can view your profile!</a>
         @endif
 
 @endsection
