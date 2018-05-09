@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Page not found')
+
 @section('content')
     {{-- create a box for all the text--}}
     <div class="box box-solid">

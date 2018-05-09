@@ -1,4 +1,7 @@
 @extends('adminlte::page')
+
+@section('title', 'Profile: Overview')
+
 <?php use Illuminate\Support\Facades\Auth; ?>
     @section('content')
     <div class="container">
