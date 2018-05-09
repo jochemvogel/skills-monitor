@@ -83,24 +83,16 @@
                                         @if($rubric->courses_id->real_abbreviation == true && $rubric->courses_id->course_code != null)
                                             {{$rubric->courses_id->course_code}})
 
-<<<<<<< HEAD
-                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code != null)
-=======
 
                                         {{--  +Code -abb --}}
                                         @elseif($rubric->courses_id->real_abbreviation == true && $rubric->courses_id->course_code == null)
 
->>>>>>> 944c2041b07db09a6d4b2a244da8b3312110d977
 
 
-<<<<<<< HEAD
-                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code == null )
-=======
                                         {{--  -Code +abb --}}
                                         @elseif($rubric->courses_id->real_abbreviation == false && $rubric->courses_id->course_code != null)
 
                                             ({{$rubric->courses_id->course_code}})
->>>>>>> 944c2041b07db09a6d4b2a244da8b3312110d977
 
 
                                         {{--  -Code -abb --}}

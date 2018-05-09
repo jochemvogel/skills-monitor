@@ -45,7 +45,7 @@
 
                                 <td>
                                     {{--@can('view', $row)--}}
-                                        <a href="{{ route('courses.show', ['id' => $row->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View"></i> </a>
+                                        <a href="{{ route('courses.show', ['id' => $row->course_abbreviation]) }}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View"></i> </a>
                                     {{--@endcan--}}
                                     @can('update', $row)
                                         <a href="{{ route('courses.edit', ['id' => $row->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>

@@ -65,9 +65,7 @@
                       @endif
                     </div> 
 
-
-
-            <div class="box-footer">
+                <div class="box-footer">
                 <div class="pull-right">
                     <input type='submit' class='btn btn-success btn-sm' value='Save'>
                 </div>
