@@ -1,12 +1,13 @@
 @extends('adminlte::page')
 
 
+@section('title', 'Rubrics: ' . $rubrics->name)
 
 @section('content')
     {{-- create a box around the rubrics and it's name --}}
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
                     {{-- show the name of the rubrics --}}
                     {{ $rubrics->name }}
@@ -188,4 +189,9 @@
             });
         </script>
     @endcan
+@endpush
+
+@push ('css')
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 @endpush

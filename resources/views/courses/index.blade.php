@@ -1,16 +1,18 @@
 @extends('adminlte::page')
 
+@section('title', 'Courses: Overview')
+
 @section('content')
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
-                    Courses
+                    Courses: Overview
                     @can('create', \App\Course::class)
                         <a href="{{route('courses.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Create New </a>
                     @endcan
                 </strong>
-            </h3>
+            </h1>
         </div>
         <div class="box-body">
             <table id="courses" class="table table-striped table-bordered">
