@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Users: Create')
+
 @section('content')
     @section('content_header')
     @endsection

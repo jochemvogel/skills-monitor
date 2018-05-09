@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Inbox: Overview')
+
 @section('content-header')
           <h1>
             HZ Mailbox

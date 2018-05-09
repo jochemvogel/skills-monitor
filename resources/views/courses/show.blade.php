@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Courses: ' . $course->name)
+
 @section('content')
     <div class="box box-solid">
         <div class="box-header with-border">
