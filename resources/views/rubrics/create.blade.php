@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@section('title', 'Rubrics: Create')
+
 @section('content')
     <div class="box box-solid">
         <div class="box-header with-border">
@@ -26,6 +28,8 @@
                             <input type="number" class="form-control" min='1' max='10' step='1' name='cols' placeholder="6" required>
                         </div>
                     </div>
+
+
                     <div class="form-group {{ $errors->has('course') ? ' has-error ' : '' }}">
                         <label class="col-sm-2 control-label" for="course">Course <span class="required">*</span></label>
                             <div class="col-sm-10">
@@ -44,6 +48,8 @@
                             @endif
                         </div> 
                     </div>
+
+
 
                 <div class="box-footer">
                     <div class="pull-right">

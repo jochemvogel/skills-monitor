@@ -1,28 +1,34 @@
 @extends('adminlte::page')
 
+@section('title', 'Rubrics: Overview')
+
 @section('content')
-    <div class="box box-solid"">
+    <div class="box box-solid">
         <div class="box-header">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
-                    List of all the rubrics
+                    Rubrics: Overview
                 </strong>
-                <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs">
+                {{--ADMIN/DOCENT--}}
+                <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs" title="Create new rubric">
                     <i class="fa fa-plus"></i> Create New
                 </a>
-            </h3>
+                {{--ADMIN/DOCENT--}}
+            </h1>
         </div>
 
         <!-- /.box-header -->
         <div class="box-body">
             <div id="example1_wrapper" class="">
-                    <div class="row">
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="dataTables_length" id="example1_length">
                         </div>
                     </div>
                 </div>
 
+
+                {{-- TABLE HEADER --}}
 
                 <div class="row">
                     <div class="col-sm-12">
@@ -32,65 +38,84 @@
                                 <th>Course name</th>
                                 <th>Rubric name</th>
                                 <th>Creator</th>
-                                <th>View</th>
-                                <th class="rubrics_action">Action</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
+
+                {{-- END TABLE HEADER --}}
+
+
+                {{-- TABLE BODY --}}
                             <tbody>
                             @foreach($rubrics as $rubric)
                                 <tr role="row">
-                                    <td>{{ $rubric->courses2->name }}
+                                    <td><a href="{{route('courses.show',['course_abbreviation' => $rubric->courses_id->course_abbreviation])}}" title="View course: {{ $rubric->courses_id->name }}">{{ $rubric->courses_id->name }}</a>
 
-                                        @if($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation != null)
+                    {{--          course_id->real_abbreviation  --}}
+                                        {{-- COURSE ABBREVIATION --}}
 
-                                            ({{$rubric->courses2->course_abbreviation}},
+                                        {{--  +Code +abb --}}
+                                        @if($rubric->courses_id->course_code != null && $rubric->courses_id->real_abbreviation == true)
 
-                                        @elseif($rubric->courses2->course_code != null && $rubric->courses2->course_abbreviation == null  )
+
+                                            ({{$rubric->courses_id->course_abbreviation}},
 
 
-                                        @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation != null)
+                                        {{--  +Code -abb--}}
+                                        @elseif($rubric->courses_id->course_code != null && $rubric->courses_id->real_abbreviation == false )
 
-                                             ({{$rubric->courses2->course_abbreviation}})
 
-                                        @elseif($rubric->courses2->course_code == null && $rubric->courses2->course_abbreviation == null)
+                                        {{--  -Code +abb --}}
+                                        @elseif($rubric->courses_id->courses_id == null && $rubric->courses_id->real_abbreviation == true )
 
-                                        @else
-                                            -
+                                             ({{$rubric->courses_id->course_abbreviation}})
+
+
+                                        {{--  -Code -abb --}}
+                                        @elseif($rubric->courses_id->course_code == null && $rubric->courses_id->real_abbreviation == false)
 
                                         @endif
 
+                                        {{-- COURSE CODE--}}
 
 
-                                        @if($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code != null)
-
-                                            {{$rubric->courses2->course_code}})
-
-
-                                        @elseif($rubric->courses2->course_abbreviation != null && $rubric->courses2->course_code == null )
+                                        {{--  +Code +abb --}}
+                                        @if($rubric->courses_id->real_abbreviation == true && $rubric->courses_id->course_code != null)
+                                            {{$rubric->courses_id->course_code}})
 
 
-
-                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code != null )
-
-                                            ({{$rubric->courses2->course_code}})
+                                        {{--  +Code -abb --}}
+                                        @elseif($rubric->courses_id->real_abbreviation == true && $rubric->courses_id->course_code == null)
 
 
-                                        @elseif($rubric->courses2->course_abbreviation == null && $rubric->courses2->course_code == null )
+
+                                        {{--  -Code +abb --}}
+                                        @elseif($rubric->courses_id->real_abbreviation == false && $rubric->courses_id->course_code != null)
+
+                                            ({{$rubric->courses_id->course_code}})
 
 
-                                        @else
-                                            -
+                                        {{--  -Code -abb --}}
+                                        @elseif($rubric->courses_id->real_abbreviation == false && $rubric->courses_id->course_code == null)
 
                                         @endif
 
                                     </td>
                                     <td>{{ $rubric->name }}</td>
                                     <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
-                                    <td><a href="{{route('rubrics.update',['id' => $rubric->id])}}">View</a></td>
-                                    <td>Edit Remove</td>
+                                    <td>
+                                        <a href="{{route('rubrics.update',['id' => $rubric->id])}}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View rubric"></i></a>
+                                    {{--@can ('delete', $rubric)--}}
+                                        <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric"></i> </a>
+                                    {{--@endcan--}}
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
+
+
+                            {{-- END TABLE BODY --}}
+
                         </table>
                     </div>
                 </div>

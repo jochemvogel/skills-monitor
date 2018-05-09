@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('role_id')->default(5); // default is guest
             $table->string('email')->unique();
             $table->string('password');
+            $table->boolean('deleted')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
