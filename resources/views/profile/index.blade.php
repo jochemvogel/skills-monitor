@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Profile: (Naam)')
+@section('title', 'Profile: (Name)')
 
 <?php use Illuminate\Support\Facades\Auth; ?>
 
@@ -12,7 +12,7 @@
 
             <h3 class="profile-username text-center"><?php echo(Auth::user()->firstname.' '.Auth::user()->lastname); ?></h3>
 
-            <p class="text-muted text-center">Eerstejaars</p>
+            <p class="text-muted text-center">First grade</p>
 
         </div>
         <!-- /.box-body -->
