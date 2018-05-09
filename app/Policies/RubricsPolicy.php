@@ -19,7 +19,7 @@ class RubricsPolicy
      */
     public function view(User $user, Rubrics $rubrics)
     {
-        //
+        return true;
     }
 
     /**
@@ -66,6 +66,12 @@ class RubricsPolicy
      */
     public function delete(User $user, Rubrics $rubrics)
     {
-        //
+        if($user->role_id === 1){
+            return true;
+        }elseif($user->role_id === 2){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

@@ -104,10 +104,15 @@
                                     <td>{{ $rubric->name }}</td>
                                     <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
                                     <td>
-                                        <a href="{{route('rubrics.update',['id' => $rubric->id])}}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View rubric"></i></a>
-                                    {{--@can ('delete', $rubric)--}}
-                                        <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric"></i> </a>
-                                    {{--@endcan--}}
+                                    @can('view', $rubric)
+                                        <a href="{{ route('rubrics.show',['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View rubric"></i></a>
+                                    @endcan
+                                    @can('update', $rubric)
+                                        <a href="{{ route('rubrics.show', ['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-pencil" title="Edit"></i></a>
+                                    @endcan
+                                    @can('delete', $rubric)
+                                        <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric"></i></a>
+                                    @endcan
                                     </td>
                                 </tr>
                             @endforeach
@@ -131,6 +136,15 @@
     $(document).ready(function() {
     $('#rubrics').DataTable();
     });
+</script>
+<script>
+    document.addEventListener('click', function(){
+        if(event.srcElement.classList[1] === "fa-pencil"){
+            sessionStorage.setItem("edit", 'true');
+        }else{
+            sessionStorage.setItem("edit", 'false');
+        }
+    })
 </script>
 @endpush
 
