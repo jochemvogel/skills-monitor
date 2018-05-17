@@ -26,7 +26,11 @@ Route::middleware(['auth'])->group( function () {
 
 Route::resource('users', 'usersController');
 Route::resource('rubrics', 'rubricsController');
+
 Route::resource('stats', 'StatsController');
+
+    // Stats getData
+    Route::get('/getstats', 'StatsController@getDataBlok');
 
 Route::resource('courses', 'coursesController');
     Route::resource('users', 'usersController');
