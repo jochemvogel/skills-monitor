@@ -17,7 +17,7 @@ class CreateFieldsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('rows_id');
             $table->integer('col');
-            $table->text('content');
+            $table->longText('content');
             $table->timestamps();
         });
     }

@@ -123,12 +123,14 @@ class rubricsController extends Controller
         {
             $rubric = Rubrics::findOrFail($id);
             $courses = Course::all();
+            $cols = $rubric->cols;
 
 
             $params = [
                 'title' => 'Edit Rubric',
                 'rubrics' => $rubric,
                 'courses' => $courses,
+                'cols' => $cols,
             ];
 
             return view('rubrics.edit')->with($params);
