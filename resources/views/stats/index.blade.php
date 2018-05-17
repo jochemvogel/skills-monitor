@@ -55,7 +55,8 @@
                     data: {
                         'blok': '1'
                     }, success: function (data) {
-                        ;
+
+                       document.getElementById('tbody').innerHTML=data;
                     }
                 });
                 break;
@@ -71,7 +72,7 @@
                         'blok': '2'
                      }, success: function (data) {
 
-                        console.log(data);
+                        document.getElementById('tbody').innerHTML=data;
                      }
 
                 });
