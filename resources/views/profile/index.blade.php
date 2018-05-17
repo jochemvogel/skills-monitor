@@ -1,35 +1,59 @@
 @extends('adminlte::page')
+
+@section('title', 'Profile: (Name)')
+
 <?php use Illuminate\Support\Facades\Auth; ?>
-    @section('content')
-    <div class="container">
 
-        <!-- Shows information about the user when logged in -->
+@section('content')
+    @if(Auth::check())
+    <div class="box box-primary">
+        <div class="box-body box-profile">
+            <img class="profile-user-img img-responsive img-circle" src="{{ URL::to('/') }}/img/coffee.png" alt="User profile picture">
 
-        @if(Auth::check())
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="box box-solid">
+            <h3 class="profile-username text-center"><?php echo(Auth::user()->firstname.' '.Auth::user()->lastname); ?></h3>
 
-                        <div class="box-header with-border">
-                            <i class="fa fa-user"></i> 
-                            <h1 class="box-title">Profile</h1>
-                        </div>
+            <p class="text-muted text-center">First grade</p>
 
-                        <div class="box-body">
-                            <h2>Welcome <?php echo(Auth::user()->firstname.' '.Auth::user()->lastname); ?></h2>
-                            <p>Your e-mail address is: <?php echo(Auth::user()->email); ?></p>
-                            <p>Do you want to change your email address? Click <a href="{{ route('users.index') }}">here</a></p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-         @endif
-
-        <!-- When not logged in user is redirected to login page -->
-
-         @if(Auth::guest())
-         <a href="/login" class="btn btn-danger"> You have to login first before you can view your profile!</a>
-         @endif
+        </div>
+        <!-- /.box-body -->
     </div>
-    @endsection
+
+
+    <div class="box box-primary">
+            <!-- /.box-header -->
+            <div class="box-body">
+                <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+
+                <p class="text-muted">
+                    HBO-ICT, HZ University of Applied Sciences at Vlissingen
+                </p>
+
+                <hr>
+
+                <strong><i class="fa fa-envelope margin-r-5"></i> Mail</strong>
+
+                <p class="text-muted">
+                    admin@admin.com - Click <a href="{{ route('users.index') }}">here</a> to change
+                </p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+                <p class="text-muted">Middelburg, the Netherlands</p>
+
+                <hr>
+
+                <strong><i class="fa fa-file-text-o margin-r-5"></i> Bio</strong>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+            </div>
+            <!-- /.box-body -->
+        @endif
+
+@endsection
+
+@push ('css')
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+@endpush

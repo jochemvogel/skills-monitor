@@ -1,14 +1,16 @@
 @extends('adminlte::page')
 
+@section('title', 'Page not found')
+
 @section('content')
     {{-- create a box for all the text--}}
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
                     Sorry, we couldn't find the page you were looking for
                 </strong>
-            </h3>
+            </h1>
         </div>
         <div class="box-body">
             <p1>Congratulations, you are one of the few people who see this page.</p1>
@@ -25,3 +27,8 @@
         </div>
     </div>
 @endsection
+
+@push ('css')
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
+@endpush

@@ -1,13 +1,15 @@
 @extends('adminlte::page')
 
+@section('title', 'Rubrics: Create')
+
 @section('content')
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title">
+            <h1 class="box-title">
                 <strong>
-                    Create new rubrics
+                 Rubrics: Create
                 </strong>
-            </h3>
+            </h1>
         </div>
         <div class="box-body">
             <form class="form-horizontal" action="{{ route('rubrics.store') }}" method="POST">
@@ -26,6 +28,8 @@
                             <input type="number" class="form-control" min='1' max='10' step='1' name='cols' placeholder="6" required>
                         </div>
                     </div>
+
+
                     <div class="form-group {{ $errors->has('course') ? ' has-error ' : '' }}">
                         <label class="col-sm-2 control-label" for="course">Course <span class="required">*</span></label>
                             <div class="col-sm-10">
@@ -45,6 +49,8 @@
                         </div> 
                     </div>
 
+
+
                 <div class="box-footer">
                     <div class="pull-right">
                         <input type='submit' class='btn btn-success btn-sm' value='Save'>
@@ -61,6 +67,11 @@
             $('.select2').select2();
         });
     </script>
+@endpush
+
+@push ('css')
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 @endpush
 
 
