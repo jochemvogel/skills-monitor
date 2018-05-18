@@ -54,6 +54,10 @@
 @push('js')
     @can('update', $rubrics)
         <script>
+            document.addEventListener('ready', function(){
+                // #TODO remove divs from rubrics
+            });
+
             document.addEventListener('click', function(){
                 var elem = event.srcElement;
                 var row = elem.parentElement.parentElement.parentElement;
