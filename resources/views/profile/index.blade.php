@@ -8,7 +8,7 @@
     @if(Auth::check())
     <div class="box box-primary">
         <div class="box-body box-profile">
-            <img class="profile-user-img img-responsive img-circle" src="http://skills.hz/img/coffee.png" alt="User profile picture">
+            <img class="profile-user-img img-responsive img-circle" src="{{ URL::to('/') }}/img/coffee.png" alt="User profile picture">
 
             <h3 class="profile-username text-center"><?php echo(Auth::user()->firstname.' '.Auth::user()->lastname); ?></h3>
 

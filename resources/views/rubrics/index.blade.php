@@ -108,7 +108,7 @@
                                         <a href="{{ route('rubrics.show',['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View rubric"></i></a>
                                     @endcan
                                     @can('update', $rubric)
-                                        <a href="{{ route('rubrics.show', ['id' => $rubric->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i></a>
+                                        <a href="{{ route('rubrics.edit', ['id' => $rubric->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i></a>
                                     @endcan
                                     @can('delete', $rubric)
                                         <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric"></i></a>

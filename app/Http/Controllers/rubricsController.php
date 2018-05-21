@@ -127,7 +127,7 @@ class rubricsController extends Controller
 
             $params = [
                 'title' => 'Edit Rubric',
-                'rubric' => $rubric,
+                'rubrics' => $rubric,
                 'courses' => $courses,
             ];
 
