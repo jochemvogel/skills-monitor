@@ -17,7 +17,13 @@
         <div class="box-body with-border">
             <h2>
                 Rubrics
+                @can('create', \App\Course::class)
+                    <a href="{{route('rubrics.create')}}" class="btn btn-primary btn-xs" title="Create new rubric">
+                    <i class="fa fa-plus"></i> Add New Rubric
+                    </a>
+                @endcan
             </h2>
+
             <br>
 
             <table id="show-courses" class="table table-striped table-bordered">
@@ -48,7 +54,9 @@
         <div class="box-body with-border">
             <h2>
                 Users
+                <a href="{{route('courses.create')}}" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i> Add New User</a>
             </h2>
+
             <br>
             <table id="show-users" class="table table-striped table-bordered">
                 <thead>
@@ -59,12 +67,26 @@
                 </tr>
                 </thead>
                 <tbody>
+
+                <a href="https://www.example.com/" class="btn btn-primary btn-xs"><i class="fa fa-envelope"></i> Send Message To All</a>
+
+                <br>
+
+                <br>
+
                 @if(count($rubrics))
                     @foreach($rubrics as $row)
                         <tr>
                             <td>Admin</td>
                             <td>Admin</td>
-                            <td>Edit & Mail</td>
+                            <td>
+                                @can('update', $row)
+                                    <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
+                                @endcan
+                                    <a href="mailto:admin@admin.com" class="btn btn-warning btn-xs"><i class="fa fa-envelope" title="Mail"></i> </a>
+
+
+                            </td>
                         </tr>
                     @endforeach
                 @endif
