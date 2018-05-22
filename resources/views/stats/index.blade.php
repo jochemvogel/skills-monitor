@@ -25,7 +25,13 @@
                     </thead>
 
                     <tbody id="tbody">
-
+                    @foreach($results as $row)
+                        <tr>
+                            <td>{{$row->course}}</td>
+                            <td>{{$row->grade}}</td>
+                            <td>{{$row->ec}}</td>    
+                        </tr>
+                    @endforeach
                     </tbody>
 
                 </table>
@@ -43,20 +49,47 @@
 @push('js')
 <script>
 
-    var data = [];
 
-    function callBack(response) {
+    function createChart(response) {
             data = response;
             
             var length = data.length;
-            var newData = [];
-
+            var resultsArray = [];
+            
             for(var i = 0 ; i < length; i++){
             
-                newData.push(data[i].grade);
+                resultsArray.push(data[i].grade);
+                
             }            
-            console.dir(newData);
-        };
+            console.dir(resultsArray);
+
+            new Chart(document.getElementById("line-chart"), {
+                type: 'line',
+                data: {
+                labels: ['Week 1','Week 2','Week 3','Week 4'],
+                datasets: [{ 
+                        data: resultsArray,
+                        label: 'results',
+                        borderColor: "#3e95cd",
+                        fill: false
+                        }]
+                },
+            
+                options: {
+                        scales: {
+                            yAxes: [{
+                                display: true,
+                                ticks: {
+                                    beginAtZero: true,
+                                    max: 10,
+                                    stepSize: 1
+                                }
+                            }]
+                        }
+                }   
+
+            });
+    };
 
     window.addEventListener('click', function(){
         switch (event.srcElement.id) {
@@ -70,7 +103,7 @@
                     data: {
                         'blok': '1'
                     }, success: function (data) {
-                        callBack(data);
+                        createChart(data);
                         
                     }
                 });
@@ -86,9 +119,10 @@
                      url: '/getstats',
                      data: {
                         'blok': '2'
-                     }, success: function (data) {
-                        callBack(data);
-                     }
+                    }, success: function (data) {
+                        createChart(data);
+
+                    }
 
                 });
                 
