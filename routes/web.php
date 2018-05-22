@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SetPassword;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +34,12 @@ Route::middleware(['auth'])->group( function () {
     Route::put('backupfield', 'JSONcontroller@backupField');
     Route::get('moverow', 'JSONcontroller@moveRow');
     Route::get('getpending', 'JSONcontroller@getPending');
+
+    //Mail
+    Route::get('/jemoeder', function(){
+        // Mail::to('whatever@mail.com')->send(new setPassword);
+        return view('confirm');
+    });
 });
 
 Route::fallback(function ()

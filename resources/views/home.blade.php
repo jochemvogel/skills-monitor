@@ -6,6 +6,7 @@
 
 @section('content')
     <p>You are logged in!</p>
+    <a href="/jemoeder"><button type="submit">Mail</button></a>
 @stop
 
 @push ('css')

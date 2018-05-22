@@ -7,6 +7,8 @@ use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SetPassword;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -69,6 +71,8 @@ class usersController extends Controller
             'role_id' => $request->input('role'),
             'password' => bcrypt($request->input('password')),
         ]);
+
+        Mail::to($request->input('email'))->send(new setPassword);
 
         return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been created.");
     }
