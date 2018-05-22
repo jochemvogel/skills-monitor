@@ -3,20 +3,16 @@
 @section('title', 'Courses: Delete')
 
 @section('content')
-    @section('content_header')
-    @endsection
-    <div class="">
-        <div class="clearfix"></div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Confirm Delete Record <a href="{{route('courses.index')}}" class="btn btn-info btn-xs"><i class="fa fa-chevron-left"></i> Back </a></h2>
-                        <div class="clearfix"></div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                        <h1 class="box-title">
+                            <strong>
+                                Confirm Delete Course <a href="{{route('courses.index')}}" class="btn btn-primary btn-xs"><i class="fa fa-chevron-left"></i> Back </a>
+                            </strong>
+                        </h1>
                     </div>
-                    <div class="x_content">
-                        <p>Are you sure you want to delete <strong>{{$course->name}}</strong></p>
+                    <div class="box-body">
+                        <p>Are you sure you want to delete <strong>{{$course->name}}</strong>?</p>
 
                         <form method="POST" action="{{ route('courses.destroy', ['id' => $course->id]) }}">
                             <input type="hidden" name="_token" value="{{ Session::token() }}">
@@ -27,7 +23,6 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 
 @push ('css')
