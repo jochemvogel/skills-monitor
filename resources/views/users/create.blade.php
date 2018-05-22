@@ -7,7 +7,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">
             <strong>
-                Create new rubrics
+                Users: Create
             </strong>
         </h3>
     </div>
