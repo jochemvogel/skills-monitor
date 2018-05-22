@@ -44,7 +44,6 @@
 
 @push('js')
 <script>
-
     //Onload function
     window.onload = function(){
 
@@ -148,8 +147,5 @@
             }
         });        
     });
-
-    
-
 </script>
 @endpush
