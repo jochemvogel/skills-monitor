@@ -7,7 +7,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">
             <strong>
-                Create new rubrics
+                Users: Create
             </strong>
         </h3>
     </div>
@@ -27,10 +27,13 @@
                         <input type="text" class="form-control" name="lastname" placeholder="last name" required>
                     </div>
                 </div>
-                <div class="form-group"{{ $errors->has('email') ? ' has-error' : '' }}>
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <label for="Email" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="email" placeholder="email" required>
+                        @if ($errors->has('email'))
+                        <span class="help-block">{{ $errors->first('email') }}</span>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group"{{ $errors->has('password') ? ' has-error' : '' }}>
@@ -47,7 +50,7 @@
                 </div>
 
                 <div class="form-group {{ $errors->has('role') ? ' has-error ' : '' }}">
-                    <label class="col-sm-2 control-label" for="email">Role <span class="required">*</span>
+                    <label class="col-sm-2 control-label" for="role">Role <span class="required">*</span>
                     </label>
                     <div class="col-sm-10">
                         <select class="form-control select2" name="role" id="role">

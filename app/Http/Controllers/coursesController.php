@@ -164,6 +164,8 @@ class coursesController extends Controller
 
             $this->validate($request, [
                 'name' => 'required',
+                'course_abbreviation' => 'nullable|unique:courses,course_abbreviation,'.$id,
+                'course_code' => 'nullable|unique:courses,course_code,'.$id,
             ]);
 
             function generateRandomAbbrevation($length = 3)

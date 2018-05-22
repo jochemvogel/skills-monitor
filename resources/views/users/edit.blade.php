@@ -5,15 +5,18 @@
 @section('content')
     @section('content_header')
     @endsection
-    <div class="">
-        <div class="clearfix"></div>
+
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <h1 class="box-title">
+                <strong>
+                 User: Edit
+                </strong>
+            </h1>
+        </div>
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Edit User <a href="{{route('users.index')}}" class="btn btn-info btn-xs"><i class="fa fa-chevron-left"></i> Back </a></h2>
-                        <div class="clearfix"></div>
-                    </div>
                     <div class="x_content">
                         <br />
                         <form method="post" action="{{ route('users.update', ['id' => $user->id]) }}" data-parsley-validate class="form-horizontal form-label-left">
@@ -77,7 +80,6 @@
                                 <input type="hidden" name="role" value="{{ $currentRole->id }}">
                             @endcannot
                               
-
                             <div class="ln_solid"></div>
 
                             <div class="form-group">
@@ -92,7 +94,6 @@
                 </div>
             </div>
         </div>
-    </div>
 @endsection
 
 @push ('css')
