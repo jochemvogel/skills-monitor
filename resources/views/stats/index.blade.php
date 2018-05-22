@@ -27,13 +27,7 @@
                     </thead>
 
                     <tbody id="tbody">
-                        @foreach($results as $row)
-                        <tr>
-                            <td>{{$row->course}}</td>
-                            <td>{{$row->grade}}</td>
-                            <td>{{$row->ec}}</td>    
-                        </tr>
-                        @endforeach
+
                     </tbody>
 
                 </table>
@@ -63,10 +57,31 @@
                 data: {
                     'blok': '1'
                 }, success: function (data) {
-                    createChart(data);
-                        
+                    createTable(data);
+                    createChart(data);                   
                 }
         });
+    };
+
+    // Create Table
+    function createTable(response) {
+        data = response;
+
+        var length = data.length;
+        var tbody = document.getElementById("tbody");
+        tbody.innerHTML = '';
+        
+        for(var i = 0 ; i < length; i++) {
+            
+            
+            var tr = document.createElement("tr");
+            
+            tr.innerHTML =  '<td>'+data[i].course+'</td>' +
+                            '<td>'+data[i].grade+'</td>' +
+                            '<td>'+data[i].ec+'</td>';
+            
+            tbody.appendChild(tr);
+        }
     };
 
     // Create chart
@@ -76,10 +91,9 @@
             var length = data.length;
             var resultsArray = [];
             
-            for(var i = 0 ; i < length; i++){
+            for(var i = 0 ; i < data.length; i++) {
             
                 resultsArray.push(data[i].grade);
-                
             }            
 
             new Chart(document.getElementById("line-chart"), {
@@ -112,49 +126,27 @@
                             }]
                         }
                 }   
-
             });
     };
 
     // Listener to different blokken
     window.addEventListener('click', function(){
-        switch (event.srcElement.id) {
-            case 'blok1':
-                $.ajax({
-                   headers: {
-                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                   },
-                    type: "GET",
-                    url: '/getstats',
-                    data: {
-                        'blok': '1'
-                    }, success: function (data) {
-                        createChart(data);
-                        
-                    }
-                });
-                
-            break;
 
-            case 'blok2':
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                     type: "GET",
-                     url: '/getstats',
-                     data: {
-                        'blok': '2'
-                    }, success: function (data) {
-                        createChart(data);
+        var id = event.srcElement.id.substr(4);
 
-                    }
-
-                });
-                
-            break;
-
-        }
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "GET",
+            url: '/getstats',
+            data: {
+                'blok': id            
+            }, success: function (data) {
+                createTable(data);
+                createChart(data);
+            }
+        });        
     });
 
     
