@@ -20,4 +20,9 @@ class Course extends Model
       return $this->belongsToMany(Rubric::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
 }
