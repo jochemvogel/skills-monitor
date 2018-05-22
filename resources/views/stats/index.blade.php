@@ -43,6 +43,21 @@
 @push('js')
 <script>
 
+    var data = [];
+
+    function callBack(response) {
+            data = response;
+            
+            var length = data.length;
+            var newData = [];
+
+            for(var i = 0 ; i < length; i++){
+            
+                newData.push(data[i].grade);
+            }            
+            console.dir(newData);
+        };
+
     window.addEventListener('click', function(){
         switch (event.srcElement.id) {
             case 'blok1':
@@ -55,11 +70,12 @@
                     data: {
                         'blok': '1'
                     }, success: function (data) {
-
-                       document.getElementById('tbody').innerHTML=data;
+                        callBack(data);
+                        
                     }
                 });
-                break;
+                
+            break;
 
             case 'blok2':
                 $.ajax({
@@ -71,14 +87,17 @@
                      data: {
                         'blok': '2'
                      }, success: function (data) {
-
-                        document.getElementById('tbody').innerHTML=data;
+                        callBack(data);
                      }
 
                 });
-                break;
+                
+            break;
 
         }
     });
+
+    
+
 </script>
 @endpush

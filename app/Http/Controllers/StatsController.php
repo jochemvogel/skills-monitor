@@ -18,7 +18,7 @@ public function index(){
 public function getDataBlok(Request $request){
 
     $results = DB::table('results')->where('blok', '=', $request->input("blok"))->get();
-    return view('stats.statsList', ['results'=>$results]);
+    return $results;
 
 }
 
