@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Rubrics;
+use App\User;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -249,12 +250,22 @@ class coursesController extends Controller
 
     public function add($id)
     {
-        return view('courses.add');
+        $courses = Course::All();
+        $users = User::All();
 
+
+        $params = [
+            'title' => 'Add user',
+            'users' => $users,
+            'courses' => $courses,
+        ];
+
+        return view('courses.add')->with($params);
     }
 
     public function remove($id)
     {
+
         return view('courses.remove');
     }
 }
