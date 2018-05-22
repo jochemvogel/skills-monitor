@@ -1,11 +1,13 @@
 @extends('adminlte::page')
 
+@section('title', 'Stats')
+
 @section('content')
 
 
     <div class="box box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title"><strong>Progress</strong></h3>
+            <h3 class="box-title"><strong>Stats</strong></h3>
         </div>
 
         <div class="box-body">
@@ -25,13 +27,13 @@
                     </thead>
 
                     <tbody id="tbody">
-                    @foreach($results as $row)
+                        @foreach($results as $row)
                         <tr>
                             <td>{{$row->course}}</td>
                             <td>{{$row->grade}}</td>
                             <td>{{$row->ec}}</td>    
                         </tr>
-                    @endforeach
+                        @endforeach
                     </tbody>
 
                 </table>
@@ -49,7 +51,25 @@
 @push('js')
 <script>
 
+    //Onload function
+    window.onload = function(){
 
+        $.ajax({
+            headers: {
+                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+                type: "GET",
+                url: '/getstats',
+                data: {
+                    'blok': '1'
+                }, success: function (data) {
+                    createChart(data);
+                        
+                }
+        });
+    };
+
+    // Create chart
     function createChart(response) {
             data = response;
             
@@ -61,7 +81,6 @@
                 resultsArray.push(data[i].grade);
                 
             }            
-            console.dir(resultsArray);
 
             new Chart(document.getElementById("line-chart"), {
                 type: 'line',
@@ -69,13 +88,19 @@
                 labels: ['Week 1','Week 2','Week 3','Week 4'],
                 datasets: [{ 
                         data: resultsArray,
-                        label: 'results',
+                        label: 'Results',
                         borderColor: "#3e95cd",
                         fill: false
                         }]
                 },
             
+                //Options for chart
                 options: {
+                        title: {
+                            display: true,
+                            text: 'Progress'
+                        },
+
                         scales: {
                             yAxes: [{
                                 display: true,
@@ -91,6 +116,7 @@
             });
     };
 
+    // Listener to different blokken
     window.addEventListener('click', function(){
         switch (event.srcElement.id) {
             case 'blok1':
