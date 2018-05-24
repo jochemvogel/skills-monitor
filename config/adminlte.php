@@ -124,6 +124,11 @@ return [
             'url'  => 'users',
             'icon' => 'group',
         ],
+        [
+            'text' => 'Judge',
+            'url'  => 'judgement',
+            'icon' => 'check-circle-o',
+        ],
         'User menu',
         [
             'text' => 'Profile',

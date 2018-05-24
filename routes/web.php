@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group( function () {
     Route::resource('users', 'usersController');
     Route::resource('rubrics', 'rubricsController');
     Route::resource('courses', 'coursesController');
+    Route::resource('judgement', 'judgementController');
 
     // JSONcontroller routes
     Route::put('updatefield', 'JSONcontroller@updateField');
