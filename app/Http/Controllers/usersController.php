@@ -73,7 +73,10 @@ class usersController extends Controller
         ]);
         $data = array('pass' => $pass);
 
-        Mail::to($request->input('email'))->send(new setPassword, $data);
+        // Mail::to($request->input('email'))->send(new setPassword, $data);
+        Mail::send('confirm', $data, function($message){
+            $message->to($request->input('email'),'test')->subject('Set Password');
+        });
 
         return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been created.");
     }
