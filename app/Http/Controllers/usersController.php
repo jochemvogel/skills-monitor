@@ -60,7 +60,6 @@ class usersController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required|unique:users',
-            'password' => 'required',
             'role' => 'required',
         ]);
 
@@ -69,7 +68,7 @@ class usersController extends Controller
             'lastname' => $request->input('lastname'),
             'email' => $request->input('email'),
             'role_id' => $request->input('role'),
-            'password' => bcrypt($request->input('password')),
+            'password' => bcrypt(uniqid(true)),
         ]);
 
         Mail::to($request->input('email'))->send(new setPassword);
