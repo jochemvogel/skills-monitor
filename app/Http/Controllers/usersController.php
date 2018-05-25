@@ -74,7 +74,7 @@ class usersController extends Controller
         $data = array('pass' => $pass);
 
         // Mail::to($request->input('email'))->send(new setPassword, $data);
-        Mail::send('confirm', $data, function($message){
+        Mail::send('confirm', $data, function($message) use ($request){
             $message->to($request->input('email'),'test')->subject('Set Password');
         });
 
