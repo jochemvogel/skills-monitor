@@ -1,47 +1,58 @@
-@extends('adminlte::master')
+@component('mail::message')
+{{-- Greeting --}}
+@if (! empty($greeting))
+# {{ $greeting }}
+@else
+@if ($level == 'error')
+# Whoops!
+@else
+# Hello!
+@endif
+@endif
 
-@section('adminlte_css')
-    <link rel="stylesheet" href="{{ asset('vendor/adminlte/css/auth.css') }}">
-    @yield('css')
-@stop
+{{-- Intro Lines --}}
+@foreach ($introLines as $line)
+{{ $line }}
 
-@section('body_class', 'login-page')
+@endforeach
 
-@section('body')
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}">{!! config('adminlte.logo', '<b>Admin</b>LTE') !!}</a>
-        </div>
-        <!-- /.login-logo -->
-        <div class="login-box-body">
-            <p class="login-box-msg">{{ trans('adminlte::adminlte.password_reset_message') }}</p>
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
-            <form action="{{ url(config('adminlte.password_email_url', 'password/email')) }}" method="post">
-                {!! csrf_field() !!}
+{{-- Action Button --}}
+@isset($actionText)
+<?php
+    switch ($level) {
+        case 'success':
+            $color = 'green';
+            break;
+        case 'error':
+            $color = 'red';
+            break;
+        default:
+            $color = 'blue';
+    }
+?>
+@component('mail::button', ['url' => $actionUrl, 'color' => $color])
+{{ $actionText }}
+@endcomponent
+@endisset
 
-                <div class="form-group has-feedback {{ $errors->has('email') ? 'has-error' : '' }}">
-                    <input type="email" name="email" class="form-control" value="{{ $email or old('email') }}"
-                           placeholder="{{ trans('adminlte::adminlte.email') }}">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <button type="submit"
-                        class="btn btn-primary btn-block btn-flat"
-                >Confirm Password</button>
-            </form>
-        </div>
-        <!-- /.login-box-body -->
-    </div><!-- /.login-box -->
-@stop
+{{-- Outro Lines --}}
+@foreach ($outroLines as $line)
+{{ $line }}
 
-@section('adminlte_js')
-    @yield('js')
-@stop
+@endforeach
+
+{{-- Salutation --}}
+@if (! empty($salutation))
+{{ $salutation }}
+@else
+Regards,<br>{{ config('app.name') }}
+@endif
+
+{{-- Subcopy --}}
+@isset($actionText)
+@component('mail::subcopy')
+If you’re having trouble clicking the "{{ $actionText }}" button, copy and paste the URL below
+into your web browser: [{{ $actionUrl }}]({{ $actionUrl }})
+@endcomponent
+@endisset
+@endcomponent
