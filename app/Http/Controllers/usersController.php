@@ -63,15 +63,16 @@ class usersController extends Controller
             'role' => 'required',
         ]);
 
+        $pass = uniqid(true);
         $user = User::create([
             'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),
             'email' => $request->input('email'),
             'role_id' => $request->input('role'),
-            'password' => bcrypt(uniqid(true)),
+            'password' => bcrypt($pass),
         ]);
 
-        Mail::to($request->input('email'))->send(new setPassword);
+        Mail::to($request->input('email'))->send(new setPassword, $pass);
 
         return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been created.");
     }

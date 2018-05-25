@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>Gefeliciteerd, u bent een bakvis</h1>
+<h2>Uw wachtwoord is: {{$pass}}</h2>
 </body>
 </html>
