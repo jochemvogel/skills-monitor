@@ -71,8 +71,9 @@ class usersController extends Controller
             'role_id' => $request->input('role'),
             'password' => bcrypt($pass),
         ]);
+        $data = array('pass' => $pass);
 
-        Mail::to($request->input('email'))->send(new setPassword, $pass);
+        Mail::to($request->input('email'))->send(new setPassword, $data);
 
         return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been created.");
     }
