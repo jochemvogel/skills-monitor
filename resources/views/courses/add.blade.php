@@ -8,20 +8,19 @@
         <div class="box-header with-border">
             <h1 class="box-title">
                 <strong>
-                    Courses: Add User
+                    {{$course->name}}
                 </strong>
             </h1>
         </div>
 
         {{--NAME--}}
         <div class="box-body">
-            <form class="form-horizontal" action="{{ route('courses.addStore') }}" method="POST">
+            <form class="form-horizontal" method="POST" action="{{ route('courses.addUser', ['id'=>request()->route('id')])}}">
                 @csrf
-                <input type='hidden' name='rows' value='1'>
                     <div class="form-group">
                             <label class="col-sm-2 control-label" for="course">Name <span class="required">*</span></label>
                             <div class="col-sm-10">
-                                <select class="form-control select2 select2-hidden-accessible" data-placeholder="Select a course" style="width: 100%;" tabindex="-1" aria-hidden="true" name="course">
+                                <select name="user" class="form-control select2 select2-hidden-accessible" data-placeholder="Select a course" style="width: 100%;" tabindex="-1" aria-hidden="true" name="course">
                                     @if(count($users))
                                         @foreach($users as $row)
                                             <option value="{{ $row->id }}">{{ $row->firstname }} {{$row->lastname}}</option>
@@ -30,21 +29,6 @@
                                 </select>
                             </div>
                         </div>
-
-        {{--COURSE--}}
-                <input type='hidden' name='rows' value='1'>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="course">Course <span class="required">*</span></label>
-                        <div class="col-sm-10">
-                            <select class="form-control select2 select2-hidden-accessible" data-placeholder="Select a course" style="width: 100%;" tabindex="-1" aria-hidden="true" name="course">
-                                @if ($courses->count())
-                                    @foreach($courses as $course)
-                                        <option value="{{ $course->id }}">{{ $course->name }}</option>
-                                    @endforeach
-                                @endif
-                            </select>
-                        </div>
-                    </div>
 
                         <div class="box-footer">
                             <div class="pull-right">

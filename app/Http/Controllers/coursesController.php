@@ -250,20 +250,60 @@ class coursesController extends Controller
 
     public function add($id)
     {
+        $course = Course::find($id);
         $courses = Course::All();
         $users = User::All();
-
 
         $params = [
             'title' => 'Add user',
             'users' => $users,
+            'course' => $course,
             'courses' => $courses,
         ];
 
         return view('courses.add')->with($params);
     }
 
-    public function addStore() {
+    public function addUser()
+    {
+
+        // #TODO 2. gegevens opslaan in database 3. redirect naar course (waarvan je id hebt)
+
+        // Gegevens in database:
+        // request()->id           = course_id
+        // reguest()->post('user') = user_id
+
+        dd("Course_id: ".request()->id.", User_id: ".request()->post('user'));
+
+        // return view ('courses'index');
+
+
+
+//        try
+//        {
+//            $course = Course::All();
+//            $user = User::All();
+//
+//            $this->validate($request, [
+//                'user' => 'required',
+//            ]);
+//
+//            $course->id = request()->id;
+//            $user->id = request()->post('user');
+//
+//
+//            return redirect()->route('courses.index');
+//        }
+//        catch (ModelNotFoundException $ex)
+//        {
+//            if ($ex instanceof ModelNotFoundException)
+//            {
+//                return response()->view('errors.'.'404');
+//            }
+//        }
+
+
+
 
     }
 

@@ -24,6 +24,8 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/courses/{course_abbreviation}', 'coursesController@show');
     Route::get('/rubrics/{id}/delete', 'rubricsController@delete')->name('rubrics.delete');
 
+    Route::post('/courses/{id}/addUser/done', 'coursesController@addUser')->name('courses.addUser');
+
 
     Route::resource('users', 'usersController');
     Route::resource('rubrics', 'rubricsController');
