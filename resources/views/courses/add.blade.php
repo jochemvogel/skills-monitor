@@ -15,7 +15,8 @@
 
         {{--NAME--}}
         <div class="box-body">
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="{{ route('courses.store') }}" method="POST">
+                @csrf
                 <input type='hidden' name='rows' value='1'>
                     <div class="form-group">
                             <label class="col-sm-2 control-label" for="course">Name <span class="required">*</span></label>
@@ -23,7 +24,7 @@
                                 <select class="form-control select2 select2-hidden-accessible" data-placeholder="Select a course" style="width: 100%;" tabindex="-1" aria-hidden="true" name="course">
                                     @if(count($users))
                                         @foreach($users as $row)
-                                            <option>{{ $row->firstname }} {{$row->lastname}}</option>
+                                            <option value="{{ $row->id }}">{{ $row->firstname }} {{$row->lastname}}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -44,16 +45,16 @@
                             </select>
                         </div>
                     </div>
-            </form>
-
 
                         <div class="box-footer">
                             <div class="pull-right">
                                 <input type='submit' class='btn btn-success btn-sm' value='Save'>
                             </div>
                         </div>
-                    </div>
-                </div>
+            </form>
+        </div>
+    </div>
+
 @endsection
 @push ('css')
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
