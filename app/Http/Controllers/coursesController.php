@@ -263,6 +263,10 @@ class coursesController extends Controller
         return view('courses.add')->with($params);
     }
 
+    public function addStore() {
+
+    }
+
     public function remove($id)
     {
 

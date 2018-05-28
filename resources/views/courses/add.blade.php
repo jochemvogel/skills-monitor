@@ -15,7 +15,7 @@
 
         {{--NAME--}}
         <div class="box-body">
-            <form class="form-horizontal" action="{{ route('courses.store') }}" method="POST">
+            <form class="form-horizontal" action="{{ route('courses.addStore') }}" method="POST">
                 @csrf
                 <input type='hidden' name='rows' value='1'>
                     <div class="form-group">
