@@ -33,9 +33,9 @@ Route::resource('stats', 'StatsController');
     Route::get('/getstats', 'StatsController@getDataBlok');
 
 Route::resource('courses', 'coursesController');
-    Route::resource('users', 'usersController');
-    Route::resource('rubrics', 'rubricsController');
-    Route::resource('courses', 'coursesController');
+Route::resource('users', 'usersController');
+Route::resource('rubrics', 'rubricsController');
+    
 
     // JSONcontroller routes
     Route::put('updatefield', 'JSONcontroller@updateField');
