@@ -33,10 +33,17 @@ Route::resource('stats', 'StatsController');
 
 Route::resource('rubrics', 'rubricsController');
     // JSONcontroller routes
+    Route::get('getpendingnames', 'JSONcontroller@getPendingNames');
+    Route::put('updatename', 'JSONcontroller@updateName');
+    Route::put('backupname', 'JSONcontroller@backupName');
+
+    Route::get('getpendingfields', 'JSONcontroller@getPendingFields');
     Route::put('updatefield', 'JSONcontroller@updateField');
     Route::put('backupfield', 'JSONcontroller@backupField');
+
     Route::get('moverow', 'JSONcontroller@moveRow');
-    Route::get('getpending', 'JSONcontroller@getPending');
+    Route::put('addrow', 'JSONcontroller@addRow');
+    Route::delete('deleterow', 'JSONcontroller@deleteRow');
 });
 
 Route::fallback(function ()
