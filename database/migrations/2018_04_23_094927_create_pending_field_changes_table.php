@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePendingChangesTable extends Migration
+class CreatePendingFieldChangesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePendingChangesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pending_changes', function (Blueprint $table) {
+        Schema::create('pending_field_changes', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('field_id');
-            $table->string('content');
+            $table->longText('content');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreatePendingChangesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pending_changes');
+        Schema::dropIfExists('pending_field_changes');
     }
 }
