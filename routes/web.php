@@ -23,20 +23,15 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/rubrics/{id}/delete', 'rubricsController@delete')->name('rubrics.delete');
 
 
-
+Route::resource('courses', 'coursesController');
 Route::resource('users', 'usersController');
-Route::resource('rubrics', 'rubricsController');
+
 
 Route::resource('stats', 'StatsController');
-
     // Stats getData
     Route::get('/getstats', 'StatsController@getDataBlok');
 
-Route::resource('courses', 'coursesController');
-Route::resource('users', 'usersController');
 Route::resource('rubrics', 'rubricsController');
-    
-
     // JSONcontroller routes
     Route::put('updatefield', 'JSONcontroller@updateField');
     Route::put('backupfield', 'JSONcontroller@backupField');
