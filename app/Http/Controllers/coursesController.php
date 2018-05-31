@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Rubrics;
 use App\User;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -267,45 +268,25 @@ class coursesController extends Controller
     public function addUser()
     {
 
-        // #TODO 2. gegevens opslaan in database 3. redirect naar course (waarvan je id hebt)
+        try {
 
-        // Gegevens in database:
-        // request()->id           = course_id
-        // reguest()->post('user') = user_id
+            $user_id = request()->post('user');
+            $course_id = request()->id;
 
-        dd("Course_id: ".request()->id.", User_id: ".request()->post('user'));
+            $data = array('user_id' => $user_id, "course_id" => $course_id);
 
-        // return view ('courses'index');
+            DB::table('course_user')->insert($data);
+            $course_code = DB::table('courses')->where('id', '=', $course_id)->first()->course_abbreviation;
 
+            return redirect(route('courses.show', ['id' => $course_code]));
 
-
-//        try
-//        {
-//            $course = Course::All();
-//            $user = User::All();
-//
-//            $this->validate($request, [
-//                'user' => 'required',
-//            ]);
-//
-//            $course->id = request()->id;
-//            $user->id = request()->post('user');
-//
-//
-//            return redirect()->route('courses.index');
-//        }
-//        catch (ModelNotFoundException $ex)
-//        {
-//            if ($ex instanceof ModelNotFoundException)
-//            {
-//                return response()->view('errors.'.'404');
-//            }
-//        }
-
-
-
-
+        } catch (ModelNotFoundException $ex) {
+            if ($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
+            }
+        }
     }
+
 
     public function remove($id)
     {
