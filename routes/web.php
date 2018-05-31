@@ -29,6 +29,10 @@ Route::middleware(['auth'])->group( function () {
     Route::resource('rubrics', 'rubricsController');
     Route::resource('courses', 'coursesController');
 
+    // Change password routes
+    Route::get('/changepassword','HomeController@showChangePasswordForm');
+    Route::post('/changepassword','HomeController@changePassword')->name('changePassword');
+
     // JSONcontroller routes
     Route::get('getpendingnames', 'JSONcontroller@getPendingNames');
     Route::put('updatename', 'JSONcontroller@updateName');
