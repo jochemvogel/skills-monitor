@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SetPassword;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -74,8 +75,8 @@ class usersController extends Controller
         $data = array('pass' => $pass);
 
         // Mail::to($request->input('email'))->send(new setPassword, $data);
-        Mail::send('confirm', $data, function($message) use ($request){
-            $message->to($request->input('email'),'test')->subject('Set Password');
+        Mail::send('mail.confirm', $data, function($message) use ($request, $user){
+            $message->to($request->input('email'), $user->firstname." ".$user->lastname)->subject('Set Password');
         });
 
         return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been created.");

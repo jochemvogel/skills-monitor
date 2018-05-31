@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -45,10 +47,15 @@ class HomeController extends Controller
             'current-password' => 'required',
             'new-password' => 'required|string|min:6|confirmed',
         ]);
+
         //Change Password
-        $user = Auth::user();
-        $user->password = bcrypt($request->get('new-password'));
-        $user->save();
+        DB::table('users')->where('id',Auth::User()->id)->update([
+            "password" => bcrypt($request->get('new-password')),
+        ]);
+
+        Mail::send('mail.pwchange', [], function($message){
+            $message->to(Auth::User()->email, Auth::User()->firstname." ".Auth::User()->lastname)->subject('Your password has been changed!');
+        });
         return redirect()->back()->with("success","Password changed successfully !");
     }
 
