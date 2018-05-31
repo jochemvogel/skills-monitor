@@ -293,6 +293,11 @@ class coursesController extends Controller
 
         return view('courses.remove');
     }
+
+    public function removeUser()
+    {
+
+    }
 }
 
 

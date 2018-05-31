@@ -20,7 +20,8 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/courses/create', 'coursesController@create');
     Route::get('/courses/{id}/delete', 'coursesController@delete')->name('courses.delete');
     Route::get('/courses/{id}/addUser', 'coursesController@add')->name('courses.add');
-    Route::get('/courses/{id}/removeUser', 'coursesController@remove')->name('courses.remove');
+    Route::get('/courses/{id}/remove', 'coursesController@remove')->name('courses.remove');
+    Route::get('/courses/{id}/removeUser', 'coursesController@remove')->name('courses.removeUser');
     Route::get('/courses/{course_abbreviation}', 'coursesController@show');
     Route::get('/rubrics/{id}/delete', 'rubricsController@delete')->name('rubrics.delete');
 

@@ -70,9 +70,6 @@
                 <tbody>
                 {{--@can add & remove --}}
                 <a href="{{ route('courses.add',['id' => $course->id])}}"  class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Add New User</a>
-                <div class="pull-right">
-                <a href="{{ route('courses.remove',['id' => $course->id])}}" class="btn btn-danger btn-xs" ><i class="fa fa-times"></i> Remove User</a>
-                </div>
                 <br>
                 <br>
                 {{--@endcan--}}
@@ -84,7 +81,7 @@
                             <td>
                                 <a href="mailto: {{ $row->email }}," class="btn btn-warning btn-xs"><i class="fa fa-envelope" title="Send mail to {{$row->firstname}} {{$row->lastname}}"></i> </a>
                                 @can('delete', $row)
-                                    <a href="{{ route('users.edit', ['id' => $row->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash" title="Remove {{$row->firstname }} {{$row->lastname}} from {{$course->name}}"></i> </a>
+                                    <a href="{{ route('courses.removeUser', ['id' => $course->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash" title="Remove {{$row->firstname }} {{$row->lastname}} from {{$course->name}}"></i> </a>
                                 @endcan
                             </td>
                         </tr>
