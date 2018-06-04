@@ -69,11 +69,7 @@ class usersController extends Controller
             'role_id' => $request->input('role'),
             'password' => bcrypt($pass),
         ]);
-        $url = route('password.reset', ["token" => $pass]);
-        // Mail::to($request->input('email'))->send(new setPassword, $data);
-//        Mail::send(new SetPassword, $data, function($message) use ($request, $user){
-//            $message->to($request->input('email'), $user->firstname." ".$user->lastname)->subject('Set Password');
-//        });
+
         Mail::to($user)->send(new SetPassword($pass));
         return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been created.");
     }
