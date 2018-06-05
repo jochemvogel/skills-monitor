@@ -7,6 +7,7 @@ use App\Role;
 use Illuminate\Http\Request;
 use App\Mail\SetPassword;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Passwords\PasswordBroker;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -70,7 +71,7 @@ class usersController extends Controller
             'password' => bcrypt($pass),
         ]);
 
-        Mail::to($user)->send(new SetPassword($pass));
+        Mail::to($user)->send(new SetPassword(app('auth.password.broker')->createToken($user)));
         return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been created.");
     }
 
