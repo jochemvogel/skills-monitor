@@ -13,7 +13,7 @@
         </div>
 
         <div class="box-body">
-            <p>Are you sure you want to delete <strong>User firstname User lastname</strong>?</p>
+            <p>Are you sure you want to delete <strong>{{$user->firstname}} {{$user->lastname}}</strong>?</p>
             <form method="POST" action="{{ route('courses.destroyUser', ['user_id'=>request()->route('user_id'), 'course_id'=>request()->route('course_id')]) }}">
                 @csrf
                 <button type="submit" class="btn btn-danger">Yes I'm sure. Delete</button>

@@ -280,19 +280,11 @@ class coursesController extends Controller
         return view('courses.remove');
     }
 
-    public function removeUser() {
-        $course = Course::find($id);
-        $courses = Course::All();
-        $users = User::All();
+    public function removeUser($course_id, $user_id) {
 
-        $params = [
-            'title' => 'Remove user',
-            'users' => $users,
-            'course' => $course,
-            'courses' => $courses,
-        ];
+        $user = DB::table('users')->where('id', '=', $user_id)->get()->first();
 
-        return view('courses.removeUser')->with($params);
+        return view('courses.remove')->with(["user"=>$user]);
 
     }
 
