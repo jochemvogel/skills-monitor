@@ -10,8 +10,7 @@ class ResultsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         $results1 = new Results();
         $results1->course = 'GRE1';
         $results1->blok = 1;
