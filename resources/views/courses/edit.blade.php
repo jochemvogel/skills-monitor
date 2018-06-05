@@ -17,6 +17,8 @@
             <div class="x_content">
                 <br />
                 <form method="post" action="{{ route('courses.update', ['id' => $course->id]) }}" data-parsley-validate class="form-horizontal form-label-left">
+                    @csrf
+                    @method('put')
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -54,8 +56,6 @@
 
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <input type="hidden" name="_token" value="{{ Session::token() }}">
-                            <input name="_method" type="hidden" value="PUT">
                             <button type="submit" class="btn btn-success">Save Course Changes</button>
                         </div>
                     </div>
