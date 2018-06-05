@@ -6,9 +6,9 @@ use App\Course;
 use App\Rubrics;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -294,6 +294,18 @@ class coursesController extends Controller
 
         return view('courses.removeUser')->with($params);
 
+    }
+
+    public function destroyUser($course_id, $user_id) {
+        try {
+        $delete = DB::table('course_user')->where('user_id', '=', $user_id)->where('course_id', '=', $course_id)->delete();
+        return redirect()->route('courses.index');
+
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
+            }
+        }
     }
 }
 
