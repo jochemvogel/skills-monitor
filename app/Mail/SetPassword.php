@@ -2,24 +2,23 @@
 
 namespace App\Mail;
 
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SetPassword extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $token;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $newtoken)
     {
-        //
+        $this->token = $newtoken;
     }
 
     /**
@@ -29,6 +28,6 @@ class SetPassword extends Mailable
      */
     public function build()
     {
-        return $this->view('confirm');     
+        return $this->markdown('mail.confirm')->with(["token"=>$this->token]);
     }
 }
