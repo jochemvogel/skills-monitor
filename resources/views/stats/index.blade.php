@@ -45,7 +45,7 @@
 @push('js')
 <script>
     //Onload function
-    window.onload = function(){
+    window.onload = function() {
 
         $.ajax({
             headers: {
@@ -129,7 +129,7 @@
     };
 
     // Listener to different blokken
-    window.addEventListener('click', function(){
+    window.addEventListener('click', function() {
 
         var id = event.srcElement.id.substr(4);
 
