@@ -19,19 +19,22 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/inbox', 'InboxController@index')->name('index');
     Route::get('/courses/create', 'coursesController@create');
     Route::get('/courses/{id}/delete', 'coursesController@delete')->name('courses.delete');
+    Route::get('/courses/{id}/addUser', 'coursesController@add')->name('courses.add');
+    Route::get('/courses/{id}/remove', 'coursesController@remove')->name('courses.remove');
+    Route::get('/courses/{id}/removeUser', 'coursesController@remove')->name('courses.removeUser');
     Route::get('/courses/{course_abbreviation}', 'coursesController@show');
     Route::get('/rubrics/{id}/delete', 'rubricsController@delete')->name('rubrics.delete');
 
+    Route::post('/courses/{id}/addUser/done', 'coursesController@addUser')->name('courses.addUser');
 
-Route::resource('courses', 'coursesController');
-Route::resource('users', 'usersController');
+    Route::resource('users', 'usersController');
+    Route::resource('courses', 'coursesController');
 
-
-Route::resource('stats', 'StatsController');
+    Route::resource('stats', 'StatsController');
     // Stats getData
     Route::get('/getstats', 'StatsController@getDataBlok');
 
-Route::resource('rubrics', 'rubricsController');
+    Route::resource('rubrics', 'rubricsController');
     // JSONcontroller routes
     Route::get('getpendingnames', 'JSONcontroller@getPendingNames');
     Route::put('updatename', 'JSONcontroller@updateName');
