@@ -25,8 +25,8 @@
                         <label for="Course Abbreviation" class="col-sm-2 control-label">Course Abbreviation</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="course_abbreviation" placeholder="course abbreviation">
-                            @if ($errors->has('course_abbreviation'))
-                            <span class="help-block">{{ $errors->first('course_abbreviation') }}</span>
+                            @if($errors->has('course_abbreviation'))
+                                <span class="help-block">{{ $errors->first('course_abbreviation') }}</span>
                             @endif
                         </div>
                     </div>
@@ -34,8 +34,8 @@
                         <label for="Course Code" class="col-sm-2 control-label">Course Code</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="course_code" placeholder="course code">
-                            @if ($errors->has('course_code'))
-                            <span class="help-block">{{ $errors->first('course_code') }}</span>
+                            @if($errors->has('course_code'))
+                                <span class="help-block">{{ $errors->first('course_code') }}</span>
                             @endif
                         </div>
                     </div>

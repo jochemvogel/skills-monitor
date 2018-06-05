@@ -11,8 +11,7 @@ class CreateCourseUserTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('course_user', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('course_id')->unsigned();
@@ -26,8 +25,7 @@ class CreateCourseUserTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('course_user');
     }
 }

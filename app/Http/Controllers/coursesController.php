@@ -57,19 +57,19 @@ class coursesController extends Controller
             $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456';
             $charactersLength = strlen($characters);
             $randomString = '';
-            for ($i = 0; $i < $length; $i++) {
+            for($i = 0; $i < $length; $i++) {
                 $randomString .= $characters[rand(0, $charactersLength - 1)];
             }
-            while (DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists()) {
+            while(DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists()) {
                 $randomString = '';
-                for ($i = 0; $i < $length; $i++) {
+                for($i = 0; $i < $length; $i++) {
                     $randomString .= $characters[rand(0, $charactersLength - 1)];
                 }
             }
             return $randomString;
         }
 
-        if ($request->input('course_abbreviation') != null) {
+        if($request->input('course_abbreviation') != null) {
             $course_abbreviation = $request->input('course_abbreviation');
             $course_abbreviation_boolean = true;
         } else {
@@ -99,12 +99,12 @@ class coursesController extends Controller
             $courses = Course::All();
             $selectedcourse = null;
 
-            foreach ($courses as $course) {
-                if (strcasecmp($course->course_abbreviation, $course_abbreviation) === 0) {
+            foreach($courses as $course) {
+                if(strcasecmp($course->course_abbreviation, $course_abbreviation) === 0) {
                     $selectedcourse = $course;
                 }
             }
-            if ($selectedcourse == null) {
+            if($selectedcourse == null) {
                 return redirect(route('courses.index'));
             }
 
@@ -116,8 +116,8 @@ class coursesController extends Controller
             ];
 
             return view('courses.show')->with($params);
-        } catch (ModelNotFoundException $ex) {
-            if ($ex instanceof ModelNotFoundException) {
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');
             }
         }
@@ -139,8 +139,8 @@ class coursesController extends Controller
             ];
 
             return view('courses.edit')->with($params);
-        } catch (ModelNotFoundException $ex) {
-            if ($ex instanceof ModelNotFoundException) {
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');
             }
         }
@@ -167,19 +167,19 @@ class coursesController extends Controller
                 $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456';
                 $charactersLength = strlen($characters);
                 $randomString = '';
-                for ($i = 0; $i < $length; $i++) {
+                for($i = 0; $i < $length; $i++) {
                     $randomString .= $characters[rand(0, $charactersLength - 1)];
                 }
-                while (DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists()) {
+                while(DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists()) {
                     $randomString = '';
-                    for ($i = 0; $i < $length; $i++) {
+                    for($i = 0; $i < $length; $i++) {
                         $randomString .= $characters[rand(0, $charactersLength - 1)];
                     }
                 }
                 return $randomString;
             }
 
-            if ($request->input('course_abbreviation') != null) {
+            if($request->input('course_abbreviation') != null) {
                 $course_abbreviation = $request->input('course_abbreviation');
                 $course_abbreviation_boolean = true;
             } else {
@@ -195,8 +195,8 @@ class coursesController extends Controller
             $course->save();
 
             return redirect()->route('courses.index')->with('success', "The course <strong>$course->name</strong> has successfully been updated.");
-        } catch (ModelNotFoundException $ex) {
-            if ($ex instanceof ModelNotFoundException) {
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');
             }
         }
@@ -212,8 +212,8 @@ class coursesController extends Controller
             ];
 
             return view('courses.delete')->with($params);
-        } catch (ModelNotFoundException $ex) {
-            if ($ex instanceof ModelNotFoundException) {
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');
             }
         }
@@ -232,8 +232,8 @@ class coursesController extends Controller
             $course->delete();
 
             return redirect()->route('courses.index')->with('success', "The course <strong>$course->name</strong> has successfully been archived.");
-        } catch (ModelNotFoundException $ex) {
-            if ($ex instanceof ModelNotFoundException) {
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');
             }
         }
@@ -268,8 +268,8 @@ class coursesController extends Controller
 
             return redirect(route('courses.show', ['id' => $course_code]));
 
-        } catch (ModelNotFoundException $ex) {
-            if ($ex instanceof ModelNotFoundException) {
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
                 return response()->view('errors.' . '404');
             }
         }

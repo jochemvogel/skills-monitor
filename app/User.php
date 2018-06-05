@@ -30,9 +30,8 @@ class User extends Authenticatable
     /**
     * @param string|array $roles
     */
-    public function authorizeRoles($roles)
-    {
-      if (is_array($roles)) {
+    public function authorizeRoles($roles) {
+      if(is_array($roles)) {
           return $this->hasAnyRole($roles) ||
                  abort(401, 'This action is unauthorized.');
       }
@@ -43,16 +42,14 @@ class User extends Authenticatable
     * Check multiple roles
     * @param array $roles
     */
-    public function hasAnyRole($roles)
-    {
+    public function hasAnyRole($roles) {
       return null !== $this->roles()->whereIn('name', $roles)->first();
     }
     /**
     * Check one role
     * @param string $role
     */
-    public function hasRole($role)
-    {
+    public function hasRole($role) {
       return null !== $this->roles()->where('name', $role)->first();
     }
 
@@ -60,8 +57,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Role');
     }
 
-    public function courses()
-    {
+    public function courses() {
         return $this->belongsToMany(Course::class);
     }
 }

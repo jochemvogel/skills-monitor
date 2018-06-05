@@ -15,13 +15,11 @@ class Course extends Model
         'name', 'course_abbreviation', 'real_abbreviation', 'course_code',
     ];
 
-    public function rubrics()
-    {
+    public function rubrics() {
       return $this->belongsToMany(Rubric::class);
     }
 
-    public function users()
-    {
+    public function users() {
         return $this->belongsToMany(User::class);
     }
 
