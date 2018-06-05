@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Results;
 use DB;
 
 class StatsController extends Controller {
@@ -15,7 +16,8 @@ class StatsController extends Controller {
 
     public function getDataBlok(Request $request) {
 
-        $results = DB::table('results')->where('blok', '=', $request->input("blok"))->get();
+        //$results = DB::table('results')->where('blok', '=' , $request->input("blok"))->get();
+        $results =  Results::with('course')->where("blok","=",$request->input("blok"))->get();
         return $results;
     }
 }

@@ -57,7 +57,8 @@
                     'blok': '1'
                 }, success: function (data) {
                     createTable(data);
-                    createChart(data);                   
+                    createChart(data);
+                    console.dir(data);
                 }
         });
     };
@@ -74,8 +75,8 @@
             
             
             var tr = document.createElement("tr");
-            
-            tr.innerHTML =  '<td>'+data[i].course+'</td>' +
+
+            tr.innerHTML =  '<td>'+data[i].course.name+'</td>' +
                             '<td>'+data[i].grade+'</td>' +
                             '<td>'+data[i].ec+'</td>';
             
