@@ -20,8 +20,7 @@ class coursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $courses = Course::all();
 
         $params = [
@@ -48,8 +47,7 @@ class coursesController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $this->validate($request, [
             'name' => 'required|unique:courses',
             'course_abbreviation' => 'nullable|unique:courses',
@@ -98,8 +96,7 @@ class coursesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($course_abbreviation)
-    {
+    public function show($course_abbreviation) {
         try {
             $courses = Course::All();
             $selectedcourse = null;
@@ -134,8 +131,7 @@ class coursesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         try {
             $course = Course::findOrFail($id);
 
@@ -159,8 +155,7 @@ class coursesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         try {
             $course = Course::findOrFail($id);
 
@@ -210,8 +205,7 @@ class coursesController extends Controller
         }
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
         try {
             $course = Course::findOrFail($id);
 
@@ -234,8 +228,7 @@ class coursesController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         try {
             $course = Course::findOrFail($id);
 
@@ -249,8 +242,7 @@ class coursesController extends Controller
         }
     }
 
-    public function add($id)
-    {
+    public function add($id) {
         $course = Course::find($id);
         $courses = Course::All();
         $users = User::All();
@@ -265,8 +257,7 @@ class coursesController extends Controller
         return view('courses.add')->with($params);
     }
 
-    public function addUser()
-    {
+    public function addUser() {
 
         try {
 
@@ -288,14 +279,11 @@ class coursesController extends Controller
     }
 
 
-    public function remove($id)
-    {
-
+    public function remove($id) {
         return view('courses.remove');
     }
 
-    public function removeUser()
-    {
+    public function removeUser() {
 
     }
 }
