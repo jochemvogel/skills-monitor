@@ -36,8 +36,7 @@ class coursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('courses.create');
     }
 
@@ -54,8 +53,7 @@ class coursesController extends Controller
             'course_code' => 'nullable|unique:courses',
         ]);
 
-        function generateRandomAbbrevation($length = 3)
-        {
+        function generateRandomAbbrevation($length = 3) {
             $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456';
             $charactersLength = strlen($characters);
             $randomString = '';
@@ -165,8 +163,7 @@ class coursesController extends Controller
                 'course_code' => 'nullable|unique:courses,course_code,'.$id,
             ]);
 
-            function generateRandomAbbrevation($length = 3)
-            {
+            function generateRandomAbbrevation($length = 3) {
                 $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456';
                 $charactersLength = strlen($characters);
                 $randomString = '';
