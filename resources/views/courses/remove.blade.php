@@ -7,14 +7,18 @@
         <div class="box-header with-border">
             <h1 class="box-title">
                 <strong>
-                    Courses: Remove User
+                    Confirm Delete Course <a href="{{route('courses.index')}}" class="btn btn-primary btn-xs"><i class="fa fa-chevron-left"></i> Back </a>
                 </strong>
             </h1>
         </div>
+
         <div class="box-body">
-            <p>
-                Wat een gave test is dit! Toch?
-            </p>
+            <p>Are you sure you want to delete <strong>User firstname User lastname</strong>?</p>
+            {{--<form method="POST" action="{{ route('courses.destroy', ['id' => $course->id]) }}">--}}
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-danger">Yes I'm sure. Delete</button>
+            </form>
         </div>
     </div>
 @endsection

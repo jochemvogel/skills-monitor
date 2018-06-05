@@ -281,6 +281,18 @@ class coursesController extends Controller
     }
 
     public function removeUser() {
+        $course = Course::find($id);
+        $courses = Course::All();
+        $users = User::All();
+
+        $params = [
+            'title' => 'Remove user',
+            'users' => $users,
+            'course' => $course,
+            'courses' => $courses,
+        ];
+
+        return view('courses.removeUser')->with($params);
 
     }
 }

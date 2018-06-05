@@ -10,9 +10,10 @@
                     @if($course->course_abbreviation != null && $course->real_abbreviation == true)
                         {{$course->course_abbreviation}} -
                     @endif
-                    {{$course->name}}
+                        {{$course->name}}
                 </strong>
             </h1>
+
             <div class="pull-right">
                 <a href="#" onClick="alert('Not working yet')" class="btn btn-danger btn-xs float-right" ><i class="fa fa-times"></i> Leave Course</a>
             </div>
@@ -24,10 +25,10 @@
             </h2>
             <table id="show-courses" class="table table-striped table-bordered">
                 <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Action</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
                 <tbody>
                 @can('create', \App\Course::class)
@@ -79,7 +80,7 @@
                                 <td>
                                     <a href="mailto: {{ $row->email }}," class="btn btn-warning btn-xs"><i class="fa fa-envelope" title="Send mail to {{$row->firstname}} {{$row->lastname}}"></i> </a>
                                     @can('delete', $row)
-                                        <a href="{{ route('courses.removeUser', ['id' => $course->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-trash" title="Remove {{$row->firstname }} {{$row->lastname}} from {{$course->name}}"></i> </a>
+                                        <a href="{{ route('courses.removeUser', ['id' => $row->id, 'course_abbreviation' => $course->course_abbreviation])}}" class="btn btn-danger btn-xs"><i class="fa fa-trash" title="Remove {{$row->firstname }} {{$row->lastname}} from {{$course->name}}"></i> </a>
                                     @endcan
                                 </td>
                             </tr>
