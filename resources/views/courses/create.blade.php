@@ -7,7 +7,7 @@
         <div class="box-header with-border">
             <h3 class="box-title">
                 <strong>
-                    Create new course
+                    Courses: Create
                 </strong>
             </h3>
         </div>
@@ -21,16 +21,22 @@
                             <input type="text" class="form-control" name="name" placeholder="name" required>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="Course Abbreviation" class="col-sm-2 control-label"{{ $errors->has('course_abbreviation') ? ' has-error' : '' }}>Course Abbreviation</label>
+                    <div class="form-group{{ $errors->has('course_abbreviation') ? ' has-error' : '' }}">
+                        <label for="Course Abbreviation" class="col-sm-2 control-label">Course Abbreviation</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="course_abbreviation" placeholder="course abbreviation">
+                            @if($errors->has('course_abbreviation'))
+                                <span class="help-block">{{ $errors->first('course_abbreviation') }}</span>
+                            @endif
                         </div>
                     </div>
-                    <div class="form-group"{{ $errors->has('course_code') ? ' has-error' : '' }}>
+                    <div class="form-group{{ $errors->has('course_code') ? ' has-error' : '' }}">
                         <label for="Course Code" class="col-sm-2 control-label">Course Code</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="course_code" placeholder="course code">
+                            @if($errors->has('course_code'))
+                                <span class="help-block">{{ $errors->first('course_code') }}</span>
+                            @endif
                         </div>
                     </div>
     

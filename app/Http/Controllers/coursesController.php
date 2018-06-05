@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Course;
 use App\Rubrics;
-use DB;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -18,8 +20,7 @@ class coursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $courses = Course::all();
 
         $params = [
@@ -35,19 +36,17 @@ class coursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('courses.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $this->validate($request, [
             'name' => 'required|unique:courses',
             'course_abbreviation' => 'nullable|unique:courses',
@@ -58,25 +57,22 @@ class coursesController extends Controller
             $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456';
             $charactersLength = strlen($characters);
             $randomString = '';
-            for ($i = 0; $i < $length; $i++) {
+            for($i = 0; $i < $length; $i++) {
                 $randomString .= $characters[rand(0, $charactersLength - 1)];
             }
-            while(DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists() ){
+            while(DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists()) {
                 $randomString = '';
-                for ($i = 0; $i < $length; $i++) {
+                for($i = 0; $i < $length; $i++) {
                     $randomString .= $characters[rand(0, $charactersLength - 1)];
                 }
             }
             return $randomString;
         }
 
-        if($request->input('course_abbreviation') != null)
-        {
+        if($request->input('course_abbreviation') != null) {
             $course_abbreviation = $request->input('course_abbreviation');
             $course_abbreviation_boolean = true;
-        }
-        else
-        {
+        } else {
             $course_abbreviation = generateRandomAbbrevation();
             $course_abbreviation_boolean = false;
         }
@@ -95,22 +91,20 @@ class coursesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($course_abbreviation)
-    {
-        try
-        {
+    public function show($course_abbreviation) {
+        try {
             $courses = Course::All();
             $selectedcourse = null;
 
             foreach($courses as $course) {
-                if(strcasecmp($course->course_abbreviation, $course_abbreviation) === 0){
+                if(strcasecmp($course->course_abbreviation, $course_abbreviation) === 0) {
                     $selectedcourse = $course;
                 }
             }
-            if($selectedcourse == null){
+            if($selectedcourse == null) {
                 return redirect(route('courses.index'));
             }
 
@@ -122,12 +116,9 @@ class coursesController extends Controller
             ];
 
             return view('courses.show')->with($params);
-        }
-        catch (ModelNotFoundException $ex) 
-        {
-            if ($ex instanceof ModelNotFoundException)
-            {
-                return response()->view('errors.'.'404');
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
             }
         }
     }
@@ -135,13 +126,11 @@ class coursesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        try
-        {
+    public function edit($id) {
+        try {
             $course = Course::findOrFail($id);
 
             $params = [
@@ -150,12 +139,9 @@ class coursesController extends Controller
             ];
 
             return view('courses.edit')->with($params);
-        }
-        catch (ModelNotFoundException $ex) 
-        {
-            if ($ex instanceof ModelNotFoundException)
-            {
-                return response()->view('errors.'.'404');
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
             }
         }
     }
@@ -163,47 +149,44 @@ class coursesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        try
-        {
+    public function update(Request $request, $id) {
+        try {
             $course = Course::findOrFail($id);
 
             $this->validate($request, [
                 'name' => 'required',
+                'course_abbreviation' => 'nullable|unique:courses,course_abbreviation,'.$id,
+                'course_code' => 'nullable|unique:courses,course_code,'.$id,
             ]);
 
             function generateRandomAbbrevation($length = 3) {
                 $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456';
                 $charactersLength = strlen($characters);
                 $randomString = '';
-                for ($i = 0; $i < $length; $i++) {
+                for($i = 0; $i < $length; $i++) {
                     $randomString .= $characters[rand(0, $charactersLength - 1)];
                 }
-                while(DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists() ){
+                while(DB::table('courses')->where('course_abbreviation', '=', $randomString)->exists()) {
                     $randomString = '';
-                    for ($i = 0; $i < $length; $i++) {
+                    for($i = 0; $i < $length; $i++) {
                         $randomString .= $characters[rand(0, $charactersLength - 1)];
                     }
                 }
                 return $randomString;
             }
 
-            if($request->input('course_abbreviation') != null)
-            {
+            if($request->input('course_abbreviation') != null) {
                 $course_abbreviation = $request->input('course_abbreviation');
                 $course_abbreviation_boolean = true;
-            }
-            else
-            {
+            } else {
                 $course_abbreviation = generateRandomAbbrevation();
                 $course_abbreviation_boolean = false;
             }
-    
+
             $course->name = $request->input('name');
             $course->course_abbreviation = $course_abbreviation;
             $course->course_code = $request->input('course_code');
@@ -212,20 +195,15 @@ class coursesController extends Controller
             $course->save();
 
             return redirect()->route('courses.index')->with('success', "The course <strong>$course->name</strong> has successfully been updated.");
-        }
-        catch (ModelNotFoundException $ex) 
-        {
-            if ($ex instanceof ModelNotFoundException)
-            {
-                return response()->view('errors.'.'404');
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
             }
         }
     }
 
-    public function delete($id)
-    {
-        try
-        {
+    public function delete($id) {
+        try {
             $course = Course::findOrFail($id);
 
             $params = [
@@ -234,12 +212,9 @@ class coursesController extends Controller
             ];
 
             return view('courses.delete')->with($params);
-        }
-        catch (ModelNotFoundException $ex) 
-        {
-            if ($ex instanceof ModelNotFoundException)
-            {
-                return response()->view('errors.'.'404');
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
             }
         }
     }
@@ -247,26 +222,66 @@ class coursesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        try
-        {
+    public function destroy($id) {
+        try {
             $course = Course::findOrFail($id);
 
             $course->delete();
 
             return redirect()->route('courses.index')->with('success', "The course <strong>$course->name</strong> has successfully been archived.");
-        }
-        catch (ModelNotFoundException $ex) 
-        {
-            if ($ex instanceof ModelNotFoundException)
-            {
-                return response()->view('errors.'.'404');
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
             }
         }
+    }
+
+    public function add($id) {
+        $course = Course::find($id);
+        $courses = Course::All();
+        $users = User::All();
+
+        $params = [
+            'title' => 'Add user',
+            'users' => $users,
+            'course' => $course,
+            'courses' => $courses,
+        ];
+
+        return view('courses.add')->with($params);
+    }
+
+    public function addUser() {
+
+        try {
+
+            $user_id = request()->post('user');
+            $course_id = request()->id;
+
+            $data = array('user_id' => $user_id, "course_id" => $course_id);
+
+            DB::table('course_user')->insert($data);
+            $course_code = DB::table('courses')->where('id', '=', $course_id)->first()->course_abbreviation;
+
+            return redirect(route('courses.show', ['id' => $course_code]));
+
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
+            }
+        }
+    }
+
+
+    public function remove($id) {
+        return view('courses.remove');
+    }
+
+    public function removeUser() {
+
     }
 }
 
