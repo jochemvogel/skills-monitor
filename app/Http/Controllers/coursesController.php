@@ -242,7 +242,16 @@ class coursesController extends Controller
     public function add($id) {
         $course = Course::find($id);
         $courses = Course::All();
-        $users = User::All();
+        $AttachedUsers = DB::table('users')
+            ->join('course_user', 'course_user.user_id', '=', 'users.id')
+            ->select('users.id')
+            ->get()
+            ->pluck('id');
+
+        $users = DB::table('users')
+            ->whereNotIn('id', $AttachedUsers)
+            ->get()
+            ->all();
 
         $params = [
             'title' => 'Add user',
