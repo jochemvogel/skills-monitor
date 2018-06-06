@@ -6,8 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SetPassword extends Mailable
-{
+class SetPassword extends Mailable {
     use Queueable, SerializesModels;
 
     protected $token;
