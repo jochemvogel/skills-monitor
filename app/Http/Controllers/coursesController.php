@@ -227,9 +227,8 @@ class coursesController extends Controller
      */
     public function destroy($id) {
         try {
-            $course = Course::findOrFail($id);
 
-            $course->delete();
+
 
             return redirect()->route('courses.index')->with('success', "The course <strong>$course->name</strong> has successfully been archived.");
         } catch(ModelNotFoundException $ex) {
