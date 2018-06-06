@@ -1,4 +1,3 @@
-
     @component('mail::message')
         An account has been made for you!
     @endcomponent
