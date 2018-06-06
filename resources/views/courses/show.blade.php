@@ -80,7 +80,7 @@
                                 <td>
                                     <a href="mailto: {{ $row->email }}," class="btn btn-warning btn-xs"><i class="fa fa-envelope" title="Send mail to {{$row->firstname}} {{$row->lastname}}"></i> </a>
                                     @can('delete', $row)
-                                        <a href="{{ route('courses.removeUser', ['id' => $row->id, 'course_abbreviation' => $course->course_abbreviation])}}" class="btn btn-danger btn-xs"><i class="fa fa-trash" title="Remove {{$row->firstname }} {{$row->lastname}} from {{$course->name}}"></i> </a>
+                                        <a href="{{ route('courses.removeUser', ['course_id' => $course->id, 'user_id' => $row->id])}}" class="btn btn-danger btn-xs"><i class="fa fa-trash" title="Remove {{$row->firstname }} {{$row->lastname}} from {{$course->name}}"></i> </a>
                                     @endcan
                                 </td>
                             </tr>

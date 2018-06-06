@@ -13,10 +13,9 @@
         </div>
 
         <div class="box-body">
-            <p>Are you sure you want to delete <strong>User firstname User lastname</strong> from <strong> course </strong> ?</p>
-            {{--<form method="POST" action="{{ route('courses.destroy', ['id' => $course->id]) }}">--}}
+            <p>Are you sure you want to delete <strong>{{$user->firstname}} {{$user->lastname}}</strong>?</p>
+            <form method="POST" action="{{ route('courses.destroyUser', ['user_id'=>request()->route('user_id'), 'course_id'=>request()->route('course_id')]) }}">
                 @csrf
-                @method('delete')
                 <button type="submit" class="btn btn-danger">Yes I'm sure. Delete</button>
             </form>
         </div>
