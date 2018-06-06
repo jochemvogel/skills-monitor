@@ -48,8 +48,15 @@
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
             </div>
-            <!-- /.box-body -->
+
+            <div class="box-footer">
+                <div class="pull-right">
+                    <a href="/changepassword"><button type="submit" class="btn btn-primary">Change password</button></a>
+                </div>
+            </div>
         @endif
+
+
 
 @endsection
 
