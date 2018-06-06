@@ -30,11 +30,11 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function showChangePasswordForm(){
+    public function showChangePasswordForm() {
         return view('auth.changepassword');
     }
 
-    public function changePassword(Request $request){
+    public function changePassword(Request $request) {
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
         // The passwords matches
             return redirect()->back()->with("error","Your current password does not matches with the password you provided. Please try again.");
