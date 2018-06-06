@@ -287,7 +287,7 @@ class coursesController extends Controller
         return view('courses.remove');
     }
 
-    public function removeUser($course_id, $user_id) {
+    public function removeUser($user_id) {
 
         $user = DB::table('users')->where('id', '=', $user_id)->get()->first();
 
@@ -295,9 +295,8 @@ class coursesController extends Controller
 
     }
 
-    public function destroyUser($course_id, $user_id) {
+    public function destroyUser($course_id) {
         try {
-            $delete = DB::table('course_user')->where('user_id', '=', $user_id)->where('course_id', '=', $course_id)->delete();
 
             $course_code = DB::table('courses')->where('id', '=', $course_id)->first()->course_abbreviation;
 

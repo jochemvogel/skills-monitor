@@ -7,7 +7,7 @@
             <div class="box-header with-border">
                 <h1 class="box-title">
                     <strong>
-                        Confirm Delete Course <a href="{{route('courses.index')}}" class="btn btn-primary btn-xs"><i class="fa fa-chevron-left"></i> Back </a>
+                        Confirm Delete Course <a href="{{route('courses.show', ['id' => $course->course_abbreviation])}}" class="btn btn-primary btn-xs"><i class="fa fa-chevron-left"></i> Back </a>
                     </strong>
                 </h1>
             </div>
