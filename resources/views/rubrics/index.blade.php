@@ -30,18 +30,27 @@
                     <tbody>
                         @foreach($rubrics as $rubric)
                             <tr role="row">
-                                <td>
-                                    <a href="{{route('courses.show',['course_abbreviation' => $rubric->courses_id->course_abbreviation])}}" title="View course: {{ $rubric->courses_id->name }}">{{ $rubric->courses_id->name }}</a>
+                                <td> <a href="{{route('courses.show',['course_abbreviation' => $rubric->courses_id->course_abbreviation])}}" title="View course: {{ $rubric->courses_id->name }}">{{ $rubric->courses_id->name }}</a>
 
-
+                                    {{-- If course has cu code --}}
                                     @if($rubric->courses_id->course_code != null)
-                                       @if($rubric->courses_id->real_abbreviation == true)
+
+                                        {{-- If course has abbreviation (and cu code) --}}
+                                        @if($rubric->courses_id->real_abbreviation == true)
                                             ({{$rubric->courses_id->course_abbreviation}}, {{$rubric->courses_id->course_code}})
+
+                                        {{-- If course hasn't an abbreviation (but has cu code) --}}
                                         @else
                                             ({{$rubric->courses_id->course_code}})
                                         @endif
+
+                                    {{--  If course has no cu code & has no abbreviation  --}}
+                                    @elseif($rubric->courses_id->course_code == null && $rubric->courses_id->real_abbreviation == false)
+
+                                    {{-- If course has no cu code (but has an abbreviation) --}}
                                     @else
                                         ({{$rubric->courses_id->course_abbreviation}})
+
                                     @endif
                                 </td>
                                 <td>{{ $rubric->name }}</td>
@@ -76,11 +85,11 @@
     });
 </script>
 <script>
-    document.addEventListener('click', function(){
-        if(event.srcElement.classList[1] === "fa-pencil"){
-            sessionStorage.setItem("edit", 'true');
-        }else{
-            sessionStorage.setItem("edit", 'false');
+            document.addEventListener('click', function(){
+                if(event.srcElement.classList[1] === "fa-pencil"){
+                    sessionStorage.setItem("edit", 'true');
+                }else{
+                    sessionStorage.setItem("edit", 'false');
         }
     })
 </script>
