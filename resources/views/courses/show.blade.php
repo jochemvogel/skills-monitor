@@ -15,7 +15,7 @@
             </h1>
 
             <div class="pull-right">
-                <a href="#" onClick="alert('Not working yet')" class="btn btn-danger btn-xs float-right" ><i class="fa fa-times"></i> Leave Course</a>
+                <a href="{{ route('courses.leave', ['course_id' => $course->id, 'user_id' => Auth::user()->id])}}" class="btn btn-danger btn-xs float-right" ><i class="fa fa-times"></i> Leave Course</a>
             </div>
         </div>
 
@@ -33,12 +33,9 @@
                 <tbody>
                 @can('create', \App\Course::class)
                     <a href="{{ route('rubrics.create')}}"  class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Create New Rubric</a>
+                <br>
+                <br>
                 @endcan
-                <div class="pull-right">
-                    <a href="{{ route('courses.remove',['id' => $course->id])}}" class="btn btn-danger btn-xs" ><i class="fa fa-times"></i> Remove Rubric</a>
-                </div>
-                <br>
-                <br>
                 @if(count($rubrics))
                     @foreach($rubrics as $row)
                         <tr>
@@ -69,9 +66,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @can('create', Auth::user())
                     <a href="{{ route('courses.add',['id' => $course->id])}}"  class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Add New User</a>
                     <br>
                     <br>
+                    @endcan
                      @if(count($course->users))
                         @foreach($course->users as $row)
                             <tr>

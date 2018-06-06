@@ -23,7 +23,9 @@
                         <select name="user" class="form-control select2 select2-hidden-accessible" data-placeholder="Select a user" style="width: 100%;" tabindex="-1" aria-hidden="true" name="course">
                             @if(count($users))
                                 @foreach($users as $row)
+                                    {{-- @if($user != member of course --}}
                                     <option value="{{ $row->id }}">{{ $row->firstname }} {{$row->lastname}}</option>
+                                    {{-- @endif--}}
                                 @endforeach
                             @endif
                         </select>

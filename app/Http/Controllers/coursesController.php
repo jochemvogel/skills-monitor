@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -227,9 +228,9 @@ class coursesController extends Controller
      */
     public function destroy($id) {
         try {
+                $course = Course::findOrFail($id);
 
-
-
+                $course->delete();
             return redirect()->route('courses.index')->with('success', "The course <strong>$course->name</strong> has successfully been archived.");
         } catch(ModelNotFoundException $ex) {
             if($ex instanceof ModelNotFoundException) {
@@ -254,7 +255,6 @@ class coursesController extends Controller
     }
 
     public function addUser() {
-
         try {
 
             $user_id = request()->post('user');
@@ -274,8 +274,7 @@ class coursesController extends Controller
         }
     }
 
-
-    public function remove($id) {
+    public function remove() {
         return view('courses.remove');
     }
 
@@ -289,8 +288,11 @@ class coursesController extends Controller
 
     public function destroyUser($course_id, $user_id) {
         try {
-        $delete = DB::table('course_user')->where('user_id', '=', $user_id)->where('course_id', '=', $course_id)->delete();
-        return redirect()->route('courses.index');
+            $delete = DB::table('course_user')->where('user_id', '=', $user_id)->where('course_id', '=', $course_id)->delete();
+
+            $course_code = DB::table('courses')->where('id', '=', $course_id)->first()->course_abbreviation;
+
+            return redirect(route('courses.show', ['id' => $course_code]));
 
         } catch(ModelNotFoundException $ex) {
             if($ex instanceof ModelNotFoundException) {
@@ -298,6 +300,26 @@ class coursesController extends Controller
             }
         }
     }
+
+    public function leaveCourseView() {
+        $user = DB::table('users')->where('id', '=', Auth::user()->id)->get()->first();
+
+        return view('courses.leave')->with(["user"=>$user]);
+    }
+
+    public function leaveCourseAction($course_id) {
+        try {
+            $course_code = DB::table('courses')->where('id', '=', $course_id)->first()->course_abbreviation;
+
+            return redirect(route('courses.show', ['id' => $course_code]));
+
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
+            }
+        }
+    }
+
 }
 
 
