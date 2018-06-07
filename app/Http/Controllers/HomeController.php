@@ -57,7 +57,7 @@ class HomeController extends Controller
         Mail::send('mail.pwchange', [], function($message){
             $message->to(Auth::User()->email, Auth::User()->firstname." ".Auth::User()->lastname)->subject('Your password has been changed!');
         });
+        
         return redirect()->back()->with("success","Password changed successfully !");
     }
-
 }
