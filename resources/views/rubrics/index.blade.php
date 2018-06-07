@@ -17,6 +17,7 @@
             </h1>
         </div>
 
+        <div class="box-body">
             <div class="row">
                 <div class="col-sm-12">
                     <table id="rubrics" class="table table-striped table-bordered">
