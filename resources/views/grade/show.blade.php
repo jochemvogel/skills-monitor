@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Judgement: Show')
+@section('title', 'Grade: Show')
 
 @section('content')
     <div class="box box-solid">
