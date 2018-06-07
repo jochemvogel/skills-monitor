@@ -16,8 +16,7 @@ class SetPassword extends Mailable
      *
      * @return void
      */
-    public function __construct(string $newtoken)
-    {
+    public function __construct(string $newtoken) {
         $this->token = $newtoken;
     }
 
@@ -26,8 +25,7 @@ class SetPassword extends Mailable
      *
      * @return $this
      */
-    public function build()
-    {
+    public function build() {
         return $this->markdown('mail.confirm')->with(["token"=>$this->token]);
     }
 }
