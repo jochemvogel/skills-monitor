@@ -44,7 +44,7 @@
                                             ({{$rubric->courses_id->course_code}})
                                         @endif
 
-                                        {{--  If course has no cu code  --}}
+                                    {{--  If course has no cu code  --}}
                                     @else
                                         {{--  If course has no abbreviation  --}}
                                         @if($rubric->courses_id->real_abbreviation == false)
@@ -74,7 +74,6 @@
                 </table>
             </div>
         </div>
-
 @endsection
 
 @push ('js')
