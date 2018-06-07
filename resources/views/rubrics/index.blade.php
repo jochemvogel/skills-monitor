@@ -44,13 +44,15 @@
                                             ({{$rubric->courses_id->course_code}})
                                         @endif
 
-                                    {{--  If course has no cu code & has no abbreviation  --}}
-                                    @elseif($rubric->courses_id->course_code == null && $rubric->courses_id->real_abbreviation == false)
-
-                                    {{-- If course has no cu code (but has an abbreviation) --}}
+                                        {{--  If course has no cu code  --}}
                                     @else
-                                        ({{$rubric->courses_id->course_abbreviation}})
+                                        {{--  If course has no abbreviation  --}}
+                                        @if($rubric->courses_id->real_abbreviation == false)
 
+                                        {{--  If course has an abbreviation --}}
+                                        @else
+                                            ({{$rubric->courses_id->course_abbreviation}})
+                                        @endif
                                     @endif
                                 </td>
                                 <td>{{ $rubric->name }}</td>
