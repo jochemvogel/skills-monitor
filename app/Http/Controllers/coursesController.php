@@ -309,16 +309,16 @@ class coursesController extends Controller
         }
     }
 
-    public function leaveCourseView() {
-        $user = DB::table('users')->where('id', '=', Auth::user()->id)->get()->first();
-
-        return view('courses.leave')->with(["user"=>$user]);
+    public function leaveCourseView($course_id, $user_id) {
+        $user = DB::table('users')->where('id', '=', $user_id)->get()->first();
+        $course = DB::table('courses')->where("id", "=", $course_id)->get()->first();
+        return view('courses.leave')->with(["user"=>$user, "course" => $course]);
     }
 
-    public function leaveCourseAction($course_id) {
+    public function leaveCourseAction($course_id, $user_id) {
         try {
             $course_code = DB::table('courses')->where('id', '=', $course_id)->first()->course_abbreviation;
-
+            DB::table('course_user')->where('user_id', '=', $user_id)->where('course_id', '=', $course_id)->delete();
             return redirect(route('courses.show', ['id' => $course_code]));
 
         } catch(ModelNotFoundException $ex) {

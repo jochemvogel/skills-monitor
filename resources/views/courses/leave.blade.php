@@ -14,7 +14,7 @@
 
         <div class="box-body">
             <p>Are you sure you want to delete leave the course?</p>
-            <form method="POST" action="{{ route('courses.destroyUser', ['user_id'=>Auth::user()->id, 'course_id'=>request()->route('course_id')]) }}">
+            <form method="POST" action="{{ route('courses.leaveCourse', ['user_id'=>Auth::user()->id, 'course_id'=>request()->route('course_id')]) }}">
                 @csrf
                 <button type="submit" class="btn btn-danger">Yes I'm sure. Delete</button>
             </form>
