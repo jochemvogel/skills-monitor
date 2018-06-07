@@ -27,11 +27,14 @@ Route::middleware(['auth'])->group( function () {
 
     Route::post('/courses/{id}/addUser/done', 'coursesController@addUser')->name('courses.addUser');
 
-
     Route::resource('users', 'usersController');
-    Route::resource('rubrics', 'rubricsController');
     Route::resource('courses', 'coursesController');
 
+    Route::resource('stats', 'StatsController');
+    // Stats getData
+    Route::get('/getstats', 'StatsController@getDataBlok');
+
+    Route::resource('rubrics', 'rubricsController');
     // JSONcontroller routes
     Route::get('getpendingnames', 'JSONcontroller@getPendingNames');
     Route::put('updatename', 'JSONcontroller@updateName');
