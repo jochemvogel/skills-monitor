@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SetPassword;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,10 +33,17 @@ Route::middleware(['auth'])->group( function () {
     Route::post('/courses/{course_id}/removeUserConfirm/{user_id}', 'coursesController@destroyUser')->name('courses.destroyUser');
     Route::post('/courses/{id}/addUser/done', 'coursesController@addUser')->name('courses.addUser');
 
-
     Route::resource('users', 'usersController');
-    Route::resource('rubrics', 'rubricsController');
     Route::resource('courses', 'coursesController');
+    Route::resource('rubrics', 'rubricsController');
+    Route::resource('stats', 'StatsController');
+
+    // Change password routes
+    Route::get('/changepassword','HomeController@showChangePasswordForm');
+    Route::post('/changepassword','HomeController@changePassword')->name('changePassword');
+
+    // Stats getData
+    Route::get('/getstats', 'StatsController@getDataBlok');
 
     // JSONcontroller routes
     Route::get('getpendingnames', 'JSONcontroller@getPendingNames');
@@ -45,6 +55,13 @@ Route::middleware(['auth'])->group( function () {
     Route::put('backupfield', 'JSONcontroller@backupField');
 
     Route::get('moverow', 'JSONcontroller@moveRow');
+    Route::get('getpending', 'JSONcontroller@getPending');
+
+    //Mail
+    Route::get('/jemoeder', function(){
+        // Mail::to('whatever@mail.com')->send(new setPassword);
+        return view('confirm');
+    });
     Route::put('addrow', 'JSONcontroller@addRow');
     Route::delete('deleterow', 'JSONcontroller@deleteRow');
 });

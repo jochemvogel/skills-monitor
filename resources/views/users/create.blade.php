@@ -40,20 +40,6 @@
                     </div>
                 </div>
 
-                <div class="form-group"{{ $errors->has('password') ? ' has-error' : '' }}>
-                    <label for="Password" class="col-sm-2 control-label">Password</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="password" placeholder="password" required>
-                    </div>
-                </div>
-
-                <div class="form-group"{{ $errors->has('confirm_password') ? ' has-error' : '' }}>
-                    <label for="Confirm Password" class="col-sm-2 control-label">Confirm Password</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="confirm_password" placeholder="confirm password" required>
-                    </div>
-                </div>
-
                 <div class="form-group {{ $errors->has('role') ? ' has-error ' : '' }}">
                     <label class="col-sm-2 control-label" for="role">Role <span class="required">*</span></label>
                     <div class="col-sm-10">

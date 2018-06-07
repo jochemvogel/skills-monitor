@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Controller;
+use App\Mail\SetPassword;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Auth\Passwords\PasswordBroker;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -58,18 +59,19 @@ class usersController extends Controller
             'firstname' => 'required',
             'lastname' => 'required',
             'email' => 'required|unique:users',
-            'password' => 'required',
             'role' => 'required',
         ]);
 
+        $pass = uniqid(true);
         $user = User::create([
             'firstname' => $request->input('firstname'),
             'lastname' => $request->input('lastname'),
             'email' => $request->input('email'),
             'role_id' => $request->input('role'),
-            'password' => bcrypt($request->input('password')),
+            'password' => bcrypt($pass),
         ]);
 
+        Mail::to($user)->send(new SetPassword(app('auth.password.broker')->createToken($user)));
         return redirect()->route('users.index')->with('success', "The user <strong>$user->firstname</strong> has successfully been created.");
     }
 
