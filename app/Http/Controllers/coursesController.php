@@ -6,10 +6,11 @@ use App\Course;
 use App\Rubrics;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -227,10 +228,9 @@ class coursesController extends Controller
      */
     public function destroy($id) {
         try {
-            $course = Course::findOrFail($id);
+                $course = Course::findOrFail($id);
 
-            $course->delete();
-
+                $course->delete();
             return redirect()->route('courses.index')->with('success', "The course <strong>$course->name</strong> has successfully been archived.");
         } catch(ModelNotFoundException $ex) {
             if($ex instanceof ModelNotFoundException) {
@@ -242,7 +242,16 @@ class coursesController extends Controller
     public function add($id) {
         $course = Course::find($id);
         $courses = Course::All();
-        $users = User::All();
+        $AttachedUsers = DB::table('users')
+            ->join('course_user', 'course_user.user_id', '=', 'users.id')
+            ->select('users.id')
+            ->get()
+            ->pluck('id');
+
+        $users = DB::table('users')
+            ->whereNotIn('id', $AttachedUsers)
+            ->get()
+            ->all();
 
         $params = [
             'title' => 'Add user',
@@ -255,7 +264,6 @@ class coursesController extends Controller
     }
 
     public function addUser() {
-
         try {
 
             $user_id = request()->post('user');
@@ -275,14 +283,51 @@ class coursesController extends Controller
         }
     }
 
-
-    public function remove($id) {
+    public function remove() {
         return view('courses.remove');
     }
 
-    public function removeUser() {
+    public function removeUser($user_id) {
+
+        $user = DB::table('users')->where('id', '=', $user_id)->get()->first();
+
+        return view('courses.remove')->with(["user"=>$user]);
 
     }
+
+    public function destroyUser($course_id) {
+        try {
+
+            $course_code = DB::table('courses')->where('id', '=', $course_id)->first()->course_abbreviation;
+
+            return redirect(route('courses.show', ['id' => $course_code]));
+
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
+            }
+        }
+    }
+
+    public function leaveCourseView() {
+        $user = DB::table('users')->where('id', '=', Auth::user()->id)->get()->first();
+
+        return view('courses.leave')->with(["user"=>$user]);
+    }
+
+    public function leaveCourseAction($course_id) {
+        try {
+            $course_code = DB::table('courses')->where('id', '=', $course_id)->first()->course_abbreviation;
+
+            return redirect(route('courses.show', ['id' => $course_code]));
+
+        } catch(ModelNotFoundException $ex) {
+            if($ex instanceof ModelNotFoundException) {
+                return response()->view('errors.' . '404');
+            }
+        }
+    }
+
 }
 
 

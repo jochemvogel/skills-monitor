@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="box box-solid">
-        <div class="box-header">
+        <div class="box-header with-border">
             <h1 class="box-title">
                 <strong>
                     Rubrics: Overview
@@ -17,53 +17,61 @@
             </h1>
         </div>
 
-        <div class="box-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="rubrics" class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Course name</th>
-                                <th>Rubric name</th>
-                                <th>Creator</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($rubrics as $rubric)
-                                <tr role="row">
-                                    <td>
-                                        <a href="{{route('courses.show',['course_abbreviation' => $rubric->courses_id->course_abbreviation])}}" title="View course: {{ $rubric->courses_id->name }}">{{ $rubric->courses_id->name }}</a>
+            <div class="box-body">
+                <table id="rubrics" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Course name</th>
+                            <th>Rubric name</th>
+                            <th>Creator</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($rubrics as $rubric)
+                            <tr role="row">
+                                <td> <a href="{{route('courses.show',['course_abbreviation' => $rubric->courses_id->course_abbreviation])}}" title="View course: {{ $rubric->courses_id->name }}">{{ $rubric->courses_id->name }}</a>
 
+                                    {{-- If course has cu code --}}
+                                    @if($rubric->courses_id->course_code != null)
 
-                                        @if($rubric->courses_id->course_code != null)
-                                           @if($rubric->courses_id->real_abbreviation == true)
-                                                ({{$rubric->courses_id->course_abbreviation}}, {{$rubric->courses_id->course_code}})
-                                            @else
-                                                ({{$rubric->courses_id->course_code}})
-                                            @endif
+                                        {{-- If course has abbreviation (and cu code) --}}
+                                        @if($rubric->courses_id->real_abbreviation == true)
+                                            ({{$rubric->courses_id->course_abbreviation}}, {{$rubric->courses_id->course_code}})
+
+                                        {{-- If course hasn't an abbreviation (but has cu code) --}}
+                                        @else
+                                            ({{$rubric->courses_id->course_code}})
+                                        @endif
+
+                                    {{--  If course has no cu code  --}}
+                                    @else
+                                        {{--  If course has no abbreviation  --}}
+                                        @if($rubric->courses_id->real_abbreviation == false)
+
+                                        {{--  If course has an abbreviation --}}
                                         @else
                                             ({{$rubric->courses_id->course_abbreviation}})
                                         @endif
-                                    </td>
-                                    <td>{{ $rubric->name }}</td>
-                                    <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
-                                    <td>
-                                    @can('view', $rubric)
-                                        <a href="{{ route('rubrics.show',['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View rubric"></i></a>
-                                    @endcan
-                                    @can('update', $rubric)
-                                        <a href="{{ route('rubrics.edit', ['id' => $rubric->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i></a>
-                                    @endcan
-                                    @can('delete', $rubric)
-                                        <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric"></i></a>
-                                    @endcan
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                                    @endif
+                                </td>
+                                <td>{{ $rubric->name }}</td>
+                                <td>{{ $rubric->creator->firstname }} {{ $rubric->creator->lastname }}</td>
+                                <td>
+                                @can('view', $rubric)
+                                    <a href="{{ route('rubrics.show',['id' => $rubric->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View rubric"></i></a>
+                                @endcan
+                                @can('update', $rubric)
+                                    <a href="{{ route('rubrics.edit', ['id' => $rubric->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i></a>
+                                @endcan
+                                @can('delete', $rubric)
+                                    <a href="{{ route('rubrics.delete', ['id' => $rubric->id], '/delete') }}" class="btn btn-danger btn-xs"><i class="fa fa-trash-o" title="Delete rubric"></i></a>
+                                @endcan
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
 @endsection
@@ -78,11 +86,11 @@
     });
 </script>
 <script>
-    document.addEventListener('click', function(){
-        if(event.srcElement.classList[1] === "fa-pencil"){
-            sessionStorage.setItem("edit", 'true');
-        }else{
-            sessionStorage.setItem("edit", 'false');
+            document.addEventListener('click', function(){
+                if(event.srcElement.classList[1] === "fa-pencil"){
+                    sessionStorage.setItem("edit", 'true');
+                }else{
+                    sessionStorage.setItem("edit", 'false');
         }
     })
 </script>
