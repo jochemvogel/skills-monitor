@@ -4,19 +4,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePendingChangesTable extends Migration
+class CreateResultsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('pending_changes', function (Blueprint $table) {
+    public function up() {
+        Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('field_id');
-            $table->string('content');
+            $table->unsignedInteger('course_id');
+            $table->integer('blok');
+            $table->decimal('grade');
+            $table->decimal('ec');
             $table->timestamps();
         });
     }
@@ -26,8 +27,7 @@ class CreatePendingChangesTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('pending_changes');
+    public function down() {
+        Schema::dropIfExists('results');
     }
 }

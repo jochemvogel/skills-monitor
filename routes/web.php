@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SetPassword;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,19 +22,46 @@ Route::middleware(['auth'])->group( function () {
     Route::get('/inbox', 'InboxController@index')->name('index');
     Route::get('/courses/create', 'coursesController@create');
     Route::get('/courses/{id}/delete', 'coursesController@delete')->name('courses.delete');
+    Route::get('/courses/{id}/addUser', 'coursesController@add')->name('courses.add');
+    Route::get('/courses/{id}/remove', 'coursesController@remove')->name('courses.remove');
+    Route::get('/courses/{id}/removeUser', 'coursesController@remove')->name('courses.removeUser');
     Route::get('/courses/{course_abbreviation}', 'coursesController@show');
     Route::get('/rubrics/{id}/delete', 'rubricsController@delete')->name('rubrics.delete');
 
+    Route::post('/courses/{id}/addUser/done', 'coursesController@addUser')->name('courses.addUser');
+
     Route::resource('users', 'usersController');
-    Route::resource('rubrics', 'rubricsController');
     Route::resource('courses', 'coursesController');
     Route::resource('judgement', 'judgementController');
+    Route::resource('rubrics', 'rubricsController');
+    Route::resource('stats', 'StatsController');
+
+    // Change password routes
+    Route::get('/changepassword','HomeController@showChangePasswordForm');
+    Route::post('/changepassword','HomeController@changePassword')->name('changePassword');
+
+    // Stats getData
+    Route::get('/getstats', 'StatsController@getDataBlok');
 
     // JSONcontroller routes
+    Route::get('getpendingnames', 'JSONcontroller@getPendingNames');
+    Route::put('updatename', 'JSONcontroller@updateName');
+    Route::put('backupname', 'JSONcontroller@backupName');
+
+    Route::get('getpendingfields', 'JSONcontroller@getPendingFields');
     Route::put('updatefield', 'JSONcontroller@updateField');
     Route::put('backupfield', 'JSONcontroller@backupField');
+
     Route::get('moverow', 'JSONcontroller@moveRow');
     Route::get('getpending', 'JSONcontroller@getPending');
+
+    //Mail
+    Route::get('/jemoeder', function(){
+        // Mail::to('whatever@mail.com')->send(new setPassword);
+        return view('confirm');
+    });
+    Route::put('addrow', 'JSONcontroller@addRow');
+    Route::delete('deleterow', 'JSONcontroller@deleteRow');
 });
 
 Route::fallback(function ()

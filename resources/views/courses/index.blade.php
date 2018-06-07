@@ -28,7 +28,6 @@
                     @if(count($courses))
                         @foreach($courses as $row)
                             <tr>
-                                
                                 @if($row->course_abbreviation != null && $row->real_abbreviation == true)
                                   <td>{{$row->course_abbreviation}}</td>
                                 @else
@@ -44,9 +43,7 @@
                                 <td>{{$row->name}}</td>
 
                                 <td>
-                                    @can('view', $row)
                                         <a href="{{ route('courses.show', ['id' => $row->course_abbreviation]) }}" class="btn btn-info btn-xs"><i class="fa fa-eye" title="View"></i> </a>
-                                    @endcan
                                     @can('update', $row)
                                         <a href="{{ route('courses.edit', ['id' => $row->id]) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil" title="Edit"></i> </a>
                                     @endcan

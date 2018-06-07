@@ -137,7 +137,7 @@ return [
         ],
         [
             'text' => 'Stats',
-            'url'  => '#',
+            'url'  => 'stats',
             'icon' => 'bar-chart-o',
         ]
     ],
