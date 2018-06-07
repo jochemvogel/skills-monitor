@@ -124,6 +124,11 @@ return [
             'url'  => 'users',
             'icon' => 'group',
         ],
+        [
+            'text' => 'Grade',
+            'url'  => 'grade',
+            'icon' => 'check-circle-o',
+        ],
         'User menu',
         [
             'text' => 'Profile',
