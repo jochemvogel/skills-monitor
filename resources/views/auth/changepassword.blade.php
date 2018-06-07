@@ -39,7 +39,7 @@
                         <input id="new-password" type="password" class="form-control" name="new-password" required>
                         @if($errors->has('new-password'))
                             <span class="help-block">
-                            <strong>{{ $errors->first('new-password') }}</strong>
+                                <strong>{{ $errors->first('new-password') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -50,7 +50,7 @@
                         <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required>
                         @if($errors->has('new-password-confirm'))
                             <span class="help-block">
-                            <strong>{{ $errors->first('new-password-confirm') }}</strong>
+                                <strong>{{ $errors->first('new-password-confirm') }}</strong>
                             </span>
                         @endif
                     </div>
