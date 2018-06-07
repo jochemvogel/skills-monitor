@@ -30,14 +30,17 @@ Route::middleware(['auth'])->group( function () {
 
     Route::post('/courses/{id}/addUser/done', 'coursesController@addUser')->name('courses.addUser');
 
-
     Route::resource('users', 'usersController');
-    Route::resource('rubrics', 'rubricsController');
     Route::resource('courses', 'coursesController');
+    Route::resource('rubrics', 'rubricsController');
+    Route::resource('stats', 'StatsController');
 
     // Change password routes
     Route::get('/changepassword','HomeController@showChangePasswordForm');
     Route::post('/changepassword','HomeController@changePassword')->name('changePassword');
+
+    // Stats getData
+    Route::get('/getstats', 'StatsController@getDataBlok');
 
     // JSONcontroller routes
     Route::get('getpendingnames', 'JSONcontroller@getPendingNames');
