@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJudgementTable extends Migration
+class CreateGradeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateJudgementTable extends Migration
      */
     public function up()
     {
-        Schema::create('judgements', function (Blueprint $table) {
+        Schema::create('grades', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('rubrics_id');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateJudgementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('judgement');
+        Schema::dropIfExists('grade');
     }
 }

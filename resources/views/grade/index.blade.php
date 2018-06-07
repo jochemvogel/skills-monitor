@@ -7,7 +7,7 @@
         <div class="box-header with-border">
             <h1 class="box-title">
                 <strong>
-                    Judge: Overview
+                    Grade: Overview
                 </strong>
             </h1>
         </div>

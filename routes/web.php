@@ -32,7 +32,7 @@ Route::middleware(['auth'])->group( function () {
 
     Route::resource('users', 'usersController');
     Route::resource('courses', 'coursesController');
-    Route::resource('judgement', 'judgementController');
+    Route::resource('grade', 'gradeController');
     Route::resource('rubrics', 'rubricsController');
     Route::resource('stats', 'StatsController');
 

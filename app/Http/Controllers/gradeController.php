@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Judgement;
+use App\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class judgementController extends Controller
-{
+class gradeController extends Controller{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view("judgement.index");
+    public function index(){
+        return view("grade.index");
     }
 
     /**
@@ -23,8 +21,7 @@ class judgementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         //
     }
 
@@ -34,8 +31,7 @@ class judgementController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         //
     }
 
@@ -45,12 +41,11 @@ class judgementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
         $param = [
-            'judgement' => Judgement::findOrFail($id)
+            'grade' => Grade::findOrFail($id)
         ];
-        return view("judgement.show")->with($param);
+        return view("grade.show")->with($param);
     }
 
     /**
@@ -59,8 +54,7 @@ class judgementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         //
     }
 
@@ -71,8 +65,7 @@ class judgementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         //
     }
 
@@ -82,8 +75,7 @@ class judgementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         //
     }
 }

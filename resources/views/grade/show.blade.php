@@ -8,7 +8,7 @@
             <h1 class="box-title">
                 <strong>
                     {{-- show the name of the rubrics --}}
-                    {{ $judgement->rubrics->name }}
+                    {{ $grade->rubrics->name }}
                 </strong>
             </h1>
         </div>
@@ -18,9 +18,9 @@
                 <thead>
                 </thead>
                 <tbody id="tbody">
-                @foreach($judgement->rubrics->rowobjects as $row)
+                @foreach($grade->rubrics->rowobjects as $row)
                     <tr>
-                        <td colspan="{{$judgement->rubrics->cols}}">
+                        <td colspan="{{$grade->rubrics->cols}}">
                             <div style="width: 101%; margin-left: -0.5%;">
                             <input style="width: 100%;" type="text" value="" class="slider form-control" data-slider-min="0" data-slider-max="100"
                                    data-slider-step="1" data-slider-value="50" data-slider-orientation="horizontal"
@@ -36,7 +36,7 @@
                         @endforeach
                     </tr>
                     <tr>
-                        <td colspan="{{$judgement->rubrics->cols}}">
+                        <td colspan="{{$grade->rubrics->cols}}">
                             comments for this row please
                         </td>
                     </tr>

@@ -125,8 +125,8 @@ return [
             'icon' => 'group',
         ],
         [
-            'text' => 'Judge',
-            'url'  => 'judgement',
+            'text' => 'Grade',
+            'url'  => 'grade',
             'icon' => 'check-circle-o',
         ],
         'User menu',
