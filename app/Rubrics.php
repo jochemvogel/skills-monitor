@@ -15,6 +15,10 @@ class Rubrics extends Model
         'name', 'cols', 'course_id', 'user_id'
     ];
 
+    // Unit test function
+    public function getName() {
+        return 'Test rubric';
+    }
 
     public function rowobjects()
     {

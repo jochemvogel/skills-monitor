@@ -14,6 +14,7 @@
                 </strong>
             </h1>
 
+            {{--Button: Leave course--}}
             <div class="pull-right">
                 <a href="{{ route('courses.leave', ['course_id' => $course->id, 'user_id' => Auth::user()->id])}}" class="btn btn-danger btn-xs float-right" ><i class="fa fa-times"></i> Leave Course</a>
             </div>
@@ -31,11 +32,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                {{--Button: Create New Rubrics--}}
                 @can('create', \App\Course::class)
                     <a href="{{ route('rubrics.create')}}"  class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Create New Rubric</a>
                 <br>
                 <br>
                 @endcan
+                {{--Rubric table content--}}
                 @if(count($rubrics))
                     @foreach($rubrics as $row)
                         <tr>
@@ -66,18 +69,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{--Button: Add New User--}}
                     @can('create', Auth::user())
                     <a href="{{ route('courses.add',['id' => $course->id])}}"  class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Add New User</a>
                     <br>
                     <br>
                     @endcan
+                    {{--User table content--}}
                      @if(count($course->users))
                         @foreach($course->users as $row)
                             <tr>
                                 <td>{{$row->firstname}}</td>
                                 <td>{{$row->lastname}}</td>
                                 <td>
+                                    {{--Button: Send mail--}}
                                     <a href="mailto: {{ $row->email }}," class="btn btn-warning btn-xs"><i class="fa fa-envelope" title="Send mail to {{$row->firstname}} {{$row->lastname}}"></i> </a>
+                                    {{--Button: Delete user--}}
                                     @can('delete', $row)
                                         <a href="{{ route('courses.removeUser', ['course_id' => $course->id, 'user_id' => $row->id])}}" class="btn btn-danger btn-xs"><i class="fa fa-trash" title="Remove {{$row->firstname }} {{$row->lastname}} from {{$course->name}}"></i> </a>
                                     @endcan
